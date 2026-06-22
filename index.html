@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>頭竹苗福利社｜頭份・竹南・苗栗在地優惠平台</title>
+  <meta name="description" content="頭竹苗福利社整合頭份、竹南、苗栗在地特約商店優惠。免費領取數位福利卡，查詢美食、生活服務、購物、教育、親子與休閒優惠。" />
+  <meta name="keywords" content="頭竹苗福利社, 頭竹苗大家庭福利卡, 頭份優惠, 竹南優惠, 苗栗優惠, 特約商店, 數位福利卡" />
+  <meta property="og:title" content="頭竹苗福利社｜頭份・竹南・苗栗在地優惠平台" />
+  <meta property="og:description" content="免費領取數位福利卡，查詢頭份、竹南、苗栗在地特約商店優惠。" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#2f9e8f" />
+
+  <style>
+    :root {
+      --bg: #f7faf9;
+      --surface: #ffffff;
+      --surface-soft: #eef7f4;
+      --surface-blue: #eef5ff;
+      --ink: #1f2a37;
+      --ink-soft: #405266;
+      --muted: #6b7a8a;
+      --line: #dbe5e2;
+      --primary: #2f9e8f;
+      --primary-dark: #187a6d;
+      --primary-soft: #dff5ef;
+      --blue: #4f7cff;
+      --blue-soft: #eaf0ff;
+      --amber: #c68a2b;
+      --amber-soft: #fff6df;
+      --danger: #c2410c;
+      --shadow: 0 18px 50px rgba(31, 42, 55, .08);
+      --shadow-sm: 0 10px 28px rgba(31, 42, 55, .06);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(47, 158, 143, .10), transparent 34%),
+        radial-gradient(circle at 96% 8%, rgba(79, 124, 255, .09), transparent 30%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.72;
+      letter-spacing: .01em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 250, 249, .88);
+      border-bottom: 1px solid rgba(219, 229, 226, .8);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #e9fbf6, #dbeafe);
+      border: 1px solid rgba(47, 158, 143, .18);
+      color: var(--primary-dark);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      line-height: 1.25;
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 800;
+      padding: 10px 12px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+      background: var(--primary-soft);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 26px rgba(47, 158, 143, .22);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-line {
+      color: #fff;
+      background: #06c755;
+      box-shadow: 0 12px 26px rgba(6, 199, 85, .20);
+    }
+
+    .btn-ghost {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .btn-soft {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border-color: rgba(47, 158, 143, .14);
+    }
+
+    .hero {
+      padding: 78px 0 38px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(223, 245, 239, .8);
+      color: var(--primary-dark);
+      font-weight: 900;
+      font-size: 14px;
+      border: 1px solid rgba(47, 158, 143, .16);
+    }
+
+    h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
+    h1 .soft-mark {
+      color: var(--primary-dark);
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 650px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 1.85vw, 20px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid rgba(219, 229, 226, .9);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .panel-title h2 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.24;
+      letter-spacing: -0.03em;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .search-preview {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(238, 247, 244, .72), rgba(255,255,255,.82));
+      border: 1px solid rgba(219, 229, 226, .8);
+    }
+
+    .preview-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .preview-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .preview-item {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      align-items: center;
+      gap: 11px;
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid rgba(219, 229, 226, .8);
+    }
+
+    .preview-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .preview-item strong {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .preview-item span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .preview-tag {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stat {
+      padding: 16px 14px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .stat b {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .kicker {
+      margin-bottom: 7px;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(29px, 3.6vw, 42px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .section-desc {
+      margin: 9px 0 0;
+      max-width: 620px;
+      color: var(--muted);
+    }
+
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .entry-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid rgba(219, 229, 226, .95);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .entry-card .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .entry-card h3 {
+      margin: 0 0 7px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .entry-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      min-height: 52px;
+    }
+
+    .directory-panel {
+      padding: 24px;
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(219, 229, 226, .94);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.3fr) minmax(150px, .7fr) minmax(150px, .7fr) auto;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 16px;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(47, 158, 143, .68);
+      box-shadow: 0 0 0 4px rgba(47, 158, 143, .11);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 8px 0 22px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink-soft);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      border-color: rgba(47, 158, 143, .2);
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 22px rgba(31, 42, 55, .04);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .shop-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(31, 42, 55, .08);
+    }
+
+    .shop-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .shop-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: 23px;
+      flex: 0 0 auto;
+    }
+
+    .shop-card h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+    }
+
+    .tag.blue {
+      background: var(--blue-soft);
+      color: #315dcc;
+    }
+
+    .offer {
+      margin: 2px 0 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--amber-soft);
+      color: #805817;
+      font-weight: 900;
+      line-height: 1.55;
+    }
+
+    .shop-desc {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .shop-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .mini-btn {
+      flex: 1;
+      min-width: 86px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 38px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .mini-btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .empty {
+      display: none;
+      padding: 42px 16px;
+      border-radius: 22px;
+      border: 1px dashed #becbc7;
+      background: #fbfefd;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .process-card {
+      padding: 20px;
+      border-radius: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .process-no {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .process-card h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .process-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .split-panel {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 20px;
+      align-items: start;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-box {
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface-soft), #fff);
+      border: 1px solid rgba(47, 158, 143, .14);
+    }
+
+    .info-box h2 {
+      font-size: 32px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-list div {
+      display: flex;
+      gap: 10px;
+      color: var(--ink-soft);
+      font-weight: 800;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .helper {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-message {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      font-weight: 900;
+    }
+
+    .form-message.success {
+      display: block;
+      background: #ecfdf5;
+      border: 1px solid #b7ebd4;
+      color: #047857;
+    }
+
+    .form-message.error {
+      display: block;
+      background: #fff1f0;
+      border: 1px solid #ffc7c2;
+      color: #b42318;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 38px 0;
+      background: #1f2a37;
+      color: #f9fafb;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr .65fr;
+      gap: 24px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      margin: 0 0 10px;
+    }
+
+    .footer p,
+    .footer a {
+      color: #cbd5e1;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .backtop {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 28px rgba(47, 158, 143, .26);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(31, 42, 55, .56);
+      overflow: auto;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .26);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 22px 24px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -0.03em;
+    }
+
+    .modal-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .modal-body {
+      padding: 22px 24px 26px;
+    }
+
+    .notice-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--surface-blue);
+      color: #315dcc;
+      border: 1px solid rgba(79, 124, 255, .16);
+      font-weight: 800;
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid,
+      .entry-grid,
+      .shop-grid,
+      .footer-grid,
+      .split-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: 72px;
+        padding: 14px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, .96);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a,
+      .nav-links .btn {
+        width: 100%;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .hero {
+        padding: 40px 0 24px;
+      }
+
+      .hero-grid {
+        gap: 24px;
+      }
+
+      .hero-actions,
+      .shop-actions {
+        display: grid;
+      }
+
+      .btn,
+      .mini-btn {
+        width: 100%;
+      }
+
+      .stats,
+      .filters,
+      .form-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .directory-panel,
+      .split-panel,
+      .hero-panel {
+        padding: 18px;
+      }
+
+      .preview-item {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .preview-tag {
+        grid-column: 1 / -1;
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="回到首頁">
+        <span class="brand-logo">福</span>
+        <span class="brand-text">
+          <strong>頭竹苗福利社</strong>
+          <span>頭份・竹南・苗栗在地優惠</span>
+        </span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" type="button">選單</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#shops">查優惠</a>
+        <a href="#how">使用方式</a>
+        <a href="#merchant">店家合作</a>
+        <a href="#update">修改資料</a>
+        <a class="btn btn-line" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">免費領卡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">在地優惠・數位福利卡・特約商店</span>
+          <h1>把頭份、竹南、苗栗的優惠，整理成<span class="soft-mark">一個好找的平台</span></h1>
+          <p class="lead">
+            頭竹苗福利社整合在地特約商店與數位福利卡，讓民眾可以快速查詢優惠，也讓在地店家多一個被看見的入口。
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-line" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">免費領取福利卡</a>
+            <a class="btn btn-primary" href="#shops">查詢特約商店</a>
+            <a class="btn btn-ghost" href="#merchant">店家加入合作</a>
+          </div>
+
+          <p class="hero-note">適合放在 LINE 圖文選單、社團公告、粉專置頂與店家合作說明中。</p>
+        </div>
+
+        <aside class="hero-panel" aria-label="特約商店查詢示意">
+          <div class="panel-title">
+            <h2>今天想找什麼優惠？</h2>
+            <span class="status-pill">即時查詢</span>
+          </div>
+
+          <div class="search-preview">
+            <div class="preview-search">搜尋：飲料、美食、眼鏡、親子、生活服務</div>
+
+            <div class="preview-list">
+              <div class="preview-item">
+                <div class="preview-icon">飲</div>
+                <div>
+                  <strong>飲品與下午茶</strong>
+                  <span>咖啡、茶飲、甜點、輕食</span>
+                </div>
+                <div class="preview-tag">美食飲品</div>
+              </div>
+
+              <div class="preview-item">
+                <div class="preview-icon">服</div>
+                <div>
+                  <strong>生活服務</strong>
+                  <span>美容、芳療、通訊、居家服務</span>
+                </div>
+                <div class="preview-tag">日常剛需</div>
+              </div>
+
+              <div class="preview-item">
+                <div class="preview-icon">親</div>
+                <div>
+                  <strong>親子教育</strong>
+                  <span>課程、才藝、親子活動</span>
+                </div>
+                <div class="preview-tag">家庭友善</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <b>70+</b>
+              <span>特約商店</span>
+            </div>
+            <div class="stat">
+              <b>3</b>
+              <span>核心地區</span>
+            </div>
+            <div class="stat">
+              <b>LINE</b>
+              <span>手機可用</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Main Entrance</div>
+            <h2>保留三個主要入口，就會清楚很多</h2>
+            <p class="section-desc">民眾要領卡、查優惠；店家要加入或修改資料。首頁只聚焦這幾件最重要的事。</p>
+          </div>
+        </div>
+
+        <div class="entry-grid">
+          <article class="entry-card">
+            <div class="icon">💳</div>
+            <h3>免費領福利卡</h3>
+            <p>加入 LINE 官方帳號，取得頭竹苗大家庭數位福利卡。</p>
+            <a class="btn btn-line" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">前往領卡</a>
+          </article>
+
+          <article class="entry-card">
+            <div class="icon">🔎</div>
+            <h3>查詢特約商店</h3>
+            <p>用分類、地區、關鍵字快速找到可用優惠。</p>
+            <a class="btn btn-primary" href="#shops">開始查詢</a>
+          </article>
+
+          <article class="entry-card">
+            <div class="icon">🤝</div>
+            <h3>店家加入 / 修改</h3>
+            <p>申請加入特約商，或送出優惠與店家資料修改申請。</p>
+            <a class="btn btn-ghost" href="#update">前往表單</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shops">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Directory</div>
+            <h2>特約商店查詢</h2>
+            <p class="section-desc">
+              目前使用示範資料。正式上線後，這裡可以改讀 GAS / Google Sheet，做到「資料只維護一次，前台自動更新」。
+            </p>
+          </div>
+          <a class="btn btn-soft" href="https://buyhappy.work/EZ17P" target="_blank" rel="noopener">我要成為特約商</a>
+        </div>
+
+        <div class="directory-panel">
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="搜尋店名、優惠、分類，例如：飲料、眼鏡、美甲" />
+            <select id="categorySelect" aria-label="選擇分類">
+              <option value="">全部分類</option>
+            </select>
+            <select id="areaSelect" aria-label="選擇地區">
+              <option value="">全部地區</option>
+            </select>
+            <button class="btn btn-primary" id="resetBtn" type="button">重設</button>
+          </div>
+
+          <div class="chips" id="categoryChips"></div>
+
+          <div class="shop-grid" id="shopGrid"></div>
+
+          <div class="empty" id="emptyState">
+            找不到符合條件的特約商店。可以換個關鍵字，或改用分類 / 地區篩選。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">How it works</div>
+            <h2>福利卡使用方式</h2>
+            <p class="section-desc">讓民眾不用理解複雜系統，只要照著四個步驟就能用。</p>
+          </div>
+        </div>
+
+        <div class="process">
+          <article class="process-card">
+            <div class="process-no">1</div>
+            <h3>加入 LINE</h3>
+            <p>免費領取頭竹苗大家庭數位福利卡。</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-no">2</div>
+            <h3>查詢優惠</h3>
+            <p>依分類、地區或關鍵字找到特約商店。</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-no">3</div>
+            <h3>到店出示</h3>
+            <p>消費時出示福利卡，依店家公告使用優惠。</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-no">4</div>
+            <h3>分享給朋友</h3>
+            <p>邀請更多在地鄉親加入，一起支持在地店家。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="merchant">
+      <div class="container">
+        <div class="split-panel">
+          <div class="info-box">
+            <div class="kicker">Merchant</div>
+            <h2>店家合作</h2>
+            <p class="section-desc">
+              適合頭份、竹南、苗栗在地商家加入，讓優惠被整理、被搜尋、被分享。
+            </p>
+
+            <div class="info-list">
+              <div><span>✓</span><span>提升在地曝光</span></div>
+              <div><span>✓</span><span>導流 LINE、粉專、社群</span></div>
+              <div><span>✓</span><span>可建立長期特約商資料庫</span></div>
+              <div><span>✓</span><span>未來可延伸精選店家與活動專區</span></div>
+            </div>
+
+            <div style="margin-top: 22px;">
+              <a class="btn btn-primary" href="https://buyhappy.work/EZ17P" target="_blank" rel="noopener">報名加入特約商</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="kicker">Clean Structure</div>
+            <h2>官網負責展示，GAS 負責資料</h2>
+            <p class="section-desc">
+              這個版本的設計方向是：GitHub 官網做前台，Google Sheet 當唯一資料庫，GAS 接收查詢與修改申請。你的資料不用再分散維護。
+            </p>
+
+            <div class="notice-box">
+              建議下一步：建立正式的 shops 資料表與 pending_updates 修改申請表，讓這份官網直接讀取正式資料。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="update">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Update Request</div>
+            <h2>特約商資料修改申請</h2>
+            <p class="section-desc">
+              店家不需要登入，也不用保存專屬連結。統一從這裡送出修改申請，由管理員審核後更新正式資料。
+            </p>
+          </div>
+        </div>
+
+        <div class="split-panel">
+          <div class="info-box">
+            <h2>修改流程</h2>
+            <div class="info-list">
+              <div><span>1</span><span>店家填寫修改申請</span></div>
+              <div><span>2</span><span>資料進入待審核表</span></div>
+              <div><span>3</span><span>管理員確認內容</span></div>
+              <div><span>4</span><span>核准後更新正式資料</span></div>
+            </div>
+          </div>
+
+          <form id="updateForm">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="shopName">店家名稱</label>
+                <input id="shopName" name="shop_name" list="shopList" required placeholder="請輸入或選擇店名" />
+                <datalist id="shopList"></datalist>
+              </div>
+
+              <div class="form-field">
+                <label for="contactName">聯絡人</label>
+                <input id="contactName" name="contact_name" required placeholder="例如：王小姐" />
+              </div>
+
+              <div class="form-field">
+                <label for="contactPhone">聯絡電話</label>
+                <input id="contactPhone" name="contact_phone" required placeholder="手機或市話" />
+              </div>
+
+              <div class="form-field">
+                <label for="changeType">修改項目</label>
+                <select id="changeType" name="change_type" required>
+                  <option value="">請選擇</option>
+                  <option value="優惠內容">優惠內容</option>
+                  <option value="營業時間">營業時間</option>
+                  <option value="電話">電話</option>
+                  <option value="地址">地址</option>
+                  <option value="社群連結">社群連結</option>
+                  <option value="圖片">圖片</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+
+              <div class="form-field full">
+                <label for="newContent">申請修改內容</label>
+                <textarea id="newContent" name="new_content" required placeholder="請清楚寫出想修改成什麼內容，例如：持頭竹苗福利卡消費滿 300 元折 30 元。"></textarea>
+              </div>
+
+              <div class="form-field full">
+                <label for="note">補充說明</label>
+                <textarea id="note" name="note" placeholder="例如：優惠期間、注意事項、圖片連結、希望上架日期等。"></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+              <button class="btn btn-primary" type="submit">送出修改申請</button>
+            </div>
+
+            <div class="form-message" id="formMessage"></div>
+            <p class="helper">預覽版會模擬送出；正式版填入 GAS_UPDATE_API_URL 後，即可寫入待審核資料表。</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>頭竹苗福利社</h3>
+        <p>一個整理頭份、竹南、苗栗在地優惠的數位福利平台。</p>
+      </div>
+
+      <div>
+        <h4>主要入口</h4>
+        <div class="footer-links">
+          <a href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">免費領福利卡</a>
+          <a href="#shops">查詢特約商</a>
+          <a href="https://buyhappy.work/EZ17P" target="_blank" rel="noopener">店家加入</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>社群資源</h4>
+        <div class="footer-links">
+          <a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">福利社粉專</a>
+          <a href="https://buyhappy.work/Xvzxo" target="_blank" rel="noopener">LINE 社群</a>
+          <a href="https://buyhappy.work/jmmDj" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="backtop" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
+
+  <div class="modal" id="shopModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">店家名稱</h3>
+          <p id="modalMeta"></p>
+        </div>
+        <button class="close" type="button" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    /*
+      ============================================================
+      頭竹苗福利社 GitHub Pages 清爽版首頁
+      ============================================================
+      正式串接時，只要填入 GAS API：
+      - GAS_SHOPS_API_URL：讀取正式特約商資料
+      - GAS_UPDATE_API_URL：接收特約商修改申請
+    */
+
+    const CONFIG = {
+      GAS_SHOPS_API_URL: "",
+      GAS_UPDATE_API_URL: "",
+      LINE_CARD_URL: "https://lin.ee/rQzJS3i",
+      MERCHANT_JOIN_URL: "https://buyhappy.work/EZ17P"
+    };
+
+    const SAMPLE_SHOPS = [
+      {
+        id: "SHOP001",
+        name: "丘森茶室",
+        category: "美食飲品",
+        area: "頭份",
+        offer: "持頭竹苗福利卡享指定飲品優惠。",
+        description: "適合下午茶、朋友聚會與日常外帶飲品。",
+        phone: "",
+        address: "苗栗縣頭份市",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=丘森茶室",
+        fbUrl: ""
+      },
+      {
+        id: "SHOP002",
+        name: "買樂購 Buyhappy Go",
+        category: "零售購物",
+        area: "竹南",
+        offer: "會員與福利卡用戶享在地生活好物優惠。",
+        description: "電商、家電、生活好物與活動設備相關服務。",
+        phone: "",
+        address: "苗栗縣竹南鎮",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=買樂購+竹南",
+        fbUrl: "https://www.buyhappy.work/"
+      },
+      {
+        id: "SHOP003",
+        name: "薩雅芳香療癒家",
+        category: "生活服務",
+        area: "苗栗市",
+        offer: "持福利卡預約指定服務享專屬優惠。",
+        description: "芳療、舒壓、身心療癒與生活保健。",
+        phone: "",
+        address: "苗栗縣苗栗市",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=薩雅芳香療癒家",
+        fbUrl: ""
+      },
+      {
+        id: "SHOP004",
+        name: "Cafe 32",
+        category: "美食飲品",
+        area: "竹南",
+        offer: "持福利卡消費享指定餐飲優惠。",
+        description: "咖啡、輕食、聚會與休憩空間。",
+        phone: "",
+        address: "苗栗縣竹南鎮",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Cafe+32+竹南",
+        fbUrl: ""
+      },
+      {
+        id: "SHOP005",
+        name: "頭竹苗通訊服務",
+        category: "通訊3C",
+        area: "頭份",
+        offer: "手機配件、門號與通訊服務享福利卡優惠。",
+        description: "在地通訊服務、手機周邊與數位生活支援。",
+        phone: "",
+        address: "苗栗縣頭份市",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=頭份+通訊",
+        fbUrl: ""
+      },
+      {
+        id: "SHOP006",
+        name: "在地親子教育中心",
+        category: "教育親子",
+        area: "苗栗市",
+        offer: "持福利卡報名指定課程享優惠。",
+        description: "親子活動、才藝學習與兒童教育資源。",
+        phone: "",
+        address: "苗栗縣苗栗市",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=苗栗+親子+教育",
+        fbUrl: ""
+      }
+    ];
+
+    let shops = [];
+
+    const $ = (id) => document.getElementById(id);
+
+    function normalizeShop(raw) {
+      return {
+        id: raw.id || raw.shop_id || "",
+        name: raw.name || raw.shop_name || "",
+        category: raw.category || "其他",
+        area: raw.area || "未分類",
+        offer: raw.offer || raw.discount || "請依店家現場公告為準。",
+        description: raw.description || raw.desc || "",
+        phone: raw.phone || "",
+        address: raw.address || "",
+        mapUrl: raw.mapUrl || raw.map_url || "",
+        fbUrl: raw.fbUrl || raw.fb_url || "",
+        igUrl: raw.igUrl || raw.ig_url || ""
+      };
+    }
+
+    async function loadShops() {
+      if (!CONFIG.GAS_SHOPS_API_URL) {
+        shops = SAMPLE_SHOPS.map(normalizeShop);
+        initFilters();
+        renderShops();
+        return;
+      }
+
+      try {
+        const res = await fetch(CONFIG.GAS_SHOPS_API_URL);
+        const data = await res.json();
+        const list = Array.isArray(data) ? data : (data.shops || []);
+        shops = list.map(normalizeShop);
+      } catch (error) {
+        console.warn("讀取 GAS 失敗，改用示範資料：", error);
+        shops = SAMPLE_SHOPS.map(normalizeShop);
+      }
+
+      initFilters();
+      renderShops();
+    }
+
+    function uniqueValues(key) {
+      return [...new Set(shops.map(shop => shop[key]).filter(Boolean))].sort();
+    }
+
+    function initFilters() {
+      const categories = uniqueValues("category");
+      const areas = uniqueValues("area");
+
+      $("categorySelect").innerHTML = '<option value="">全部分類</option>' +
+        categories.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+
+      $("areaSelect").innerHTML = '<option value="">全部地區</option>' +
+        areas.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+
+      $("categoryChips").innerHTML =
+        `<button class="chip active" type="button" data-category="">全部</button>` +
+        categories.map(v => `<button class="chip" type="button" data-category="${escapeHtml(v)}">${escapeHtml(v)}</button>`).join("");
+
+      $("shopList").innerHTML = shops
+        .map(shop => `<option value="${escapeHtml(shop.name)}"></option>`)
+        .join("");
+
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+          const category = chip.dataset.category || "";
+          $("categorySelect").value = category;
+          document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          renderShops();
+        });
+      });
+    }
+
+    function getFilteredShops() {
+      const q = $("searchInput").value.trim().toLowerCase();
+      const category = $("categorySelect").value;
+      const area = $("areaSelect").value;
+
+      return shops.filter(shop => {
+        const text = [
+          shop.name,
+          shop.category,
+          shop.area,
+          shop.offer,
+          shop.description,
+          shop.address
+        ].join(" ").toLowerCase();
+
+        return (!q || text.includes(q)) &&
+               (!category || shop.category === category) &&
+               (!area || shop.area === area);
+      });
+    }
+
+    function getShopIcon(category) {
+      if (category.includes("美食") || category.includes("飲")) return "🍵";
+      if (category.includes("生活")) return "🌿";
+      if (category.includes("教育") || category.includes("親子")) return "📚";
+      if (category.includes("通訊") || category.includes("3C")) return "📱";
+      if (category.includes("購物") || category.includes("零售")) return "🛍️";
+      return "🏪";
+    }
+
+    function renderShops() {
+      const list = getFilteredShops();
+      const grid = $("shopGrid");
+      const empty = $("emptyState");
+
+      if (!list.length) {
+        grid.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      grid.innerHTML = list.map(shop => `
+        <article class="shop-card">
+          <div class="shop-top">
+            <div class="shop-icon">${getShopIcon(shop.category)}</div>
+            <button class="mini-btn" type="button" onclick="shareShop('${escapeJs(shop.id)}')">分享</button>
+          </div>
+
+          <h3>${escapeHtml(shop.name)}</h3>
+
+          <div class="tags">
+            <span class="tag">${escapeHtml(shop.category)}</span>
+            <span class="tag blue">📍 ${escapeHtml(shop.area)}</span>
+          </div>
+
+          <div class="offer">${escapeHtml(shop.offer)}</div>
+          <p class="shop-desc">${escapeHtml(shop.description || "更多資訊請依店家公告為準。")}</p>
+
+          <div class="shop-actions">
+            <button class="mini-btn primary" type="button" onclick="openShop('${escapeJs(shop.id)}')">看詳情</button>
+            <a class="mini-btn" href="${escapeAttr(shop.mapUrl || makeMapUrl(shop.name))}" target="_blank" rel="noopener">導航</a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openShop(id) {
+      const shop = shops.find(s => s.id === id);
+      if (!shop) return;
+
+      $("modalTitle").textContent = shop.name;
+      $("modalMeta").textContent = `${shop.area}｜${shop.category}`;
+
+      $("modalBody").innerHTML = `
+        <div class="offer">${escapeHtml(shop.offer)}</div>
+        <p>${escapeHtml(shop.description || "更多資訊請依店家公告為準。")}</p>
+        <p><b>地址：</b>${escapeHtml(shop.address || "尚未提供")}</p>
+        <p><b>電話：</b>${escapeHtml(shop.phone || "尚未提供")}</p>
+
+        <div class="shop-actions">
+          <a class="btn btn-primary" href="${escapeAttr(shop.mapUrl || makeMapUrl(shop.name))}" target="_blank" rel="noopener">Google 地圖導航</a>
+          ${shop.fbUrl ? `<a class="btn btn-ghost" href="${escapeAttr(shop.fbUrl)}" target="_blank" rel="noopener">店家網站 / 粉專</a>` : ""}
+          <a class="btn btn-line" href="${CONFIG.LINE_CARD_URL}" target="_blank" rel="noopener">免費領福利卡</a>
+        </div>
+
+        <div class="notice-box">
+          實際優惠內容、優惠期限與使用條件，請以店家現場公告或頭竹苗福利社最新公告為準。
+        </div>
+      `;
+
+      $("shopModal").classList.add("open");
+      $("shopModal").setAttribute("aria-hidden", "false");
+    }
+
+    async function shareShop(id) {
+      const shop = shops.find(s => s.id === id);
+      if (!shop) return;
+
+      const text = `我在頭竹苗福利社看到「${shop.name}」優惠：${shop.offer}`;
+      const url = location.href.split("#")[0] + "#shops";
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: shop.name, text, url });
+        } catch (error) {}
+      } else {
+        await navigator.clipboard.writeText(`${text}\n${url}`);
+        alert("已複製分享文字");
+      }
+    }
+
+    function makeMapUrl(keyword) {
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword)}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replaceAll("`", "&#096;");
+    }
+
+    function escapeJs(str) {
+      return String(str || "").replaceAll("\\", "\\\\").replaceAll("'", "\\'");
+    }
+
+    function setFormMessage(type, text) {
+      const box = $("formMessage");
+      box.className = `form-message ${type}`;
+      box.textContent = text;
+    }
+
+    async function submitUpdateRequest(event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      payload.submitted_at = new Date().toISOString();
+
+      if (!CONFIG.GAS_UPDATE_API_URL) {
+        console.log("修改申請預覽資料：", payload);
+        setFormMessage("success", "預覽模式：修改申請已模擬送出。正式上線時，填入 GAS_UPDATE_API_URL 即可寫入待審核表。");
+        form.reset();
+        return;
+      }
+
+      try {
+        await fetch(CONFIG.GAS_UPDATE_API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        setFormMessage("success", "已送出修改申請，等待頭竹苗福利社審核。");
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        setFormMessage("error", "送出失敗，請稍後再試，或直接聯絡頭竹苗福利社管理員。");
+      }
+    }
+
+    $("menuBtn").addEventListener("click", () => {
+      $("navLinks").classList.toggle("open");
+    });
+
+    document.querySelectorAll("#navLinks a").forEach(link => {
+      link.addEventListener("click", () => $("navLinks").classList.remove("open"));
+    });
+
+    $("searchInput").addEventListener("input", renderShops);
+
+    $("categorySelect").addEventListener("change", () => {
+      const value = $("categorySelect").value;
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.classList.toggle("active", (chip.dataset.category || "") === value);
+      });
+      renderShops();
+    });
+
+    $("areaSelect").addEventListener("change", renderShops);
+
+    $("resetBtn").addEventListener("click", () => {
+      $("searchInput").value = "";
+      $("categorySelect").value = "";
+      $("areaSelect").value = "";
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.classList.toggle("active", !chip.dataset.category);
+      });
+      renderShops();
+    });
+
+    $("modalClose").addEventListener("click", () => {
+      $("shopModal").classList.remove("open");
+      $("shopModal").setAttribute("aria-hidden", "true");
+    });
+
+    $("shopModal").addEventListener("click", (event) => {
+      if (event.target === $("shopModal")) {
+        $("shopModal").classList.remove("open");
+        $("shopModal").setAttribute("aria-hidden", "true");
+      }
+    });
+
+    $("updateForm").addEventListener("submit", submitUpdateRequest);
+
+    loadShops();
+  </script>
+</body>
+</html>
