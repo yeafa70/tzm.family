@@ -1,427 +1,294 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>免費領取福利卡｜頭竹苗福利社</title><meta name="description" content="免費領取頭竹苗大家庭數位福利卡，加入 LINE 即可查詢並使用在地特約商店優惠。"><meta name="theme-color" content="#4B2E4F"><link rel="stylesheet" href="style.css"><!-- Google tag (gtag.js) -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>福利卡申請｜頭竹苗福利社</title>
+<meta name="description" content="免費申請頭竹苗福利社數位福利卡。">
+<meta name="theme-color" content="#4B2E4F">
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YNZ2NS7L2"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-5YNZ2NS7L2');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5YNZ2NS7L2');
 </script>
-
-  <style>
+<link rel="stylesheet" href="style.css">
+<style>
 
 :root{
-  --bg:#f3eee8;
-  --bg-soft:#ebe5de;
-  --surface:#fcfaf7;
-  --surface-2:#f6f1ea;
-  --ink:#251d2a;
-  --text:#4b4350;
-  --muted:#766f79;
-  --line:rgba(75,46,79,.14);
-
-  --primary:#4B2E4F;      /* 深茄紫 */
-  --primary-2:#5e3f62;
-  --sage:#7D8F72;         /* 鼠尾草綠 */
-  --sage-2:#687a5e;
-  --clay:#C47A6B;         /* 陶土玫瑰 */
-  --clay-2:#b0695b;
-  --stone:#B7B2A7;        /* 暖石灰 */
-  --stone-2:#e3ddd3;
-
-  --shadow:0 24px 70px rgba(55,38,58,.09);
-  --shadow-sm:0 12px 30px rgba(55,38,58,.06);
-
-  --radius-xl:30px;
-  --radius-lg:22px;
-  --radius-md:16px;
+  --bg:#f5f1eb;
+  --surface:#ffffff;
+  --surface-2:#fbf8f4;
+  --paper:#f7f3ed;
+  --ink:#241f26;
+  --text:#4e4752;
+  --muted:#7d7681;
+  --line:rgba(67,49,71,.12);
+  --purple:#4b2e4f;
+  --purple-2:#3a233f;
+  --sage:#7e8f72;
+  --sage-2:#68795f;
+  --clay:#c98a75;
+  --clay-2:#af6f5b;
+  --stone:#bcaea1;
+  --shadow:0 14px 38px rgba(36,26,38,.08);
+  --shadow-sm:0 8px 22px rgba(36,26,38,.05);
   --container:1120px;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",Arial,sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 0% 0%, rgba(196,122,107,.10), transparent 18%),
-    radial-gradient(circle at 100% 8%, rgba(125,143,114,.10), transparent 20%),
-    linear-gradient(180deg,#f7f3ee 0%, var(--bg) 100%);
-  line-height:1.72;
-  letter-spacing:.01em;
-}
-a{text-decoration:none;color:inherit}
-button,input,select,textarea{font:inherit}
-.container{width:min(var(--container),calc(100% - 36px));margin:auto}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#faf7f3 0%,var(--bg) 100%);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;line-height:1.68;letter-spacing:.01em}
+a{text-decoration:none;color:inherit} img{display:block;max-width:100%} button,input,select,textarea{font:inherit}
+.container{width:min(var(--container),calc(100% - 36px));margin:auto} h1,h2,h3,p{margin-top:0}
+.site-header{position:sticky;top:0;z-index:90;background:linear-gradient(135deg,var(--purple),var(--purple-2));box-shadow:0 10px 24px rgba(26,19,28,.16);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900}.brand-text strong{display:block;color:#fff;font-size:18px;line-height:1.1;font-weight:900}.brand-text span{display:block;color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+.nav-links{display:flex;align-items:center;gap:4px}.nav-links a{color:rgba(255,255,255,.86);font-size:14px;font-weight:850;padding:10px 12px;border-radius:999px}.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,.10);color:#fff}.menu-btn{display:none;padding:9px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font-weight:900}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:10px 18px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:.18s ease;font-weight:900;white-space:nowrap}.btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--sage);color:#fff;box-shadow:0 8px 18px rgba(126,143,114,.22)}.btn-primary:hover{background:var(--sage-2)}.btn-dark{background:var(--purple);color:#fff;box-shadow:0 8px 18px rgba(75,46,79,.18)}.btn-dark:hover{background:#412645}.btn-soft{background:#fff;color:var(--clay-2);border-color:rgba(201,138,117,.34)}.btn-soft:hover{background:#fff7f3}.btn-outline{background:transparent;color:var(--purple);border-color:rgba(75,46,79,.18)}.btn-line{background:#06c755;color:#fff}
+.page-shell{padding:20px 0 0}.hero-wrap{background:var(--surface);border:1px solid var(--line);border-radius:0 0 16px 16px;overflow:hidden;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1.1fr;align-items:stretch;min-height:340px}.hero-copy{padding:40px 34px 32px;background:linear-gradient(180deg,#fffdfa 0%,#f8f3ec 100%)}.hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#f3ece5;color:var(--sage-2);border:1px solid rgba(126,143,114,.16);font-size:13px;font-weight:900}.hero h1{margin:18px 0 14px;font-size:clamp(34px,5vw,58px);line-height:1.06;letter-spacing:-.05em}.hero h1 span{display:block;margin-top:8px;font-size:.42em;letter-spacing:.12em;color:var(--purple);font-weight:900}.hero p{color:var(--text);max-width:520px;font-size:18px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.hero-note{margin-top:14px;color:var(--muted);font-size:14px}.hero-media{min-height:340px;background:url("pics/hero-local.svg") center/cover no-repeat}
+.section{padding:40px 0}.section-tight{padding:28px 0}.section-head.center{text-align:center}.section-head h2{font-size:31px;line-height:1.16;letter-spacing:-.04em;margin-bottom:6px}.section-head p{color:var(--muted)}
+.more-link{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;padding:8px 15px;border-radius:999px;background:#fff;color:var(--clay-2);border:1px solid rgba(201,138,117,.25);font-size:13px;font-weight:900}
+.category-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:20px}.category-card{background:#fbfaf7;border:1px solid rgba(67,49,71,.08);border-radius:10px;min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow-sm);text-align:center}.category-card svg{width:24px;height:24px;stroke:#8a847d}.category-card span{font-size:13px;font-weight:800;color:var(--text)}
+.featured-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}.feature-card{background:#fff;border:1px solid rgba(67,49,71,.10);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}.feature-photo{aspect-ratio:4/3;background:center/cover no-repeat}.feature-card:nth-child(1) .feature-photo{background-image:url('pics/photo-coffee.svg')}.feature-card:nth-child(2) .feature-photo{background-image:url('pics/photo-shop.svg')}.feature-card:nth-child(3) .feature-photo{background-image:url('pics/photo-travel.svg')}.feature-card:nth-child(4) .feature-photo{background-image:url('pics/photo-bike.svg')}.feature-content{padding:11px 12px 12px}.feature-title{font-size:14px;font-weight:900;line-height:1.35;margin-bottom:4px}.feature-meta{font-size:12px;color:#8b846d;margin-bottom:4px;font-weight:800}.feature-tag-row{display:flex;gap:6px;flex-wrap:wrap}.feature-tag{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;background:#f4eee8;color:var(--muted);font-size:11px;font-weight:900}.feature-offer{margin-top:6px;color:var(--clay-2);font-size:12px;font-weight:900}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.service-card{border-radius:10px;overflow:hidden;min-height:156px;color:#fff;box-shadow:var(--shadow)}.service-card.purple{background:linear-gradient(135deg,#4b2e4f,#604962)}.service-card.sage{background:linear-gradient(135deg,#7e8f72,#92a186)}.service-card.clay{background:linear-gradient(135deg,#c98a75,#d49a87)}.service-inner{padding:18px 18px 16px;height:100%;display:flex;flex-direction:column}.service-icon svg{width:34px;height:34px;stroke:rgba(255,255,255,.94)}.service-title{font-size:21px;font-weight:900;line-height:1.2;margin-top:8px}.service-sub{margin-top:4px;color:rgba(255,255,255,.78);font-size:13px}.service-actions{margin-top:auto;padding-top:14px}.service-actions .btn{min-height:33px;padding:7px 14px;background:#fff;color:var(--ink);border:0;font-size:12px}
+.page-hero{padding:34px 0 12px}.page-hero-card{background:var(--surface);border:1px solid rgba(67,49,71,.10);border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.2fr .8fr;gap:18px;overflow:hidden}.page-hero-copy{padding:32px}.page-hero-side{padding:24px;background:linear-gradient(135deg,var(--purple),#634868);color:#fff}.page-hero h1{margin:14px 0 10px;font-size:clamp(34px,4.7vw,50px);line-height:1.08;letter-spacing:-.05em}.eyebrow{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:#f3ece5;color:var(--clay-2);font-size:13px;font-weight:900}.page-hero p,.card p,.panel p{color:var(--muted)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card,.panel,.news-card,.faq details,.directory,.step{background:#fff;border:1px solid rgba(67,49,71,.10);border-radius:10px;box-shadow:var(--shadow-sm)}.card,.panel,.directory,.step,.news-card{padding:22px}.panel.dark{background:linear-gradient(135deg,var(--purple),#604562);color:#fff}.panel.dark p,.panel.dark li,.panel.dark .list-item{color:rgba(255,255,255,.82)}.card-icon{width:46px;height:46px;border-radius:10px;display:grid;place-items:center;background:#f5efe9;color:var(--purple);margin-bottom:14px}.card-icon svg{width:24px;height:24px;stroke:currentColor}.list{display:grid;gap:10px;margin-top:12px}.list-item{display:flex;gap:10px;color:var(--text);font-weight:800}.list-item span:first-child{color:var(--clay-2);font-weight:900}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step-no{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--purple);color:#fff;font-weight:900;margin-bottom:12px}.step:nth-child(2) .step-no{background:var(--sage)}.step:nth-child(3) .step-no{background:var(--clay)}.step:nth-child(4) .step-no{background:var(--stone);color:var(--purple)}.step h3{font-size:18px;margin-bottom:6px}.step p{margin-bottom:0;color:var(--muted);font-size:14px}
+.filters{display:grid;grid-template-columns:minmax(240px,1.35fr) minmax(150px,.7fr) minmax(150px,.7fr) auto;gap:12px;margin-bottom:14px}input,select,textarea{width:100%;min-height:46px;padding:11px 13px;border:1px solid rgba(67,49,71,.16);border-radius:10px;outline:0;background:#fffdfa;color:var(--ink)}textarea{min-height:112px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(126,143,114,.72);box-shadow:0 0 0 4px rgba(126,143,114,.10)}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}.chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(67,49,71,.12);background:#fff;color:var(--text);font-size:14px;font-weight:900;cursor:pointer}.chip.active{background:#eef2eb;color:var(--sage-2);border-color:rgba(126,143,114,.25)}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.shop-card{background:#fff;border:1px solid rgba(67,49,71,.10);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;min-height:100%}.shop-photo{aspect-ratio:4/3;background:center/cover no-repeat}.shop-card:nth-child(4n+1) .shop-photo{background-image:url('pics/photo-coffee.svg')}.shop-card:nth-child(4n+2) .shop-photo{background-image:url('pics/photo-shop.svg')}.shop-card:nth-child(4n+3) .shop-photo{background-image:url('pics/photo-travel.svg')}.shop-card:nth-child(4n+4) .shop-photo{background-image:url('pics/photo-bike.svg')}.shop-content{padding:12px;display:flex;flex-direction:column;flex:1}.shop-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:6px}.shop-head h3{font-size:15px;line-height:1.35;margin-bottom:0}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.tag{display:inline-flex;padding:3px 7px;border-radius:999px;background:#f4eee8;color:var(--purple);font-size:11px;font-weight:900}.tag.area{background:#eef2eb;color:var(--sage-2)}.offer{background:#fbf1ed;color:var(--clay-2);padding:10px;border-radius:8px;line-height:1.55;font-size:12px;font-weight:900;margin-bottom:8px}.shop-desc{color:var(--muted);font-size:13px;margin:0 0 12px}.shop-actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}.mini-btn{flex:1;min-width:76px;min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:999px;border:1px solid rgba(67,49,71,.12);background:#fff;color:var(--text);font-size:12px;font-weight:900;cursor:pointer}.mini-btn.primary{background:var(--purple);border-color:var(--purple);color:#fff}.empty{display:none;padding:32px 18px;text-align:center;border:1px dashed rgba(67,49,71,.22);border-radius:10px;color:var(--muted);background:rgba(255,255,255,.52)}
+.faq{display:grid;gap:12px}.faq details{padding:18px}.faq summary{cursor:pointer;font-weight:900}.faq p{margin:12px 0 0;color:var(--muted)}.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.news-date{color:var(--clay-2);font-size:13px;font-weight:900;margin-bottom:8px}.footer{margin-top:24px;padding:40px 0;background:linear-gradient(135deg,var(--purple),var(--purple-2));color:#fff}.footer-grid{display:grid;grid-template-columns:1.3fr .7fr .7fr;gap:20px}.footer p,.footer a{color:rgba(255,255,255,.72)}.footer a:hover{color:#fff}.footer-links{display:grid;gap:7px}.backtop{position:fixed;right:16px;bottom:16px;z-index:20;width:42px;height:42px;border:0;border-radius:12px;background:var(--clay);color:#fff;font-weight:900;box-shadow:0 10px 22px rgba(201,138,117,.25);cursor:pointer}.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(31,21,33,.56)}.modal.open{display:grid}.modal-card{width:min(720px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.24)}.modal-head{display:flex;justify-content:space-between;gap:16px;padding:20px 22px 14px;border-bottom:1px solid rgba(67,49,71,.10)}.modal-head p{margin:0;color:var(--muted)}.modal-body{padding:20px 22px 24px}.close{width:38px;height:38px;border-radius:10px;border:1px solid rgba(67,49,71,.12);background:#fff;cursor:pointer}.notice{margin-top:14px;padding:12px 14px;background:#eef2eb;border:1px solid rgba(126,143,114,.18);color:var(--sage-2);font-size:14px;font-weight:800;border-radius:10px}
+@media (max-width:960px){.hero{grid-template-columns:1fr}.hero-copy{padding:32px 24px}.hero-media{min-height:250px}.page-hero-card,.grid-3,.grid-2,.news-grid,.footer-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.shop-grid,.featured-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(3,1fr)}.filters{grid-template-columns:1fr 1fr}.nav-links{display:none;position:absolute;left:18px;right:18px;top:74px;flex-direction:column;align-items:stretch;background:rgba(75,46,79,.98);border:1px solid rgba(255,255,255,.12);border-radius:12px;box-shadow:var(--shadow);padding:14px}.nav-links.open{display:flex}.nav-links a,.nav-links .btn{width:100%}.menu-btn{display:inline-flex}}
+@media (max-width:620px){.container{width:min(calc(100% - 24px),var(--container))}.page-shell{padding-top:14px}.hero-wrap{border-radius:0 0 12px 12px}.hero-copy{padding:24px 18px}.hero h1{font-size:36px}.hero p{font-size:16px}.hero-actions{display:grid}.btn{width:100%}.section{padding:32px 0}.category-grid{grid-template-columns:repeat(3,1fr);gap:10px}.category-card{min-height:82px}.featured-grid{grid-template-columns:repeat(2,1fr)}.service-grid{grid-template-columns:1fr}.shop-grid{grid-template-columns:1fr}.filters,.steps{grid-template-columns:1fr}}
 
-.site-header{
-  position:sticky;top:0;z-index:80;
-  background:linear-gradient(135deg,rgba(75,46,79,.97),rgba(59,36,63,.97));
-  border-bottom:1px solid rgba(255,255,255,.10);
-  box-shadow:0 10px 30px rgba(36,27,39,.15);
-  backdrop-filter:blur(14px);
-}
-.nav{
-  min-height:78px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px
-}
-.brand{display:flex;align-items:center;gap:14px}
-.brand-mark{
-  width:46px;height:46px;border-radius:16px;display:grid;place-items:center;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.05)),
-    linear-gradient(135deg, var(--primary), var(--sage));
-  color:#fff;font-size:18px;font-weight:950;
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:0 12px 24px rgba(0,0,0,.15);
-}
-.brand strong{display:block;font-size:18px;line-height:1.2;font-weight:950;color:#fff}
-.brand span span{display:block;margin-top:3px;color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a{
-  padding:10px 12px;border-radius:999px;
-  color:rgba(255,255,255,.88);
-  font-size:14px;font-weight:850;
-}
-.nav-links a:hover,.nav-links a.active{
-  color:#fff;background:rgba(255,255,255,.10);
-}
-.menu-btn{
-  display:none;padding:9px 14px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);
-  color:#fff;font-weight:900;
+
+/* =========================================================
+   Square Professional Override
+   目的：移除過多圓弧與膠囊按鈕，改為方形小圓角風格
+   ========================================================= */
+
+:root{
+  --r-xs:4px;
+  --r-sm:6px;
+  --r-md:8px;
+  --r-lg:10px;
 }
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:46px;padding:12px 22px;border-radius:999px;border:1px solid transparent;
-  font-weight:900;text-align:center;white-space:nowrap;cursor:pointer;transition:.18s ease;
-}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{
-  color:#fff;background:var(--sage);
-  box-shadow:0 14px 28px rgba(125,143,114,.24);
-}
-.btn-primary:hover{background:var(--sage-2)}
-.btn-dark{
-  color:#fff;background:var(--primary);
-  box-shadow:0 14px 28px rgba(75,46,79,.22);
-}
-.btn-dark:hover{background:#402744}
-.btn-line{
-  color:#fff;background:#06c755;box-shadow:0 14px 28px rgba(6,199,85,.18)
-}
-.btn-outline{
-  background:transparent;color:var(--clay-2);
-  border-color:rgba(196,122,107,.48);
-}
-.btn-outline:hover{
-  background:rgba(196,122,107,.06);
-  border-color:var(--clay);
+/* 全站按鈕：取消膠囊狀 */
+.btn,
+.service-actions .btn,
+.more-link,
+.mini-btn,
+.chip,
+.menu-btn,
+.backtop,
+.close {
+  border-radius: var(--r-md) !important;
 }
 
-.hero,.page-hero{
-  position:relative;overflow:hidden;
-  background:
-    radial-gradient(circle at 8% 16%, rgba(196,122,107,.10), transparent 24%),
-    radial-gradient(circle at 92% 12%, rgba(125,143,114,.10), transparent 22%),
-    linear-gradient(180deg,#f6f0ea 0%, #f2ece6 100%);
-}
-.hero{padding:84px 0 60px}
-.page-hero{padding:72px 0 52px;border-bottom:1px solid var(--line)}
-.hero:before,.page-hero:before{
-  content:"";position:absolute;inset:auto -120px -180px auto;
-  width:460px;height:460px;border-radius:50%;
-  background:radial-gradient(circle, rgba(75,46,79,.12) 0%, rgba(75,46,79,0) 68%);
-}
-.hero-grid{
-  position:relative;display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
-  gap:46px;align-items:center;
-}
-.page-hero-inner{
-  position:relative;display:grid;
-  grid-template-columns:1.2fr .8fr;gap:36px;align-items:end;
-}
-.eyebrow{
-  display:inline-flex;gap:9px;padding:8px 14px;border-radius:999px;
-  background:rgba(196,122,107,.10);
-  color:var(--clay-2);border:1px solid rgba(196,122,107,.22);
-  font-size:14px;font-weight:900
-}
-h1,h2,h3,p{margin-top:0}
-h1{
-  margin:18px 0;
-  font-size:clamp(42px,5.4vw,68px);
-  line-height:1.05;letter-spacing:-.055em
-}
-.page-hero h1{font-size:clamp(38px,4.6vw,58px);max-width:860px}
-h1 span{color:var(--primary)}
-.lead{
-  max-width:700px;margin:0;color:var(--text);
-  font-size:clamp(17px,1.8vw,20px)
-}
-.hero-actions,.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.hero-note,.note{margin-top:18px;color:var(--muted);font-size:14px}
-
-.hero-card{
-  padding:26px;border-radius:var(--radius-xl);
-  background:
-    linear-gradient(160deg, rgba(75,46,79,.98), rgba(68,47,76,.94)),
-    linear-gradient(135deg, var(--primary), var(--primary-2));
-  color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-}
-.hero-card:before{
-  content:"";position:absolute;right:-50px;top:-50px;width:220px;height:220px;border-radius:50%;
-  background:radial-gradient(circle, rgba(196,122,107,.38) 0%, rgba(196,122,107,0) 72%);
-}
-.hero-card:after{
-  content:"";position:absolute;left:-40px;bottom:-40px;width:210px;height:210px;border-radius:50%;
-  background:radial-gradient(circle, rgba(125,143,114,.22) 0%, rgba(125,143,114,0) 72%);
-}
-.hero-card>*{position:relative}
-.card-head{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px}
-.card-head h2{margin-bottom:4px;font-size:26px;line-height:1.25;color:#fff}
-.card-head p{margin:0;color:rgba(255,255,255,.72);font-size:14px}
-.card-pill,.badge{
-  padding:5px 9px;border-radius:999px;
-  background:rgba(255,255,255,.10);color:#f8ece5;
-  border:1px solid rgba(255,255,255,.12);
-  font-size:12px;font-weight:900;white-space:nowrap
-}
-.search-box{
-  display:flex;align-items:center;gap:10px;min-height:52px;padding:0 15px;
-  border-radius:16px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.82);
-  font-weight:850;margin-bottom:14px
-}
-.hero-list{display:grid;gap:10px}
-.hero-list-item{
-  display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;
-  padding:12px;border-radius:18px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.10)
-}
-.hero-list-icon{
-  width:44px;height:44px;display:grid;place-items:center;border-radius:14px;
-  background:rgba(255,255,255,.12);font-size:18px;color:#fff;font-weight:900
-}
-.hero-list-item span{display:block;margin-top:2px;color:rgba(255,255,255,.72);font-size:13px}
-.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.stat{
-  padding:15px 12px;border-radius:18px;background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.09)
-}
-.stat b{display:block;font-size:23px;line-height:1;color:#fff}
-.stat span{display:block;margin-top:5px;color:rgba(255,255,255,.72);font-size:12px;font-weight:850}
-
-.section{padding:74px 0}
-.section.white{background:rgba(255,255,255,.38)}
-.section-head{
-  display:flex;justify-content:space-between;align-items:flex-end;gap:22px;
-  margin-bottom:28px
-}
-.kicker{
-  margin-bottom:8px;color:var(--clay-2);font-size:13px;
-  font-weight:950;letter-spacing:.13em;text-transform:uppercase
-}
-h2{
-  margin-bottom:0;font-size:clamp(30px,3.8vw,44px);
-  line-height:1.16;letter-spacing:-.045em
-}
-h3{font-size:22px;margin-bottom:8px}
-.section-desc{max-width:660px;margin:10px 0 0;color:var(--muted)}
-
-.grid-3,.entry-grid,.shop-grid,.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.split,.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.split-aside{display:grid;grid-template-columns:.92fr 1.08fr;gap:20px;align-items:start}
-
-.card,.entry-card,.panel{
-  padding:28px;border-radius:var(--radius-lg);
-  background:var(--surface);border:1px solid var(--line);
-  box-shadow:var(--shadow-sm)
-}
-.entry-icon,.card-icon{
-  width:54px;height:54px;display:grid;place-items:center;margin-bottom:17px;
-  border-radius:16px;background:var(--surface-2);color:var(--primary);
-  border:1px solid rgba(75,46,79,.10);font-size:22px;font-weight:900
-}
-.card p,.panel p,.entry-card p{color:var(--muted)}
-
-.entry-grid .entry-card:nth-child(1){background:linear-gradient(180deg,#fffdfb,#f8f2ec)}
-.entry-grid .entry-card:nth-child(2){background:linear-gradient(180deg,#fcfbf8,#f2f6ef)}
-.entry-grid .entry-card:nth-child(3){background:linear-gradient(180deg,#fbfaf8,#f5efea)}
-
-.entry-grid .entry-card:nth-child(1) .entry-icon{color:var(--primary)}
-.entry-grid .entry-card:nth-child(2) .entry-icon{color:var(--sage);background:#eef3ea;border-color:rgba(125,143,114,.18)}
-.entry-grid .entry-card:nth-child(3) .entry-icon{color:var(--clay);background:#f8ece8;border-color:rgba(196,122,107,.18)}
-
-.panel.dark{
-  background:linear-gradient(135deg,var(--primary) 0%, #5c4760 100%);
-  color:#fff;border-color:rgba(255,255,255,.08)
-}
-.panel.dark p,.panel.dark .section-desc,.panel.dark .list-item{color:rgba(255,255,255,.78)}
-.list{display:grid;gap:10px;margin-top:18px}
-.list-item{display:flex;gap:10px;color:var(--text);font-weight:850}
-.list-item span:first-child{color:var(--clay);font-weight:950}
-.panel.dark .list-item span:first-child{color:#f2d5cb}
-
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.step{
-  padding:22px;border-radius:20px;background:var(--surface);
-  border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.035)
-}
-.step-no{
-  width:38px;height:38px;display:grid;place-items:center;margin-bottom:13px;
-  border-radius:50%;background:var(--primary);color:#fff;font-weight:950
-}
-.step:nth-child(2) .step-no{background:var(--sage)}
-.step:nth-child(3) .step-no{background:var(--clay)}
-.step:nth-child(4) .step-no{background:var(--stone);color:var(--primary)}
-.step h3{font-size:18px;margin-bottom:6px}
-.step p{margin:0;color:var(--muted);font-size:14px}
-
-.directory{
-  padding:26px;border-radius:28px;background:var(--surface);
-  border:1px solid var(--line);box-shadow:var(--shadow-sm)
-}
-.filters{
-  display:grid;grid-template-columns:minmax(240px,1.35fr) minmax(150px,.7fr) minmax(150px,.7fr) auto;
-  gap:12px;margin-bottom:14px
-}
-input,select,textarea{
-  width:100%;min-height:48px;border:1px solid rgba(75,46,79,.16);
-  border-radius:14px;background:#fffdfa;color:var(--ink);outline:0;padding:12px 14px
-}
-textarea{min-height:116px;resize:vertical}
-input:focus,select:focus,textarea:focus{
-  border-color:rgba(125,143,114,.76);
-  box-shadow:0 0 0 4px rgba(125,143,114,.12)
-}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 22px}
-.chip{
-  padding:8px 12px;border:1px solid rgba(75,46,79,.12);border-radius:999px;
-  background:#fff;color:var(--text);font-size:14px;font-weight:900;cursor:pointer
-}
-.chip.active{
-  border-color:rgba(125,143,114,.38);
-  background:rgba(125,143,114,.10);color:var(--sage-2)
-}
-.shop-card{
-  display:flex;flex-direction:column;min-height:100%;padding:18px;
-  border-radius:20px;background:var(--surface);
-  border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.035);transition:.18s
-}
-.shop-card:hover{
-  transform:translateY(-2px);border-color:rgba(75,46,79,.22);box-shadow:0 16px 36px rgba(15,23,42,.08)
-}
-.shop-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:12px}
-.shop-logo{
-  width:54px;height:54px;border-radius:16px;background:var(--surface-2);
-  object-fit:contain;border:1px solid var(--line);padding:7px
-}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}
-.tag{
-  display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;
-  background:rgba(75,46,79,.08);color:var(--primary);
-  font-size:12px;font-weight:950
-}
-.tag.area{background:rgba(125,143,114,.12);color:var(--sage-2)}
-.offer{
-  margin-bottom:12px;padding:12px;border-radius:14px;
-  background:rgba(196,122,107,.10);color:var(--clay-2);
-  font-weight:950;line-height:1.55
-}
-.shop-desc{flex:1;margin-bottom:14px;color:var(--muted);font-size:14px}
-.shop-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-.mini-btn{
-  flex:1;min-width:84px;min-height:38px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--text);
-  font-size:13px;font-weight:950;cursor:pointer
-}
-.mini-btn.primary{color:#fff;border-color:var(--primary);background:var(--primary)}
-.empty{
-  display:none;padding:38px 16px;border-radius:20px;border:1px dashed rgba(75,46,79,.22);
-  background:rgba(255,255,255,.55);color:var(--muted);text-align:center;font-weight:850
-}
-.faq{display:grid;gap:12px}
-.faq details{
-  padding:18px 20px;border-radius:16px;background:var(--surface);
-  border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.03)
-}
-.faq summary{cursor:pointer;font-weight:950}
-.faq p{margin:12px 0 0;color:var(--muted)}
-.news-card{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:20px;padding:22px;box-shadow:var(--shadow-sm)
-}
-.news-date{color:var(--clay-2);font-weight:950;font-size:13px;margin-bottom:10px}
-
-.footer{
-  padding:48px 0;
-  background:linear-gradient(135deg,var(--primary) 0%, #3f2842 100%);
-  color:#fff
-}
-.footer-grid{display:grid;grid-template-columns:1.35fr .65fr .65fr;gap:24px}
-.footer h3,.footer h4{color:#fff}
-.footer p,.footer a{color:rgba(255,255,255,.76)}
-.footer a:hover{color:#fff}
-.footer-links{display:grid;gap:8px}
-
-.backtop{
-  position:fixed;right:18px;bottom:18px;z-index:40;width:46px;height:46px;border:0;border-radius:50%;
-  background:var(--clay);color:#fff;font-weight:950;box-shadow:0 12px 28px rgba(196,122,107,.25);cursor:pointer
-}
-.modal{
-  position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:22px;overflow:auto;
-  background:rgba(37,29,42,.55)
-}
-.modal.open{display:grid}
-.modal-card{
-  width:min(720px,100%);max-height:90vh;overflow:auto;
-  border-radius:26px;background:var(--surface);box-shadow:0 34px 90px rgba(0,0,0,.26)
-}
-.modal-head{
-  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
-  padding:22px 24px 14px;border-bottom:1px solid var(--line)
-}
-.modal-head h3{margin-bottom:4px;font-size:25px}
-.modal-head p{margin:0;color:var(--muted)}
-.close{
-  width:38px;height:38px;border:1px solid var(--line);border-radius:50%;
-  background:#fff;font-weight:950;cursor:pointer
-}
-.modal-body{padding:22px 24px 26px}
-.notice{
-  margin-top:16px;padding:13px 14px;border-radius:14px;background:rgba(125,143,114,.10);
-  border:1px solid rgba(125,143,114,.18);color:var(--sage-2);font-size:14px;font-weight:850
+/* 導覽列可略圓，但不要膠囊 */
+.nav-links a {
+  border-radius: var(--r-sm) !important;
 }
 
-@media(max-width:960px){
-  .hero-grid,.page-hero-inner,.entry-grid,.grid-3,.shop-grid,.split,.split-aside,.footer-grid,.news-grid{grid-template-columns:1fr}
-  .filters{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:repeat(2,1fr)}
-  .nav-links{
-    display:none;position:absolute;top:76px;left:18px;right:18px;padding:14px;border-radius:20px;
-    background:rgba(75,46,79,.98);border:1px solid rgba(255,255,255,.10);
-    box-shadow:var(--shadow);flex-direction:column;align-items:stretch
+/* Logo 方形小圓角 */
+.brand-mark {
+  border-radius: var(--r-md) !important;
+}
+
+/* 首頁大框、頁面框，降低圓弧 */
+.hero-wrap {
+  border-radius: 0 0 var(--r-lg) var(--r-lg) !important;
+}
+
+.page-hero-card,
+.modal-card {
+  border-radius: var(--r-lg) !important;
+}
+
+/* 所有主要卡片：方形小圓角 */
+.category-card,
+.feature-card,
+.service-card,
+.card,
+.panel,
+.news-card,
+.faq details,
+.directory,
+.step,
+.shop-card,
+.empty {
+  border-radius: var(--r-md) !important;
+}
+
+/* 店家照片、卡片內部圖片不再太圓 */
+.feature-photo,
+.shop-photo {
+  border-radius: 0 !important;
+}
+
+/* icon 外框改成方形小圓角，不要圓形 */
+.category-card svg,
+.card-icon,
+.entry-icon,
+.hero-list-icon,
+.service-icon,
+.step-no {
+  border-radius: var(--r-sm) !important;
+}
+
+/* 分類 icon 卡片視覺更俐落 */
+.category-card {
+  min-height: 86px;
+  background: #fbfaf7;
+}
+
+.category-card svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 服務入口三大塊：更像專業資訊卡，不要可愛卡 */
+.service-card {
+  border-radius: var(--r-md) !important;
+}
+
+.service-inner {
+  padding: 20px 20px 18px;
+}
+
+.service-actions .btn {
+  min-height: 34px !important;
+  padding: 7px 14px !important;
+  font-size: 12px !important;
+  border-radius: var(--r-sm) !important;
+}
+
+/* 表單欄位也改方正 */
+input,
+select,
+textarea {
+  border-radius: var(--r-md) !important;
+}
+
+/* 標籤不使用過度圓弧，改成微圓角 */
+.tag,
+.tag.area,
+.feature-tag,
+.badge,
+.card-pill,
+.offer,
+.notice {
+  border-radius: var(--r-sm) !important;
+}
+
+/* 圓形數字改成方形小標 */
+.step-no {
+  border-radius: var(--r-sm) !important;
+}
+
+/* 手機選單也不要大圓角 */
+.nav-links.open {
+  border-radius: var(--r-md) !important;
+}
+
+/* 返回頂部不做圓形 */
+.backtop {
+  border-radius: var(--r-md) !important;
+}
+
+/* 避免任何殘留 pill class */
+[class*="pill"],
+[class*="badge"] {
+  border-radius: var(--r-sm) !important;
+}
+
+@media (max-width:620px){
+  .hero-wrap {
+    border-radius: 0 0 var(--r-md) var(--r-md) !important;
   }
-  .nav-links.open{display:flex}
-  .nav-links a,.nav-links .btn{width:100%}
-  .menu-btn{display:inline-flex}
-}
-@media(max-width:560px){
-  .container{width:min(100% - 28px,var(--container))}
-  .hero{padding:50px 0 38px}
-  .page-hero{padding:46px 0 36px}
-  .hero-actions,.actions,.shop-actions{display:grid}
-  .btn,.mini-btn{width:100%}
-  .filters,.steps,.hero-list-item{grid-template-columns:1fr}
-  .badge{width:fit-content}
-  .hero-stats{grid-template-columns:1fr}
-  .section{padding:56px 0}
-  .section-head{display:block}
-  .directory,.panel,.card,.entry-card,.hero-card{padding:20px}
 }
 
 </style>
-</head><body><header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">福</span><span class="brand-text"><strong>頭竹苗福利社</strong><span>頭份・竹南・苗栗優惠平台</span></span></a><button class="menu-btn" id="menuBtn" type="button">選單</button><nav class="nav-links" id="navLinks"><a class="active" href="card.html">福利卡</a><a class="" href="shops.html">特約商店</a><a class="" href="merchant.html">特約商專區</a><a class="" href="company.html">企業合作</a><a class="" href="about.html">關於我們</a><a class="" href="news.html">最新消息</a><a class="btn btn-primary" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">申請福利卡</a></nav></div></header><main id="main"><section class="page-hero"><div class="container page-hero-inner"><div><span class="eyebrow">Digital Card</span><h1>免費領取頭竹苗大家庭福利卡</h1><p class="lead">加入 LINE 即可取得數位福利卡，不用下載 App，查詢優惠、到店出示都很方便。</p><div class="actions"><a class="btn btn-primary" href="https://lin.ee/rQzJS3i" target="_blank">立即加入 LINE 領卡</a><a class="btn btn-outline" href="shops.html">先看可用優惠</a></div></div><div class="panel dark"><h2>一機在手，優惠隨時有</h2><p>適合日常消費、家庭生活、在地購物與朋友聚會前查詢優惠使用。</p></div></div></section><section class="section white"><div class="container"><div class="section-head"><div><div class="kicker">Steps</div><h2>三步驟開始使用</h2></div></div><div class="steps"><article class="step"><div class="step-no">1</div><h3>加入 LINE</h3><p>點擊領卡按鈕，加入頭竹苗福利社官方入口。</p></article><article class="step"><div class="step-no">2</div><h3>查詢特約商</h3><p>從特約商店頁搜尋店名、分類、地區或優惠。</p></article><article class="step"><div class="step-no">3</div><h3>到店出示</h3><p>消費時出示福利卡，依店家公告享優惠。</p></article><article class="step"><div class="step-no">4</div><h3>分享好友</h3><p>把好康分享給家人朋友，一起支持在地店家。</p></article></div></div></section><section class="section"><div class="container grid-3"><article class="card"><div class="card-icon">⌕</div><h3>好查詢</h3><p>用分類、地區與關鍵字快速找到可用優惠。</p></article><article class="card"><div class="card-icon">▢</div><h3>手機可用</h3><p>透過 LINE 使用，不需要另外安裝 App。</p></article><article class="card"><div class="card-icon">▥</div><h3>支持在地</h3><p>讓更多頭份、竹南、苗栗在地商家被看見。</p></article></div></section></main><footer class="footer"><div class="container footer-grid"><div><h3>頭竹苗福利社</h3><p>整合頭份、竹南、苗栗在地優惠與特約商店資訊，讓鄉親用手機就能找到生活好康。</p><p>© <span id="year"></span> 頭竹苗福利社</p></div><div><h4>主要入口</h4><div class="footer-links"><a href="card.html">免費領福利卡</a><a href="shops.html">優惠店家</a><a href="merchant.html">店家加入合作</a><a href="merchant.html#update">特約商資料更新</a></div></div><div><h4>社群連結</h4><div class="footer-links"><a href="https://buyhappy.work/B2CEo" target="_blank">福利社粉專</a><a href="https://buyhappy.work/Xvzxo" target="_blank">LINE 社群</a><a href="https://buyhappy.work/jmmDj" target="_blank">TikTok</a></div></div></div></footer><button class="backtop" type="button" data-backtop>↑</button><script src="main.js"></script></body></html>
+</head><body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">福</span>
+      <span class="brand-text"><strong>頭竹苗福利社</strong><span>頭份・竹南・苗栗在地優惠平台</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" type="button">選單</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="card.html" class="active">福利卡</a><a href="shops.html" class="">優惠店家</a><a href="merchant.html" class="">特約商專區</a><a href="company.html" class="">企業合作</a><a href="about.html" class="">關於我們</a><a href="news.html" class="">最新消息</a>
+      <a class="btn btn-primary" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">申請福利卡</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-card">
+      <div class="page-hero-copy">
+        <span class="eyebrow">頭竹苗福利社</span>
+        <h1>申請福利卡</h1>
+        <p>加入頭竹苗福利社 LINE 入口，即可取得數位福利卡，不需另外下載 App。</p>
+      </div>
+      <div class="page-hero-side">
+        <h3>使用方式簡單</h3>
+        <p>加入 → 查詢優惠 → 到店出示。適合日常生活、家庭消費與在地旅遊前快速使用。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="steps">
+      <article class="step"><div class="step-no">1</div><h3>加入 LINE</h3><p>點擊福利卡申請入口，加入官方帳號。</p></article>
+      <article class="step"><div class="step-no">2</div><h3>取得福利卡</h3><p>於 LINE 內完成領卡，即可開始使用。</p></article>
+      <article class="step"><div class="step-no">3</div><h3>查詢優惠店家</h3><p>透過店家列表頁依分類或地區查詢優惠。</p></article>
+      <article class="step"><div class="step-no">4</div><h3>到店出示</h3><p>消費時出示福利卡，依店家公告享優惠。</p></article>
+    </div>
+    <div style="margin-top:18px"><a class="btn btn-primary" href="https://lin.ee/rQzJS3i" target="_blank" rel="noopener">立即申請福利卡</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container grid-3">
+    <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class=""><path d="M4 10h16v10H4z"/><path d="M12 10v10"/><path d="M4 14h16"/><path d="M12 10H8a2 2 0 1 1 0-4c2 0 4 4 4 4Zm0 0h4a2 2 0 1 0 0-4c-2 0-4 4-4 4Z"/></svg></div><h3>方便</h3><p>不需要另外安裝 App，透過 LINE 就能使用福利卡。</p></article>
+    <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class=""><path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>實用</h3><p>先查地區與店家，再決定今天要去哪裡消費。</p></article>
+    <article class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class=""><path d="m7 12 3 3a2 2 0 0 0 3 0l4-4"/><path d="M3 10l4-4 4 4-4 4-4-4Z"/><path d="m13 10 4-4 4 4-4 4-4-4Z"/></svg></div><h3>支持在地</h3><p>把生活消費留在頭份、竹南、苗栗，也讓好店被更多人看見。</p></article>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>頭竹苗福利社</h3>
+      <p>串聯頭份、竹南、苗栗在地店家與企業福利，讓生活更便利、讓在地更美好。</p>
+      <p>© <span id="year"></span> 頭竹苗福利社 All Rights Reserved.</p>
+    </div>
+    <div>
+      <h4>網站導覽</h4>
+      <div class="footer-links">
+        <a href="card.html">福利卡申請</a>
+        <a href="shops.html">優惠店家</a>
+        <a href="merchant.html">店家合作</a>
+        <a href="company.html">企業合作</a>
+      </div>
+    </div>
+    <div>
+      <h4>社群連結</h4>
+      <div class="footer-links">
+        <a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">福利社粉專</a>
+        <a href="https://buyhappy.work/Xvzxo" target="_blank" rel="noopener">在地 LINE 社群</a>
+        <a href="https://buyhappy.work/jmmDj" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="backtop" type="button" data-backtop>↑</button>
+
+<script src="main.js"></script>
+
+</body></html>
