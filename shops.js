@@ -6,10 +6,10 @@ const SHOP_CONFIG = {
 };
 
 const FALLBACK_SHOPS = [
-  {id:"shop001",name:"竹力小島咖啡",category:"美食餐飲",area:"竹南",offer:"憑福利卡享 95 折",description:"適合咖啡、甜點與朋友小聚。",address:"苗栗縣竹南鎮",map_url:"https://www.google.com/maps/search/?api=1&query=竹力小島咖啡",is_featured:true,is_active:true},
-  {id:"shop002",name:"日常雜貨所",category:"生活雜貨",area:"頭份",offer:"憑福利卡享 9 折",description:"選物雜貨、家飾與生活小物。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=日常雜貨所",is_featured:true,is_active:true},
-  {id:"shop003",name:"漫坪綠園",category:"休閒娛樂",area:"頭份",offer:"憑福利卡享 9 折",description:"放鬆散步、聚會與小型活動空間。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=漫坪綠園",is_featured:true,is_active:true},
-  {id:"shop004",name:"風城草木生活館",category:"住宿旅遊",area:"新竹",offer:"憑福利卡享 9 折",description:"空間體驗、旅宿與選物複合店。",address:"新竹市",map_url:"https://www.google.com/maps/search/?api=1&query=風城草木生活館",is_featured:true,is_active:true}
+  {id:"shop001",name:"竹南小島咖啡",category:"美食餐飲",area:"竹南",offer:"持福利卡享指定飲品優惠",description:"適合咖啡、甜點與朋友小聚。",address:"苗栗縣竹南鎮",map_url:"https://www.google.com/maps/search/?api=1&query=竹南小島咖啡",is_featured:true,is_active:true},
+  {id:"shop002",name:"頭份日常選物",category:"生活雜貨",area:"頭份",offer:"持福利卡享生活選品優惠",description:"選物雜貨、家飾與生活小物。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=頭份日常選物",is_featured:true,is_active:true},
+  {id:"shop003",name:"苗栗慢旅生活館",category:"住宿旅遊",area:"苗栗",offer:"持福利卡享平日方案優惠",description:"旅宿、選物與在地行程諮詢。",address:"苗栗縣苗栗市",map_url:"https://www.google.com/maps/search/?api=1&query=苗栗慢旅生活館",is_featured:true,is_active:true},
+  {id:"shop004",name:"頭份健康照護所",category:"健康照護",area:"頭份",offer:"持福利卡享指定服務優惠",description:"日常保健、照護諮詢與健康服務。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=頭份健康照護所",is_featured:true,is_active:true}
 ];
 
 let shops = [];

@@ -20,8 +20,6 @@
   --clay:#C68873;
   --clay-dark:#A96554;
   --stone:#B7B2A7;
-  --cream:#EADFCC;
-
   --radius-card:8px;
   --radius-btn:6px;
   --shadow:0 14px 36px rgba(36,26,38,.08);
@@ -106,7 +104,7 @@ h1,h2,h3,p{margin-top:0}
 .hero-wrap{
   background:var(--surface);
   border:1px solid var(--line);
-  border-radius:0 0 10px 10px;
+  border-radius:8px;
   overflow:hidden;
   box-shadow:var(--shadow);
 }
@@ -573,7 +571,7 @@ textarea,
 @media (max-width:620px){
   .container{width:min(calc(100% - 24px),var(--container))}
   .page-shell{padding-top:14px}
-  .hero-wrap{border-radius:0 0 8px 8px}
+  .hero-wrap{border-radius:8px}
   .hero-copy{padding:24px 18px}
   .hero h1{font-size:36px}
   .hero p{font-size:16px}
