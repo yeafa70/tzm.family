@@ -1,4 +1,3 @@
-
 const SHOP_CONFIG = {
   dataUrl: "shops.json",
   lineCardUrl: "https://lin.ee/rQzJS3i",
@@ -6,187 +5,303 @@ const SHOP_CONFIG = {
 };
 
 const FALLBACK_SHOPS = [
-  {id:"shop001",name:"竹南小島咖啡",category:"美食餐飲",area:"竹南",offer:"持福利卡享指定飲品優惠",description:"適合咖啡、甜點與朋友小聚。",address:"苗栗縣竹南鎮",map_url:"https://www.google.com/maps/search/?api=1&query=竹南小島咖啡",is_featured:true,is_active:true},
-  {id:"shop002",name:"頭份日常選物",category:"生活雜貨",area:"頭份",offer:"持福利卡享生活選品優惠",description:"選物雜貨、家飾與生活小物。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=頭份日常選物",is_featured:true,is_active:true},
-  {id:"shop003",name:"苗栗慢旅生活館",category:"住宿旅遊",area:"苗栗",offer:"持福利卡享平日方案優惠",description:"旅宿、選物與在地行程諮詢。",address:"苗栗縣苗栗市",map_url:"https://www.google.com/maps/search/?api=1&query=苗栗慢旅生活館",is_featured:true,is_active:true},
-  {id:"shop004",name:"頭份健康照護所",category:"健康照護",area:"頭份",offer:"持福利卡享指定服務優惠",description:"日常保健、照護諮詢與健康服務。",address:"苗栗縣頭份市",map_url:"https://www.google.com/maps/search/?api=1&query=頭份健康照護所",is_featured:true,is_active:true}
+  {
+    id: "fallback-001",
+    name: "竹南小島咖啡",
+    category: "美食餐飲",
+    area: "竹南",
+    offer: "持福利卡消費享指定飲品優惠。",
+    description: "提供咖啡、輕食與安靜座位，適合日常聚會與工作休息。",
+    address: "苗栗縣竹南鎮",
+    map_url: "https://www.google.com/maps/search/?api=1&query=竹南咖啡",
+    is_featured: true,
+    is_active: true
+  },
+  {
+    id: "fallback-002",
+    name: "頭份日常選物",
+    category: "生活雜貨",
+    area: "頭份",
+    offer: "福利卡會員享生活選品專屬優惠。",
+    description: "整理居家、禮品與日常用品，讓在地採買更方便。",
+    address: "苗栗縣頭份市",
+    map_url: "https://www.google.com/maps/search/?api=1&query=頭份生活選物",
+    is_featured: true,
+    is_active: true
+  },
+  {
+    id: "fallback-003",
+    name: "苗栗慢旅生活館",
+    category: "住宿旅遊",
+    area: "苗栗市",
+    offer: "指定旅遊體驗與住宿方案可享合作優惠。",
+    description: "提供苗栗慢遊資訊、住宿與在地體驗規劃。",
+    address: "苗栗縣苗栗市",
+    map_url: "https://www.google.com/maps/search/?api=1&query=苗栗旅遊",
+    is_featured: true,
+    is_active: true
+  },
+  {
+    id: "fallback-004",
+    name: "頭份健康照護所",
+    category: "健康照護",
+    area: "頭份",
+    offer: "預約指定服務享福利卡合作優惠。",
+    description: "提供日常保健、舒壓與健康照護相關服務。",
+    address: "苗栗縣頭份市",
+    map_url: "https://www.google.com/maps/search/?api=1&query=頭份健康照護",
+    is_featured: true,
+    is_active: true
+  }
 ];
 
 let shops = [];
+
 const $ = id => document.getElementById(id);
 
-function normalizeShop(r){
+function normalizeShop(row) {
   return {
-    id:r.id||r.shop_id||"",
-    name:r.name||r.shop_name||"",
-    category:r.category||"其他",
-    area:r.area||"未分類",
-    offer:r.offer||r.discount||"請依店家現場公告為準。",
-    description:r.description||r.desc||"",
-    address:r.address||"",
-    phone:r.phone||"",
-    map_url:r.map_url||r.mapUrl||"",
-    website_url:r.website_url||r.websiteUrl||"",
-    facebook_url:r.facebook_url||r.facebookUrl||"",
-    instagram_url:r.instagram_url||r.instagramUrl||"",
-    logo:r.logo||SHOP_CONFIG.defaultLogo,
-    is_featured:Boolean(r.is_featured),
-    is_active:r.is_active!==false
+    id: row.id || row.shop_id || row.name || "",
+    name: row.name || row.shop_name || "未命名店家",
+    category: row.category || "其他分類",
+    area: row.area || "其他地區",
+    offer: row.offer || row.discount || "詳細優惠以店家現場公告為準。",
+    description: row.description || row.desc || "",
+    address: row.address || "",
+    phone: row.phone || "",
+    map_url: row.map_url || row.mapUrl || "",
+    website_url: row.website_url || row.websiteUrl || "",
+    facebook_url: row.facebook_url || row.facebookUrl || "",
+    instagram_url: row.instagram_url || row.instagramUrl || "",
+    logo: row.logo || SHOP_CONFIG.defaultLogo,
+    is_featured: row.is_featured === true || row.featured === true || row.is_featured === "TRUE",
+    is_active: row.is_active !== false && row.active !== false
   };
 }
 
-async function loadShops(){
-  try{
-    const res = await fetch(SHOP_CONFIG.dataUrl,{cache:'no-store'});
-    if(!res.ok) throw new Error('load failed');
-    const data = await res.json();
-    shops = (Array.isArray(data)?data:(data.shops||[])).map(normalizeShop).filter(s=>s.is_active);
-  }catch(e){
+async function loadShops() {
+  try {
+    const response = await fetch(SHOP_CONFIG.dataUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error("shops.json load failed");
+    const data = await response.json();
+    const source = Array.isArray(data) ? data : data.shops || [];
+    shops = source.map(normalizeShop).filter(shop => shop.is_active);
+  } catch (error) {
     shops = FALLBACK_SHOPS.map(normalizeShop);
   }
-  if($('shopGrid')) initShopDirectory();
-  if($('featuredShopGrid')) renderFeaturedShops();
+
+  if ($("shopGrid")) initShopDirectory();
+  if ($("featuredShopGrid")) renderFeaturedShops();
 }
 
-function uniqueValues(k){
-  return [...new Set(shops.map(s=>s[k]).filter(Boolean))].sort();
+function uniqueValues(key) {
+  return [...new Set(shops.map(shop => shop[key]).filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
 }
 
-function initShopDirectory(){
-  const cs = uniqueValues('category');
-  const as = uniqueValues('area');
-  $('categorySelect').innerHTML = '<option value="">全部分類</option>' + cs.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
-  $('areaSelect').innerHTML = '<option value="">全部地區</option>' + as.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
-  $('categoryChips').innerHTML = `<button class="chip active" type="button" data-category="">全部</button>` + cs.map(v=>`<button class="chip" type="button" data-category="${esc(v)}">${esc(v)}</button>`).join('');
-  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
-    const cat = c.dataset.category || '';
-    $('categorySelect').value = cat;
-    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');
-    renderShops();
-  }));
-  $('searchInput').addEventListener('input',renderShops);
-  $('categorySelect').addEventListener('change',()=>{
-    const v = $('categorySelect').value;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',(c.dataset.category||'')===v));
+function initShopDirectory() {
+  const categorySelect = $("categorySelect");
+  const areaSelect = $("areaSelect");
+  const categoryChips = $("categoryChips");
+  const searchInput = $("searchInput");
+  const resetBtn = $("resetBtn");
+  const queryCategory = new URLSearchParams(window.location.search).get("category") || "";
+
+  const categories = uniqueValues("category");
+  const areas = uniqueValues("area");
+
+  categorySelect.innerHTML = '<option value="">全部分類</option>' + categories.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
+  areaSelect.innerHTML = '<option value="">全部地區</option>' + areas.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
+  categoryChips.innerHTML = '<button class="chip active" type="button" data-category="">全部</button>' + categories.map(value => `<button class="chip" type="button" data-category="${esc(value)}">${esc(value)}</button>`).join("");
+
+  if (queryCategory && categories.includes(queryCategory)) {
+    categorySelect.value = queryCategory;
+  }
+
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
+    chip.addEventListener("click", () => {
+      categorySelect.value = chip.dataset.category || "";
+      document.querySelectorAll(".chip").forEach(item => item.classList.remove("active"));
+      chip.classList.add("active");
+      renderShops();
+    });
+  });
+
+  searchInput.addEventListener("input", renderShops);
+  categorySelect.addEventListener("change", () => {
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
+    });
     renderShops();
   });
-  $('areaSelect').addEventListener('change',renderShops);
-  $('resetBtn').addEventListener('click',()=>{
-    $('searchInput').value='';
-    $('categorySelect').value='';
-    $('areaSelect').value='';
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',!c.dataset.category));
+  areaSelect.addEventListener("change", renderShops);
+  resetBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    categorySelect.value = "";
+    areaSelect.value = "";
+    document.querySelectorAll(".chip").forEach(chip => chip.classList.toggle("active", !chip.dataset.category));
     renderShops();
   });
+
   renderShops();
 }
 
-function getFiltered(){
-  const q = $('searchInput').value.trim().toLowerCase();
-  const cat = $('categorySelect').value;
-  const area = $('areaSelect').value;
-  return shops.filter(s=>{
-    const t = [s.name,s.category,s.area,s.offer,s.description,s.address].join(' ').toLowerCase();
-    return (!q||t.includes(q)) && (!cat||s.category===cat) && (!area||s.area===area);
+function getFilteredShops() {
+  const searchInput = $("searchInput");
+  const categorySelect = $("categorySelect");
+  const areaSelect = $("areaSelect");
+  const keyword = searchInput.value.trim().toLowerCase();
+  const category = categorySelect.value;
+  const area = areaSelect.value;
+
+  return shops.filter(shop => {
+    const text = [shop.name, shop.category, shop.area, shop.offer, shop.description, shop.address].join(" ").toLowerCase();
+    return (!keyword || text.includes(keyword)) && (!category || shop.category === category) && (!area || shop.area === area);
   });
 }
 
-function featuredCard(s){
+function renderFeaturedShops() {
+  const grid = $("featuredShopGrid");
+  if (!grid) return;
+
+  const featured = shops.filter(shop => shop.is_featured).slice(0, 4);
+  const list = featured.length ? featured : shops.slice(0, 4);
+  grid.innerHTML = list.map(featuredCard).join("");
+}
+
+function featuredCard(shop) {
   return `<article class="feature-card">
     <div class="feature-photo"></div>
     <div class="feature-content">
-      <div class="feature-title">${esc(s.name)}</div>
-      <div class="feature-meta">${esc(s.area)}</div>
+      <div class="feature-title">${esc(shop.name)}</div>
+      <div class="feature-meta">${esc(shop.area)}</div>
       <div class="feature-tag-row">
-        <span class="feature-tag">${esc(s.category)}</span>
-        <span class="feature-tag">${esc(s.area)}</span>
+        <span class="feature-tag">${esc(shop.category)}</span>
+        <span class="feature-tag">${esc(shop.area)}</span>
       </div>
-      <div class="feature-offer">${esc(s.offer)}</div>
+      <div class="feature-offer">${esc(shop.offer)}</div>
     </div>
   </article>`;
 }
 
-function renderFeaturedShops(){
-  const g = $('featuredShopGrid');
-  if(!g) return;
-  const list = shops.filter(s=>s.is_featured).slice(0,4);
-  const useList = list.length ? list : shops.slice(0,4);
-  g.innerHTML = useList.map(featuredCard).join('');
+function renderShops() {
+  const grid = $("shopGrid");
+  const empty = $("emptyState");
+  if (!grid) return;
+
+  const list = getFilteredShops();
+  if (!list.length) {
+    grid.innerHTML = "";
+    empty.style.display = "block";
+    return;
+  }
+
+  empty.style.display = "none";
+  grid.innerHTML = list.map(shopCard).join("");
 }
 
-function renderShops(){
-  const list = getFiltered(), g = $('shopGrid'), e = $('emptyState');
-  if(!list.length){ g.innerHTML=''; e.style.display='block'; return; }
-  e.style.display='none';
-  g.innerHTML = list.map(shopCard).join('');
-}
-
-function shopCard(s){
+function shopCard(shop) {
   return `<article class="shop-card">
     <div class="shop-photo"></div>
     <div class="shop-content">
       <div class="shop-head">
-        <div><h3>${esc(s.name)}</h3></div>
-        <button class="mini-btn" type="button" onclick="shareShop('${js(s.id)}')">分享</button>
+        <div><h3>${esc(shop.name)}</h3></div>
+        <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
       </div>
-      <div class="tags"><span class="tag">${esc(s.category)}</span><span class="tag area">${esc(s.area)}</span></div>
-      <div class="offer">${esc(s.offer)}</div>
-      <p class="shop-desc">${esc(s.description||'更多資訊請依店家公告為準。')}</p>
+      <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
+      <div class="offer">${esc(shop.offer)}</div>
+      <p class="shop-desc">${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
       <div class="shop-actions">
-        <button class="mini-btn primary" type="button" onclick="openShop('${js(s.id)}')">看詳情</button>
-        <a class="mini-btn" href="${attr(s.map_url||mapUrl(s.name))}" target="_blank" rel="noopener">導航</a>
+        <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
+        <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop.name))}" target="_blank" rel="noopener">地圖</a>
       </div>
     </div>
   </article>`;
 }
 
-function openShop(id){
-  const s=shops.find(x=>x.id===id);
-  if(!s) return;
-  $('modalTitle').textContent=s.name;
-  $('modalMeta').textContent=`${s.area}｜${s.category}`;
+function openShop(id) {
+  const shop = shops.find(item => item.id === id);
+  const modal = $("shopModal");
+  if (!shop || !modal) return;
+
+  $("modalTitle").textContent = shop.name;
+  $("modalMeta").textContent = `${shop.area}｜${shop.category}`;
   const links = [
-    s.website_url?`<a class="btn btn-outline" href="${attr(s.website_url)}" target="_blank" rel="noopener">店家網站</a>`:'',
-    s.facebook_url?`<a class="btn btn-outline" href="${attr(s.facebook_url)}" target="_blank" rel="noopener">Facebook</a>`:'',
-    s.instagram_url?`<a class="btn btn-outline" href="${attr(s.instagram_url)}" target="_blank" rel="noopener">Instagram</a>`:''
-  ].join('');
-  $('modalBody').innerHTML = `<div class="offer">${esc(s.offer)}</div>
-    <p>${esc(s.description||'更多資訊請依店家公告為準。')}</p>
-    <p><b>地址：</b>${esc(s.address||'尚未提供')}</p>
-    <p><b>電話：</b>${esc(s.phone||'尚未提供')}</p>
+    shop.website_url ? `<a class="btn btn-outline" href="${attr(shop.website_url)}" target="_blank" rel="noopener">官方網站</a>` : "",
+    shop.facebook_url ? `<a class="btn btn-outline" href="${attr(shop.facebook_url)}" target="_blank" rel="noopener">Facebook</a>` : "",
+    shop.instagram_url ? `<a class="btn btn-outline" href="${attr(shop.instagram_url)}" target="_blank" rel="noopener">Instagram</a>` : ""
+  ].join("");
+
+  $("modalBody").innerHTML = `<div class="offer">${esc(shop.offer)}</div>
+    <p>${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
+    <p><b>地址：</b>${esc(shop.address || "待補充")}</p>
+    <p><b>電話：</b>${esc(shop.phone || "待補充")}</p>
     <div class="shop-actions">
-      <a class="btn btn-primary" href="${attr(s.map_url||mapUrl(s.name))}" target="_blank" rel="noopener">Google 地圖導航</a>
+      <a class="btn btn-primary" href="${attr(shop.map_url || mapUrl(shop.name))}" target="_blank" rel="noopener">Google 地圖</a>
       ${links}
-      <a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener">免費領福利卡</a>
+      <a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener">加入 LINE 領福利卡</a>
     </div>
-    <div class="notice">優惠內容、優惠期限與使用條件，請以店家現場公告或頭竹苗福利社最新公告為準。</div>`;
-  $('shopModal').classList.add('open');
-  $('shopModal').setAttribute('aria-hidden','false');
+    <div class="notice">優惠內容與使用方式以店家現場公告為準，建議消費前先向店家確認。</div>`;
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
 }
 
-async function shareShop(id){
-  const s=shops.find(x=>x.id===id);
-  if(!s) return;
-  const text=`我在頭竹苗福利社看到「${s.name}」優惠：${s.offer}`;
-  const url=location.origin+location.pathname.replace(/[^/]*$/,'shops.html');
-  if(navigator.share){
-    try{ await navigator.share({title:s.name,text,url}); }catch(e){}
-  }else{
+async function shareShop(id) {
+  const shop = shops.find(item => item.id === id);
+  if (!shop) return;
+
+  const text = `我在頭竹苗福利社看到 ${shop.name} 的優惠：${shop.offer}`;
+  const url = location.href.split("#")[0];
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: shop.name, text, url });
+    } catch (error) {
+      return;
+    }
+  } else if (navigator.clipboard) {
     await navigator.clipboard.writeText(`${text}\n${url}`);
-    alert('已複製分享文字');
+    alert("已複製店家資訊");
   }
 }
-function mapUrl(k){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(k)}`}
-function esc(s){return String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
-function attr(s){return esc(s).replaceAll('`','&#096;')}
-function js(s){return String(s||'').replaceAll('\\','\\\\').replaceAll("'","\\'")}
 
-document.addEventListener('DOMContentLoaded',()=>{
-  const c=$('modalClose'),m=$('shopModal');
-  if(c&&m){
-    c.addEventListener('click',()=>{m.classList.remove('open');m.setAttribute('aria-hidden','true')});
-    m.addEventListener('click',e=>{ if(e.target===m){ m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }});
+function closeModal() {
+  const modal = $("shopModal");
+  if (!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function mapUrl(keyword) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword)}`;
+}
+
+function esc(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function attr(value) {
+  return esc(value).replaceAll("`", "&#096;");
+}
+
+function js(value) {
+  return String(value || "").replaceAll("\\", "\\\\").replaceAll("'", "\\'");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const closeButton = $("modalClose");
+  const modal = $("shopModal");
+  if (closeButton) closeButton.addEventListener("click", closeModal);
+  if (modal) {
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
   }
   loadShops();
 });
