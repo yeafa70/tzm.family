@@ -4,29 +4,34 @@ const SHOP_CONFIG = {
   defaultLogo: "pics/logo/default-logo.svg"
 };
 
-const CATEGORY_ORDER = ["美食飲品", "生活服務", "零售購物", "親子教育", "通訊3C", "休閒娛樂", "其他"];
+const CATEGORY_ORDER = [
+  "美食飲品",
+  "美容美體",
+  "生活服務",
+  "零售購物",
+  "親子教育",
+  "通訊3C",
+  "休閒娛樂",
+  "居家修繕",
+  "醫療保健",
+  "交通機車",
+  "住宿旅遊",
+  "企業服務",
+  "其他"
+];
 const AREA_ORDER = ["竹南", "頭份", "苗栗市", "南庄", "後龍", "公館", "其他地區"];
 
-const CATEGORY_MAP = new Map([
+const LEGACY_CATEGORY_MAP = new Map([
   ["食", "美食飲品"],
   ["美食餐飲", "美食飲品"],
-  ["美食飲品", "美食飲品"],
   ["衣", "零售購物"],
   ["零售業", "零售購物"],
-  ["零售購物", "零售購物"],
   ["住", "生活服務"],
-  ["行", "生活服務"],
+  ["行", "交通機車"],
   ["服務業", "生活服務"],
-  ["美容美體", "生活服務"],
-  ["醫療保健", "生活服務"],
-  ["生活服務", "生活服務"],
   ["育", "親子教育"],
-  ["親子教育", "親子教育"],
   ["樂", "休閒娛樂"],
-  ["休閒娛樂", "休閒娛樂"],
-  ["通訊業", "通訊3C"],
-  ["通訊3C", "通訊3C"],
-  ["其他", "其他"]
+  ["通訊業", "通訊3C"]
 ]);
 
 const AREA_MAP = new Map([
@@ -69,12 +74,16 @@ const FALLBACK_SHOPS = [
 ];
 
 let shops = [];
+let categoryOptions = [];
+let areaOptions = [];
 
 const $ = id => document.getElementById(id);
 
 function normalizeCategory(category) {
   const value = String(category || "").trim();
-  return CATEGORY_MAP.get(value) || "其他";
+  if (!value) return "其他";
+  if (CATEGORY_ORDER.includes(value)) return value;
+  return LEGACY_CATEGORY_MAP.get(value) || "其他";
 }
 
 function normalizeArea(area) {
@@ -127,10 +136,11 @@ function normalizeShop(row, index = 0) {
 }
 
 async function loadShops() {
+  let data = null;
   try {
     const response = await fetch(SHOP_CONFIG.dataUrl, { cache: "no-store" });
     if (!response.ok) throw new Error("shops.json load failed");
-    const data = await response.json();
+    data = await response.json();
     const source = Array.isArray(data) ? data : data.shops || [];
     shops = source
       .map(normalizeShop)
@@ -141,8 +151,17 @@ async function loadShops() {
     console.warn("使用備用店家資料：", error);
   }
 
+  categoryOptions = buildOptions(data?.categories, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
+  areaOptions = buildOptions(data?.areas, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
+
   if ($("shopGrid")) initShopDirectory();
   if ($("featuredShopGrid")) renderFeaturedShops();
+}
+
+function optionName(option) {
+  if (typeof option === "string") return option;
+  if (option && typeof option === "object") return option.name || option.title || option.id || "";
+  return "";
 }
 
 function sortByPreferredOrder(values, preferred) {
@@ -154,9 +173,12 @@ function sortByPreferredOrder(values, preferred) {
   });
 }
 
-function uniqueValues(key) {
-  const preferred = key === "category" ? CATEGORY_ORDER : AREA_ORDER;
-  return sortByPreferredOrder(shops.map(shop => shop[key]), preferred);
+function buildOptions(sourceOptions, fallbackValues, normalizer, preferred) {
+  const raw = Array.isArray(sourceOptions) && sourceOptions.length
+    ? sourceOptions.map(optionName)
+    : fallbackValues;
+  const normalized = raw.map(normalizer).filter(Boolean);
+  return sortByPreferredOrder(normalized, preferred);
 }
 
 function initShopDirectory() {
@@ -168,10 +190,12 @@ function initShopDirectory() {
   if (!categorySelect || !areaSelect || !categoryChips || !searchInput || !resetBtn) return;
 
   const query = new URLSearchParams(window.location.search);
-  const queryCategory = normalizeCategory(query.get("category") || "");
-  const queryArea = normalizeArea(query.get("area") || "");
-  const categories = uniqueValues("category");
-  const areas = uniqueValues("area");
+  const rawQueryCategory = query.get("category") || "";
+  const rawQueryArea = query.get("area") || "";
+  const queryCategory = rawQueryCategory ? normalizeCategory(rawQueryCategory) : "";
+  const queryArea = rawQueryArea ? normalizeArea(rawQueryArea) : "";
+  const categories = categoryOptions.length ? categoryOptions : buildOptions(null, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
+  const areas = areaOptions.length ? areaOptions : buildOptions(null, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
 
   categorySelect.innerHTML = '<option value="">全部分類</option>' + categories.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
   areaSelect.innerHTML = '<option value="">全部地區</option>' + areas.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
@@ -271,6 +295,7 @@ function renderShops() {
 }
 
 function shopCard(shop) {
+  const address = compactAddress(shop.address);
   return `<article class="shop-card">
     <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
@@ -279,8 +304,8 @@ function shopCard(shop) {
       </div>
       <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
       <div class="offer">${esc(shop.offer)}</div>
-      <p class="shop-desc">${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
-      <p class="shop-address">${esc(compactAddress(shop.address))}</p>
+      ${shop.description ? `<p class="shop-desc">${esc(shop.description)}</p>` : ""}
+      ${address ? `<p class="shop-address">${esc(address)}</p>` : ""}
       <div class="shop-actions">
         <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
         <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
@@ -314,9 +339,9 @@ function openShop(id) {
         <div class="offer">${esc(shop.offer)}</div>
       </div>
     </div>
-    <p>${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
-    ${detailRow("地址", shop.address || "待補充")}
-    ${detailRow("電話", shop.phone || "待補充")}
+    ${shop.description ? `<p>${esc(shop.description)}</p>` : ""}
+    ${detailRow("地址", shop.address)}
+    ${detailRow("電話", shop.phone)}
     ${shop.line_url ? detailRow("LINE", shop.line_url) : ""}
     ${shop.business_hours ? detailRow("營業時間", shop.business_hours) : ""}
     <div class="shop-actions">${links}</div>
@@ -358,10 +383,11 @@ function mapUrl(shop) {
 }
 
 function compactAddress(address) {
-  return address ? `地址：${address}` : "地址：待補充";
+  return address ? `地址：${address}` : "";
 }
 
 function detailRow(label, value) {
+  if (!value) return "";
   return `<p><b>${esc(label)}：</b>${esc(value)}</p>`;
 }
 
