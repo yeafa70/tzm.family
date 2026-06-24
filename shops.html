@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>優惠店家查詢｜頭竹苗福利社</title>
-<meta name="description" content="查詢頭份、竹南、苗栗在地特約商店優惠，包含美食餐飲、生活服務、零售購物與休閒娛樂。">
+<title>特約商店查詢｜頭竹苗福利社</title>
+<meta name="description" content="可用地區、分類、關鍵字快速查詢頭份、竹南、苗栗合作店家與福利卡優惠。">
 <meta name="theme-color" content="#4B2E4F">
-<link rel="stylesheet" href="style.css?v=fig3-checked-20260623">
+<link rel="stylesheet" href="style.css?v=fig3-shops-20260624">
 </head>
 <body>
 <header class="site-header">
@@ -14,22 +14,32 @@
     <a class="brand" href="index.html"><span class="brand-mark">福</span><span class="brand-text"><strong>頭竹苗福利社</strong><span>頭份・竹南・苗栗在地優惠平台</span></span></a>
     <button class="menu-btn" id="menuBtn" type="button">選單</button>
     <nav class="nav-links" id="navLinks">
-      <a href="card.html">福利卡</a><a href="shops.html" class="active">優惠店家</a><a href="merchant.html">特約商專區</a><a href="company.html">企業合作</a><a href="about.html">關於我們</a><a href="news.html">最新消息</a>
+      <a href="card.html">福利卡</a>
+      <a href="shops.html" class="active">優惠店家</a>
+      <a href="merchant.html">特約商專區</a>
+      <a href="company.html">企業合作</a>
+      <a href="about.html">關於我們</a>
+      <a href="news.html">最新消息</a>
       <a class="btn btn-primary" href="card.html">申請福利卡</a>
     </nav>
   </div>
 </header>
+
 <main>
   <section class="page-hero">
     <div class="container page-hero-card">
       <div class="page-hero-copy">
-        <span class="eyebrow">優惠查詢</span>
-        <h1>找優惠、看好店、挺在地</h1>
-        <p>用地區、分類或關鍵字快速查詢頭份、竹南、苗栗的合作店家與福利卡優惠。</p>
+        <span class="eyebrow">優惠店家</span>
+        <h1>特約商店查詢</h1>
+        <p>可用地區、分類、關鍵字快速查詢頭份、竹南、苗栗合作店家與福利卡優惠。</p>
       </div>
-      <div class="page-hero-side"><h2>查詢提醒</h2><p>優惠內容可能依店家現場公告調整，使用前可先向店家確認。</p></div>
+      <div class="page-hero-side">
+        <h2>查詢提醒</h2>
+        <p>優惠內容、營業時間與使用方式可能依店家現場公告調整，使用前可先向店家確認。</p>
+      </div>
     </div>
   </section>
+
   <section class="section">
     <div class="container">
       <div class="directory">
@@ -39,17 +49,53 @@
           <select id="areaSelect" aria-label="地區"></select>
           <button class="btn btn-dark" id="resetBtn" type="button">重設</button>
         </div>
-        <div class="chips" id="categoryChips"></div>
+        <div class="chips" id="categoryChips" aria-label="快速分類"></div>
         <div class="shop-grid" id="shopGrid"></div>
-        <div class="empty" id="emptyState">目前沒有符合條件的店家，請換個關鍵字或分類再試一次。</div>
+        <div class="empty" id="emptyState">目前沒有符合條件的店家，請換個關鍵字、分類或地區再試一次。</div>
       </div>
     </div>
   </section>
 </main>
-<footer class="footer"><div class="container footer-grid"><div><h3>頭竹苗福利社</h3><p>服務頭份、竹南、苗栗在地鄉親，串連優惠店家、數位福利卡與企業合作資源。</p><p>© <span id="year"></span> 頭竹苗福利社 All Rights Reserved.</p></div><div><h4>快速入口</h4><div class="footer-links"><a href="card.html">福利卡申請</a><a href="shops.html">優惠店家</a><a href="merchant.html">特約商專區</a><a href="company.html">企業合作</a></div></div><div><h4>官方連結</h4><div class="footer-links"><a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">福利卡表單</a><a href="https://buyhappy.work/Xvzxo" target="_blank" rel="noopener">官方 LINE</a></div></div></div></footer>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>頭竹苗福利社</h3>
+      <p>服務頭份、竹南、苗栗在地鄉親，串連優惠店家、數位福利卡與企業合作資源。</p>
+      <p>© <span id="year"></span> 頭竹苗福利社 All Rights Reserved.</p>
+    </div>
+    <div>
+      <h4>快速入口</h4>
+      <div class="footer-links">
+        <a href="card.html">福利卡申請</a>
+        <a href="shops.html">優惠店家</a>
+        <a href="merchant.html">特約商專區</a>
+        <a href="company.html">企業合作</a>
+      </div>
+    </div>
+    <div>
+      <h4>官方連結</h4>
+      <div class="footer-links">
+        <a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">福利卡表單</a>
+        <a href="https://buyhappy.work/Xvzxo" target="_blank" rel="noopener">官方 LINE</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <button class="backtop" type="button" data-backtop>上</button>
-<div class="modal" id="shopModal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><div><h3 id="modalTitle">店家資訊</h3><p id="modalMeta"></p></div><button class="close" type="button" id="modalClose">X</button></div><div class="modal-body" id="modalBody"></div></div></div>
-<script src="main.js?v=fig3-checked-20260623"></script>
-<script src="shops.js?v=fig3-checked-20260623"></script>
+
+<div class="modal" id="shopModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div><h3 id="modalTitle">店家資訊</h3><p id="modalMeta"></p></div>
+      <button class="close" type="button" id="modalClose">X</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="main.js?v=fig3-shops-20260624"></script>
+<script src="shops.js?v=fig3-shops-20260624"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 
-/* FIG3 CLEAN REBUILD v4 - checked package
+/* FIG3 CLEAN REBUILD v3
    Style: deep eggplant purple + sage green + clay rose + warm stone.
    Mature local-brand UI with compact radii.
 */
@@ -408,6 +408,7 @@ input:focus,select:focus,textarea:focus{
   margin-bottom:8px;
 }
 .shop-desc{color:var(--muted);font-size:13px;margin:0 0 12px}
+.shop-address{color:var(--text);font-size:12px;font-weight:800;margin:0 0 12px;line-height:1.5}
 .shop-actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
 .mini-btn{
   flex:1;
