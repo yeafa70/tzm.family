@@ -117,7 +117,7 @@ function normalizeShop(row, index = 0) {
     facebook_url: row.facebook_url || row.facebookUrl || "",
     instagram_url: row.instagram_url || row.instagramUrl || "",
     line_url: row.line_url || row.lineUrl || "",
-    logo: row.logo || SHOP_CONFIG.defaultLogo,
+    logo: row.logo || row.logo_url || row.logoUrl || SHOP_CONFIG.defaultLogo,
     images: normalizeImages(row.images),
     is_featured: normalizeBoolean(row.is_featured ?? row.featured, false),
     is_active: normalizeBoolean(row.is_active ?? row.active, true),
@@ -241,7 +241,7 @@ function renderFeaturedShops() {
 
 function featuredCard(shop) {
   return `<article class="feature-card">
-    <div class="feature-photo" ${shop.logo && shop.logo !== SHOP_CONFIG.defaultLogo ? `style="background-image:url('${attr(shop.logo)}')"` : ""}></div>
+    <div class="feature-photo logo-frame">${logoImage(shop, "feature-logo")}</div>
     <div class="feature-content">
       <div class="feature-title">${esc(shop.name)}</div>
       <div class="feature-meta">${esc(shop.area)}</div>
@@ -272,11 +272,10 @@ function renderShops() {
 
 function shopCard(shop) {
   return `<article class="shop-card">
-    <div class="shop-photo" ${shop.logo && shop.logo !== SHOP_CONFIG.defaultLogo ? `style="background-image:url('${attr(shop.logo)}')"` : ""}></div>
+    <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
       <div class="shop-head">
         <div><h3>${esc(shop.name)}</h3></div>
-        <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
       </div>
       <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
       <div class="offer">${esc(shop.offer)}</div>
@@ -308,7 +307,13 @@ function openShop(id) {
     `<a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener">加入 LINE 領福利卡</a>`
   ].join("");
 
-  $("modalBody").innerHTML = `<div class="offer">${esc(shop.offer)}</div>
+  $("modalBody").innerHTML = `<div class="modal-shop-summary">
+      <div class="modal-logo-box">${logoImage(shop, "modal-logo")}</div>
+      <div>
+        <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
+        <div class="offer">${esc(shop.offer)}</div>
+      </div>
+    </div>
     <p>${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
     ${detailRow("地址", shop.address || "待補充")}
     ${detailRow("電話", shop.phone || "待補充")}
@@ -358,6 +363,14 @@ function compactAddress(address) {
 
 function detailRow(label, value) {
   return `<p><b>${esc(label)}：</b>${esc(value)}</p>`;
+}
+
+function logoPath(shop) {
+  return shop.logo || SHOP_CONFIG.defaultLogo;
+}
+
+function logoImage(shop, className) {
+  return `<img class="${className}" src="${attr(logoPath(shop))}" alt="${attr(`${shop.name} LOGO`)}" loading="lazy" onerror="this.onerror=null;this.src='${SHOP_CONFIG.defaultLogo}';">`;
 }
 
 function esc(value) {
