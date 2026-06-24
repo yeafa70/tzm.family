@@ -3,7 +3,7 @@
     {
       "id": "tzm0001",
       "name": "享森活居家",
-      "category": "零售購物",
+      "category": "居家修繕",
       "area": "竹南",
       "offer": "憑福利卡消費全館品項89折",
       "description": "",
@@ -19,13 +19,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 10,
-      "updated_at": "2026-06-24 0:34:59"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0002",
       "name": "買樂購",
-      "category": "零售業",
-      "area": "竹南鎮",
+      "category": "零售購物",
+      "area": "竹南",
       "offer": "憑福利卡來店消費滿500送來店禮，滿2000以上享95折優惠+來店禮",
       "description": "",
       "address": "苗栗縣竹南鎮龍山路二段243-2號",
@@ -40,17 +40,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 20,
-      "updated_at": "2026-06-24 3:07:10"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0003",
       "name": "三峽角胖金牛角苗栗直營車",
-      "category": "食",
+      "category": "美食飲品",
       "area": "苗栗市",
       "offer": "憑福利卡消費手撕包折價5元",
       "description": "",
       "address": "苗栗市國福路31號",
-      "phone": "0909635090",
+      "phone": "909635090.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -61,38 +61,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 30,
-      "updated_at": "2026-06-24 3:13:13"
-    },
-    {
-      "id": "tzm0004",
-      "name": "吃餃嬌🥟手工水餃的",
-      "category": "食",
-      "area": "竹南",
-      "offer": "憑福利卡消費滿600享95折優惠",
-      "description": "",
-      "address": "苗栗縣竹南鎮大埔里2鄰科專八路486號五樓B室",
-      "phone": "0968374350/0915291811",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0004.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 40,
-      "updated_at": "2026-06-24 3:17:31"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0005",
       "name": "沐寶髮浴",
-      "category": "服務業",
+      "category": "美容美體",
       "area": "竹南",
       "offer": "福利卡",
       "description": "",
       "address": "竹南鎮大埔五街192號",
-      "phone": "0912848408",
+      "phone": "912848408.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -103,17 +82,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 50,
-      "updated_at": "2026-06-24 3:17:39"
+      "updated_at": "2026-06-25 02:30:03"
     },
     {
       "id": "tzm0006",
       "name": "世鼎國際事業有限公司",
-      "category": "零售業",
+      "category": "零售購物",
       "area": "竹南",
       "offer": "憑福利卡消費送PU彈力鞋墊一雙",
       "description": "",
       "address": "苗栗縣竹南鎮南大路259號",
-      "phone": "0916788711",
+      "phone": "916788711.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -124,17 +103,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 60,
-      "updated_at": "2026-06-24 3:17:51"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0007",
       "name": "植饗烤物",
-      "category": "食",
+      "category": "美食飲品",
       "area": "竹南",
       "offer": "憑福利卡消費享95折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮科專七路221號(全家對面)",
-      "phone": "0983369936",
+      "phone": "983369936.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -145,12 +124,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 70,
-      "updated_at": "2026-06-24 3:18:02"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0008",
       "name": "丘森茶室",
-      "category": "食",
+      "category": "美食飲品",
       "area": "竹南",
       "offer": "苗栗鄉親憑福利卡，加盟金減免五萬、全台各分店加十元多送一杯原茶",
       "description": "",
@@ -166,17 +145,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 80,
-      "updated_at": "2026-06-24 3:18:10"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0009",
       "name": "老黃窗簾設計．室內裝修．軟裝規劃",
-      "category": "住",
+      "category": "居家修繕",
       "area": "竹南",
       "offer": "8折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮",
-      "phone": "0978332665",
+      "phone": "978332665.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -187,12 +166,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 90,
-      "updated_at": "2026-06-24 3:19:13"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0010",
       "name": "嬰泳樂園頭份店",
-      "category": "育",
+      "category": "親子教育",
       "area": "頭份",
       "offer": "憑福利卡消費升級保溼湯浴，google評論贈小禮物！",
       "description": "",
@@ -208,12 +187,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 100,
-      "updated_at": "2026-06-24 3:19:29"
+      "updated_at": "2026-06-25 02:30:18"
     },
     {
       "id": "tzm0011",
       "name": "小畫家多元美術🎨",
-      "category": "育",
+      "category": "親子教育",
       "area": "竹南",
       "offer": "憑福利卡消費《1期12堂課》➕贈送一堂課於報名日起至三個月內使用課程 ，方為有效期限",
       "description": "",
@@ -229,17 +208,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 110,
-      "updated_at": "2026-06-24 3:19:38"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0012",
       "name": "丘森茶室後龍店",
-      "category": "食",
+      "category": "美食飲品",
       "area": "後龍",
       "offer": "憑福利卡單筆消費滿200折10元🥤",
       "description": "",
       "address": "苗栗縣後龍鎮中龍里中華路151-1號",
-      "phone": "0925239500",
+      "phone": "925239500.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "https://reurl.cc/X4gLde",
@@ -250,12 +229,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 120,
-      "updated_at": "2026-06-24 3:19:56"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0013",
       "name": "奧斯汀國際美語 照南分校",
-      "category": "育",
+      "category": "親子教育",
       "area": "竹南",
       "offer": "憑福利卡報名安親或英語或國中任一課程，第一個月折扣學費500元",
       "description": "",
@@ -271,13 +250,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 130,
-      "updated_at": "2026-06-24 3:20:05"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0014",
       "name": "SYM龍辰機車行排氣定檢站",
-      "category": "行",
-      "area": "竹南鎮",
+      "category": "交通機車",
+      "area": "竹南",
       "offer": "憑福利卡消費可不限消費金額集點（可兌換免付費機油齒輪油），排氣定檢即送當月小禮物，購買新車贈送500元購車金內洽從優。",
       "description": "",
       "address": "苗栗縣竹南鎮新生路329號",
@@ -292,13 +271,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 140,
-      "updated_at": "2026-06-24 3:20:57"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0015",
       "name": "薩雅芳香療癒家",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費ㄧ般民眾享95折優惠, 醫護人員及警消人員9折優惠",
       "description": "",
       "address": "苗栗縣頭份市尚順路60號",
@@ -313,13 +292,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 150,
-      "updated_at": "2026-06-24 3:23:01"
+      "updated_at": "2026-06-25 02:30:24"
     },
     {
       "id": "tzm0016",
       "name": "丘森茶室總店",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡加十元多一杯原茶",
       "description": "",
       "address": "苗栗縣竹南鎮科專五路403號",
@@ -334,13 +313,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 160,
-      "updated_at": "2026-06-24 3:23:51"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0017",
       "name": "唯加美好｜霧眉。做臉。身體調整｜",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "美容美體",
+      "area": "竹南",
       "offer": "憑福利卡消費打95折❤️",
       "description": "",
       "address": "苗栗縣竹南鎮維新路260號",
@@ -355,13 +334,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 170,
-      "updated_at": "2026-06-24 3:24:17"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0018",
       "name": "親蜜家優床館",
-      "category": "住",
-      "area": "竹南鎮",
+      "category": "居家修繕",
+      "area": "竹南",
       "offer": "憑福利卡可享專屬優惠價再加贈防瞞抗菌防水透氣保潔墊",
       "description": "",
       "address": "竹南鎮環市路二段108號",
@@ -376,17 +355,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 180,
-      "updated_at": "2026-06-24 3:24:41"
+      "updated_at": "2026-06-25 02:30:31"
     },
     {
       "id": "tzm0019",
       "name": "元爵味黃燜雞米飯竹南店",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡消費送豆皮一份",
       "description": "",
       "address": "竹南鎮營盤里延平路151號",
-      "phone": "0958730604",
+      "phone": "958730604.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -397,12 +376,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 190,
-      "updated_at": "2026-06-24 3:24:49"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0020",
       "name": "愛學館個別指導-竹南校",
-      "category": "育",
+      "category": "親子教育",
       "area": "竹南",
       "offer": "憑福利卡消費可以免費試聽每科科目一堂課",
       "description": "",
@@ -418,12 +397,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 200,
-      "updated_at": "2026-06-24 3:34:43"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0021",
       "name": "儒瑜文教社",
-      "category": "育",
+      "category": "親子教育",
       "area": "竹南",
       "offer": "憑福利卡消費可試上一堂創意作文和國文課,享8折優惠,另一次購買十堂課,可以享95折 另有兄弟姐妹或夫妻一起上第二位打8折,以上優惠可以聯合使用,僅限用一次^^",
       "description": "",
@@ -439,17 +418,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 210,
-      "updated_at": "2026-06-24 3:34:52"
+      "updated_at": "2026-06-25 02:30:39"
     },
     {
       "id": "tzm0022",
       "name": "手機家族",
-      "category": "通訊業",
+      "category": "通訊3C",
       "area": "竹南",
       "offer": "憑福利卡消費指定配件買一送一",
       "description": "",
       "address": "苗栗縣竹南鎮自由街17號",
-      "phone": "0939345549",
+      "phone": "939345549.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -460,12 +439,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 220,
-      "updated_at": "2026-06-24 3:34:59"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0023",
       "name": "十畝園味家傳冷凍冷藏美食",
-      "category": "食",
+      "category": "美食飲品",
       "area": "竹南",
       "offer": "現折10元，或是贈送試吃品。",
       "description": "",
@@ -481,12 +460,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 230,
-      "updated_at": "2026-06-24 3:35:05"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0024",
       "name": "Boorr啵耳星球_掏耳專門店",
-      "category": "服務業",
+      "category": "美容美體",
       "area": "竹南",
       "offer": "憑福利卡消費享95折優惠，當月壽星加碼10分鐘按摩。",
       "description": "",
@@ -502,12 +481,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 240,
-      "updated_at": "2026-06-24 3:35:12"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0025",
       "name": "湘蠟過癮美容工作室",
-      "category": "服務業",
+      "category": "美容美體",
       "area": "公館",
       "offer": "憑福利卡消費享95折優惠",
       "description": "",
@@ -523,17 +502,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 250,
-      "updated_at": "2026-06-24 3:35:19"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0026",
       "name": "環境博士科技有限公司",
-      "category": "住",
+      "category": "居家修繕",
       "area": "竹南",
       "offer": "免運費",
       "description": "",
       "address": "苗栗縣竹南鎮龍鳳里11鄰龍安街1巷22弄2號5樓",
-      "phone": "0989964593",
+      "phone": "989964593.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -544,12 +523,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 260,
-      "updated_at": "2026-06-24 3:35:26"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0027",
       "name": "Café32",
-      "category": "食",
+      "category": "美食飲品",
       "area": "頭份",
       "offer": "憑福利卡消費，咖啡&飲品同品項第二杯半價",
       "description": "",
@@ -565,17 +544,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 270,
-      "updated_at": "2026-06-24 3:35:33"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0028",
       "name": "建鋒車業",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "交通機車",
+      "area": "竹南",
       "offer": "憑福利卡滿300折50",
       "description": "",
       "address": "苗栗縣竹南鎮營盤里新生路341號",
-      "phone": "0989092837",
+      "phone": "989092837.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -586,17 +565,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 280,
-      "updated_at": "2026-06-24 3:35:42"
+      "updated_at": "2026-06-25 02:30:57"
     },
     {
       "id": "tzm0029",
       "name": "元爵味黃燜雞米飯頭份店",
-      "category": "食",
-      "area": "頭份市",
+      "category": "美食飲品",
+      "area": "頭份",
       "offer": "憑福利卡消費送一份豆皮",
       "description": "",
       "address": "頭份市和平路250號",
-      "phone": "037590072",
+      "phone": "37590072.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -607,13 +586,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 290,
-      "updated_at": "2026-06-24 3:35:48"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0030",
       "name": "AM hair salon",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費燙、染9折",
       "description": "",
       "address": "苗栗縣頭份市山下里10鄰山下街135巷65號",
@@ -628,13 +607,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 300,
-      "updated_at": "2026-06-24 3:35:55"
+      "updated_at": "2026-06-25 02:31:06"
     },
     {
       "id": "tzm0031",
       "name": "大瑋叔叔炸雞",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡消費單點餐點飲品享9折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮仁愛路671號",
@@ -649,13 +628,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 310,
-      "updated_at": "2026-06-24 3:37:58"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0032",
       "name": "貝拉小巴披薩 bella bus pizza",
-      "category": "食",
-      "area": "頭份市",
+      "category": "美食飲品",
+      "area": "頭份",
       "offer": "憑福利卡現金消費折10元",
       "description": "",
       "address": "頭份市東民二街2號旁餐車攤位",
@@ -670,13 +649,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 320,
-      "updated_at": "2026-06-24 3:38:30"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0033",
       "name": "百麗兒美睫·刺青·髮際線紋綉",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費享9折優惠",
       "description": "",
       "address": "苗栗縣頭份市民族路730號",
@@ -691,17 +670,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 330,
-      "updated_at": "2026-06-24 3:38:38"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0034",
       "name": "信和/吉元有線電視-大大寬頻-蕭鴻仁",
-      "category": "通訊業",
-      "area": "竹南鎮",
+      "category": "通訊3C",
+      "area": "竹南",
       "offer": "憑福利卡；裝機優惠裝機費及月費折抵",
       "description": "",
       "address": "苗栗縣竹南鎮山佳里9鄰山佳198號",
-      "phone": "0981456661",
+      "phone": "981456661.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -712,13 +691,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 340,
-      "updated_at": "2026-06-24 3:38:45"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0035",
       "name": "城市漢堡-龍山店",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡消費送中杯紅茶一杯",
       "description": "",
       "address": "苗栗縣竹南鎮天文里龍山路2段20號1樓",
@@ -733,34 +712,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 350,
-      "updated_at": "2026-06-24 3:38:52"
-    },
-    {
-      "id": "tzm0036",
-      "name": "嬰泳樂園",
-      "category": "其他",
-      "area": "頭份市",
-      "offer": "憑福利卡消費免費升級湯浴！",
-      "description": "",
-      "address": "頭份市尚順路49號",
-      "phone": "shineday0713@yahoo.com.tw",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "https://www.facebook.com/profile.php?id=100063771165456&mibextid=ZbWKwL",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0036.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 360,
-      "updated_at": "2026-06-24 3:38:58"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0037",
       "name": "727 Studio",
-      "category": "零售業",
-      "area": "竹南鎮",
+      "category": "零售購物",
+      "area": "竹南",
       "offer": "憑福利卡消費送小禮物一份 🎁",
       "description": "",
       "address": "苗栗縣竹南鎮民族街19號",
@@ -775,13 +733,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 370,
-      "updated_at": "2026-06-24 3:39:15"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0038",
       "name": "羊寶藝術教室",
-      "category": "育",
-      "area": "頭份市",
+      "category": "親子教育",
+      "area": "頭份",
       "offer": "🎨憑福利卡購買任何課程一期，加贈體驗價課程1堂（不限種類）🌸 🎨任何課程報名2期，送陶土課DIY材料包+泥塑工具組（價值合計$500🪴）",
       "description": "",
       "address": "苗栗縣頭份市自強路200號（自強補習班）",
@@ -796,13 +754,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 380,
-      "updated_at": "2026-06-24 3:39:22"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0039",
       "name": "叡視眼鏡行",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "生活服務",
+      "area": "頭份",
       "offer": "憑福利卡配鏡消費享9折優惠",
       "description": "",
       "address": "苗栗縣頭份市中正路125號",
@@ -817,17 +775,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 390,
-      "updated_at": "2026-06-24 3:39:28"
+      "updated_at": "2026-06-25 02:31:27"
     },
     {
       "id": "tzm0040",
       "name": "瑞宇科技",
-      "category": "零售業",
-      "area": "竹南鎮",
+      "category": "生活服務",
+      "area": "竹南",
       "offer": "憑福利卡消費享95折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮科專五路22號",
-      "phone": "0913131487",
+      "phone": "913131487.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -838,13 +796,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 400,
-      "updated_at": "2026-06-24 3:39:42"
+      "updated_at": "2026-06-25 02:31:34"
     },
     {
       "id": "tzm0041",
       "name": "JJ手作美睫",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "美容美體",
+      "area": "竹南",
       "offer": "憑福利卡首次消費享85折",
       "description": "",
       "address": "苗栗縣竹南鎮光復路372號3樓",
@@ -859,17 +817,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 410,
-      "updated_at": "2026-06-24 3:39:50"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0042",
       "name": "南苑渡假莊園",
-      "category": "食",
-      "area": "南庄鄉",
+      "category": "美食飲品",
+      "area": "南庄",
       "offer": "福利卡用餐消費假日九五折/平日九折",
       "description": "",
       "address": "苗栗縣南庄鄉南江村小東河21號",
-      "phone": "0911615122",
+      "phone": "911615122.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -880,34 +838,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 420,
-      "updated_at": "2026-06-24 3:39:57"
-    },
-    {
-      "id": "tzm0043",
-      "name": "愛學館-竹南校",
-      "category": "育",
-      "area": "竹南鎮",
-      "offer": "憑福利卡享各科免費試聽一堂課",
-      "description": "",
-      "address": "竹南鎮守法街2-2號",
-      "phone": "037-464678",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "https://www.facebook.com/profile.php?id=100094379407021",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0043.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 430,
-      "updated_at": "2026-06-24 3:40:12"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0044",
       "name": "吉泰乾洗衣店",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "生活服務",
+      "area": "竹南",
       "offer": "持福利卡消費滿200折10元；滿500有免費運送",
       "description": "",
       "address": "苗栗縣竹南鎮龍山路二段311號",
@@ -922,17 +859,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 440,
-      "updated_at": "2026-06-24 3:40:22"
+      "updated_at": "2026-06-25 02:31:45"
     },
     {
       "id": "tzm0045",
       "name": "六蒜包冰果室",
-      "category": "食",
+      "category": "美食飲品",
       "area": "頭份",
       "offer": "憑福利卡消費滿200折10元",
       "description": "",
       "address": "頭份市中央路148號",
-      "phone": "0926128110",
+      "phone": "926128110.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -943,13 +880,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 450,
-      "updated_at": "2026-06-24 3:40:48"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0046",
       "name": "采筑窗簾",
-      "category": "零售業",
-      "area": "頭份市",
+      "category": "居家修繕",
+      "area": "頭份",
       "offer": "憑福利卡消費享7折優惠",
       "description": "",
       "address": "苗栗縣頭份市東民五街28號",
@@ -964,12 +901,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 460,
-      "updated_at": "2026-06-24 3:42:33"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0047",
-      "name": "伊妃國際有限公司",
-      "category": "零售業",
+      "name": "伊集購",
+      "category": "零售購物",
       "area": "苗栗市",
       "offer": "9折優惠",
       "description": "",
@@ -981,17 +918,17 @@
       "facebook_url": "https://www.facebook.com/profile.php?id=61559613772292&mibextid=JRoKGi",
       "instagram_url": "",
       "line_url": "",
-      "logo": "pics/logo/default-logo.svg",
+      "logo": "pics/logo/tzm0047.webp",
       "images": [],
       "is_featured": false,
       "sort_order": 470,
-      "updated_at": "2026-06-24 3:42:49"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0048",
       "name": "Na’s Studio｜耳燭｜體雕｜頭療｜暖宮",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "美容美體",
+      "area": "竹南",
       "offer": "憑福利卡消費滿500打95折，滿1000打9折",
       "description": "",
       "address": "苗栗縣竹南鎮環市路三段228-1號3樓",
@@ -1006,13 +943,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 480,
-      "updated_at": "2026-06-24 3:43:15"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0049",
       "name": "雲朵森林",
-      "category": "食",
-      "area": "頭份市",
+      "category": "美食飲品",
+      "area": "頭份",
       "offer": "憑福利卡95折優惠",
       "description": "",
       "address": "苗栗縣頭份市花園東路75號2樓",
@@ -1027,12 +964,12 @@
       "images": [],
       "is_featured": false,
       "sort_order": 490,
-      "updated_at": "2026-06-24 3:43:21"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0050",
       "name": "極食玩樂桌遊店",
-      "category": "樂",
+      "category": "休閒娛樂",
       "area": "苗栗市",
       "offer": "憑福利卡買三小時送一小時",
       "description": "",
@@ -1048,13 +985,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 500,
-      "updated_at": "2026-06-24 3:43:27"
+      "updated_at": "2026-06-25 02:32:12"
     },
     {
       "id": "tzm0051",
       "name": "止癢² ๑專業掏耳｜皮膚管理",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費享95折優惠",
       "description": "",
       "address": "苗栗縣頭份市八德一路136號",
@@ -1069,13 +1006,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 510,
-      "updated_at": "2026-06-24 3:43:36"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0052",
       "name": "Chill time studio 艾比撥經",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "新客憑福利卡消費即贈眼部撥經15分鐘乙堂(須於當次課程一起使用)",
       "description": "",
       "address": "苗栗縣頭份市八德一路345號3樓",
@@ -1090,13 +1027,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 520,
-      "updated_at": "2026-06-24 3:43:41"
+      "updated_at": "2026-06-25 02:32:20"
     },
     {
       "id": "tzm0053",
       "name": "Amy美睫公主",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "美容美體",
+      "area": "竹南",
       "offer": "憑福利卡消費享9折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮和平街20號",
@@ -1111,17 +1048,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 530,
-      "updated_at": "2026-06-24 3:43:47"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0054",
       "name": "Lady’s 服飾店",
-      "category": "衣",
-      "area": "頭份市",
+      "category": "零售購物",
+      "area": "頭份",
       "offer": "滿千折百",
       "description": "",
       "address": "苗栗縣頭份市中山路50號",
-      "phone": "0980077508",
+      "phone": "980077508.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1132,13 +1069,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 540,
-      "updated_at": "2026-06-24 3:44:15"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0055",
       "name": "REP Fitness 健身工作室",
-      "category": "育",
-      "area": "頭份市",
+      "category": "休閒娛樂",
+      "area": "頭份",
       "offer": "1.憑福利卡可享「私人教練體驗課」乙堂免費（含身體組成Inbody檢測） 2.「購課10.20.30堂即享贈送教練課乙堂」或「特約專屬方案6堂教練課$9,000元優惠方案」(擇一)",
       "description": "",
       "address": "苗栗縣頭份市昌隆一街300號",
@@ -1153,13 +1090,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 550,
-      "updated_at": "2026-06-24 3:44:24"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0056",
       "name": "爪哇殿咖啡",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡消費300送印尼奶茶或紅茶1杯",
       "description": "",
       "address": "竹南博愛街194號",
@@ -1174,17 +1111,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 560,
-      "updated_at": "2026-06-24 3:44:32"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0057",
       "name": "天祿電動麻將桌",
-      "category": "樂",
-      "area": "頭份市",
+      "category": "休閒娛樂",
+      "area": "頭份",
       "offer": "憑福利卡消費購入電動麻將機享8.8優惠",
       "description": "",
       "address": "苗栗縣頭份市仁愛路172號",
-      "phone": "0976286683",
+      "phone": "976286683.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1195,13 +1132,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 570,
-      "updated_at": "2026-06-24 3:44:40"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0058",
       "name": "女王姬韓式皮膚管理",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "美容美體",
+      "area": "竹南",
       "offer": "憑福利卡消費享9折，首次到店享全項目體驗價",
       "description": "",
       "address": "苗栗縣竹南鎮自由街120號2樓",
@@ -1216,13 +1153,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 580,
-      "updated_at": "2026-06-24 3:44:48"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0059",
       "name": "桃喜甜幸 正宗四川冰粉/特色甜品",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "憑福利卡消費付現滿130現折10元",
       "description": "",
       "address": "苗栗縣竹南鎮自由街120號1樓",
@@ -1237,13 +1174,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 590,
-      "updated_at": "2026-06-24 3:44:55"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0060",
       "name": "蔡宗熹個人小貨車貨運行",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "生活服務",
+      "area": "竹南",
       "offer": "憑福利卡消費享95折",
       "description": "",
       "address": "苗栗縣竹南鎮竹興里竹圍街268巷31號",
@@ -1258,13 +1195,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 600,
-      "updated_at": "2026-06-24 3:45:04"
+      "updated_at": "2026-06-25 02:32:41"
     },
     {
       "id": "tzm0061",
       "name": "345._studio",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "零售購物",
+      "area": "竹南",
       "offer": "憑福利卡消費全項目85折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮新南街216號3樓",
@@ -1279,13 +1216,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 610,
-      "updated_at": "2026-06-24 3:45:12"
+      "updated_at": "2026-06-25 02:32:50"
     },
     {
       "id": "tzm0062",
       "name": "玩巢公仔",
-      "category": "零售業",
-      "area": "竹南鎮",
+      "category": "休閒娛樂",
+      "area": "竹南",
       "offer": "憑福利卡消費盒玩類商品滿1000打95折、滿3000打9折",
       "description": "",
       "address": "竹南鎮大埔街156號",
@@ -1300,13 +1237,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 620,
-      "updated_at": "2026-06-24 3:45:18"
+      "updated_at": "2026-06-25 02:33:00"
     },
     {
       "id": "tzm0063",
       "name": "和牛涮頭份尚順育樂世界店",
-      "category": "食",
-      "area": "頭份市",
+      "category": "美食飲品",
+      "area": "頭份",
       "offer": "憑福利卡消費贈送時令海鮮乙份、憑福利卡消費15客以上贈送1客（贈送最低價位），以上不與其他優惠併用",
       "description": "",
       "address": "苗栗縣頭份市育樂街6號1樓",
@@ -1321,13 +1258,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 630,
-      "updated_at": "2026-06-24 3:45:26"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0064",
       "name": "福梅烤雞",
-      "category": "食",
-      "area": "頭份市",
+      "category": "美食飲品",
+      "area": "頭份",
       "offer": "憑福利卡消費享9折優惠",
       "description": "",
       "address": "各大市集烤雞快閃",
@@ -1342,13 +1279,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 640,
-      "updated_at": "2026-06-24 3:48:38"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0065",
       "name": "怡廷居家護理所",
-      "category": "其他",
-      "area": "頭份市",
+      "category": "醫療保健",
+      "area": "頭份",
       "offer": "頭份竹南到府護理訪視車馬費半價優惠",
       "description": "",
       "address": "苗栗縣頭份市山下里永忠街48號2樓",
@@ -1363,17 +1300,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 650,
-      "updated_at": "2026-06-24 3:49:07"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0066",
       "name": "磐龍科技實業有限公司",
-      "category": "住",
-      "area": "竹南鎮",
+      "category": "居家修繕",
+      "area": "竹南",
       "offer": "水電家電、系統櫃，老屋翻新、方位健檢免費會勘，免費估價",
       "description": "",
       "address": "竹南鎮萬大街78號",
-      "phone": "0909168178",
+      "phone": "909168178.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1384,17 +1321,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 660,
-      "updated_at": "2026-06-24 3:49:28"
+      "updated_at": "2026-06-25 02:33:24"
     },
     {
       "id": "tzm0067",
       "name": "全植薆經典美容館",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費當日即免費贈送一次頭部舒壓或眼部舒壓好康活動2選一",
       "description": "",
       "address": "苗栗縣頭份市東民路168號",
-      "phone": "037670658",
+      "phone": "37670658.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1405,13 +1342,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 670,
-      "updated_at": "2026-06-24 3:49:50"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0068",
       "name": "思緹美學｜體雕｜精油按摩｜身體去角質",
-      "category": "服務業",
-      "area": "頭份市",
+      "category": "美容美體",
+      "area": "頭份",
       "offer": "憑福利卡消費享95折優惠，消費2000以上享9折優惠",
       "description": "",
       "address": "苗栗縣頭份市中華路883-5號1樓",
@@ -1426,13 +1363,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 680,
-      "updated_at": "2026-06-24 3:50:07"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0069",
       "name": "森森kids童裝工作室",
-      "category": "衣",
-      "area": "竹南鎮",
+      "category": "零售購物",
+      "area": "竹南",
       "offer": "憑福利卡消費9折優惠",
       "description": "",
       "address": "苗栗縣竹南鎮大埔七街8號1樓",
@@ -1447,17 +1384,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 690,
-      "updated_at": "2026-06-24 3:50:13"
+      "updated_at": "2026-06-25 02:33:35"
     },
     {
       "id": "tzm0070",
       "name": "啵耳星球掏耳專門店",
-      "category": "服務業",
+      "category": "美容美體",
       "area": "竹南",
       "offer": "滿1000折50",
       "description": "",
       "address": "350苗栗縣竹南鎮立達街41號",
-      "phone": "0971760595",
+      "phone": "971760595.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1468,13 +1405,13 @@
       "images": [],
       "is_featured": false,
       "sort_order": 700,
-      "updated_at": "2026-06-24 12:24:45"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0071",
       "name": "吃餃嬌｜手工水餃🥟",
-      "category": "食",
-      "area": "竹南鎮",
+      "category": "美食飲品",
+      "area": "竹南",
       "offer": "消費🈵️$600元，折扣95折",
       "description": "",
       "address": "苗栗縣竹南鎮科專五路3號1樓D室",
@@ -1489,17 +1426,17 @@
       "images": [],
       "is_featured": false,
       "sort_order": 710,
-      "updated_at": "2026-06-24 12:25:38"
+      "updated_at": "2026-06-25 02:29:21"
     },
     {
       "id": "tzm0072",
       "name": "畢茱爾醫美診所",
-      "category": "服務業",
-      "area": "竹南鎮",
+      "category": "生活服務",
+      "area": "竹南",
       "offer": "憑福利卡享專屬禮遇",
       "description": "",
       "address": "竹南鎮華東街56號",
-      "phone": "0958596596",
+      "phone": "958596596.0",
       "business_hours": "",
       "map_url": "",
       "website_url": "",
@@ -1510,23 +1447,75 @@
       "images": [],
       "is_featured": false,
       "sort_order": 720,
-      "updated_at": "2026-06-24 12:33:17"
+      "updated_at": "2026-06-25 02:33:43"
     }
   ],
   "categories": [
-    "美食飲品",
-    "美容美體",
-    "生活服務",
-    "零售購物",
-    "親子教育",
-    "通訊3C",
-    "休閒娛樂",
-    "居家修繕",
-    "醫療保健",
-    "交通機車",
-    "住宿旅遊",
-    "企業服務",
-    "其他"
+    {
+      "id": "美食飲品",
+      "name": "美食飲品",
+      "sort_order": 1
+    },
+    {
+      "id": "美容美體",
+      "name": "美容美體",
+      "sort_order": 2
+    },
+    {
+      "id": "生活服務",
+      "name": "生活服務",
+      "sort_order": 3
+    },
+    {
+      "id": "零售購物",
+      "name": "零售購物",
+      "sort_order": 4
+    },
+    {
+      "id": "親子教育",
+      "name": "親子教育",
+      "sort_order": 5
+    },
+    {
+      "id": "通訊3C",
+      "name": "通訊3C",
+      "sort_order": 6
+    },
+    {
+      "id": "休閒娛樂",
+      "name": "休閒娛樂",
+      "sort_order": 7
+    },
+    {
+      "id": "居家修繕",
+      "name": "居家修繕",
+      "sort_order": 8
+    },
+    {
+      "id": "醫療保健",
+      "name": "醫療保健",
+      "sort_order": 9
+    },
+    {
+      "id": "交通機車",
+      "name": "交通機車",
+      "sort_order": 10
+    },
+    {
+      "id": "住宿旅遊",
+      "name": "住宿旅遊",
+      "sort_order": 11
+    },
+    {
+      "id": "企業服務",
+      "name": "企業服務",
+      "sort_order": 12
+    },
+    {
+      "id": "其他",
+      "name": "其他",
+      "sort_order": 13
+    }
   ],
   "areas": [
     {
@@ -1565,5 +1554,5 @@
       "sort_order": 7
     }
   ],
-  "updated_at": "2026-06-24 12:58:44"
+  "updated_at": "2026-06-24 19:00:51"
 }
