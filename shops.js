@@ -295,7 +295,6 @@ function renderShops() {
 }
 
 function shopCard(shop) {
-  const address = compactAddress(shop.address);
   return `<article class="shop-card">
     <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
@@ -304,8 +303,6 @@ function shopCard(shop) {
       </div>
       <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
       <div class="offer">${esc(shop.offer)}</div>
-      ${shop.description ? `<p class="shop-desc">${esc(shop.description)}</p>` : ""}
-      ${address ? `<p class="shop-address">${esc(address)}</p>` : ""}
       <div class="shop-actions">
         <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
         <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
@@ -380,10 +377,6 @@ function closeModal() {
 function mapUrl(shop) {
   const keyword = typeof shop === "string" ? shop : [shop.name, shop.address].filter(Boolean).join(" ");
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword)}`;
-}
-
-function compactAddress(address) {
-  return address ? `地址：${address}` : "";
 }
 
 function detailRow(label, value) {
