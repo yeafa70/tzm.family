@@ -1,32 +1,37 @@
 const SHOP_CONFIG = {
   dataUrl: "shops.json",
-  lineCardUrl: "https://lin.ee/rQzJS3i",
+  lineCardUrl: "https://lin.ee/OuiR6gV",
   defaultLogo: "pics/logo/default-logo.svg"
 };
 
-const CATEGORY_ORDER = ["美食飲品", "生活服務", "零售購物", "親子教育", "通訊3C", "休閒娛樂", "其他"];
+const CATEGORY_ORDER = [
+  "美食飲品",
+  "美容美體",
+  "生活服務",
+  "零售購物",
+  "親子教育",
+  "通訊3C",
+  "休閒娛樂",
+  "居家修繕",
+  "醫療保健",
+  "交通機車",
+  "住宿旅遊",
+  "企業服務",
+  "其他"
+];
 const AREA_ORDER = ["竹南", "頭份", "苗栗市", "南庄", "後龍", "公館", "其他地區"];
 
-const CATEGORY_MAP = new Map([
+const LEGACY_CATEGORY_MAP = new Map([
   ["食", "美食飲品"],
   ["美食餐飲", "美食飲品"],
-  ["美食飲品", "美食飲品"],
   ["衣", "零售購物"],
   ["零售業", "零售購物"],
-  ["零售購物", "零售購物"],
   ["住", "生活服務"],
-  ["行", "生活服務"],
+  ["行", "交通機車"],
   ["服務業", "生活服務"],
-  ["美容美體", "生活服務"],
-  ["醫療保健", "生活服務"],
-  ["生活服務", "生活服務"],
   ["育", "親子教育"],
-  ["親子教育", "親子教育"],
   ["樂", "休閒娛樂"],
-  ["休閒娛樂", "休閒娛樂"],
-  ["通訊業", "通訊3C"],
-  ["通訊3C", "通訊3C"],
-  ["其他", "其他"]
+  ["通訊業", "通訊3C"]
 ]);
 
 const AREA_MAP = new Map([
@@ -69,18 +74,36 @@ const FALLBACK_SHOPS = [
 ];
 
 let shops = [];
+let categoryOptions = [];
+let areaOptions = [];
 
 const $ = id => document.getElementById(id);
 
 function normalizeCategory(category) {
   const value = String(category || "").trim();
-  return CATEGORY_MAP.get(value) || "其他";
+  if (!value) return "其他";
+  if (CATEGORY_ORDER.includes(value)) return value;
+  return LEGACY_CATEGORY_MAP.get(value) || "其他";
 }
 
 function normalizeArea(area) {
   const value = String(area || "").trim();
   if (!value || /^https?:\/\//i.test(value)) return "其他地區";
   return AREA_MAP.get(value) || "其他地區";
+}
+
+function resolveCategoryParam(category) {
+  const value = String(category || "").trim();
+  if (!value) return "";
+  if (CATEGORY_ORDER.includes(value) || LEGACY_CATEGORY_MAP.has(value)) return normalizeCategory(value);
+  return "";
+}
+
+function resolveAreaParam(area) {
+  const value = String(area || "").trim();
+  if (!value) return "";
+  if (AREA_ORDER.includes(value) || AREA_MAP.has(value)) return normalizeArea(value);
+  return "";
 }
 
 function normalizeImages(images) {
@@ -107,7 +130,7 @@ function normalizeShop(row, index = 0) {
     name: row.name || row.shop_name || "未命名店家",
     category: normalizeCategory(row.category),
     area: normalizeArea(row.area),
-    offer: row.offer || row.discount || "詳細優惠以店家現場公告為準。",
+    offer: row.offer || row.discount || "詳細優惠以本平台公告為主要依據。",
     description: row.description || row.desc || "",
     address: row.address || "",
     phone: row.phone || "",
@@ -117,7 +140,7 @@ function normalizeShop(row, index = 0) {
     facebook_url: row.facebook_url || row.facebookUrl || "",
     instagram_url: row.instagram_url || row.instagramUrl || "",
     line_url: row.line_url || row.lineUrl || "",
-    logo: row.logo || SHOP_CONFIG.defaultLogo,
+    logo: row.logo || row.logo_url || row.logoUrl || SHOP_CONFIG.defaultLogo,
     images: normalizeImages(row.images),
     is_featured: normalizeBoolean(row.is_featured ?? row.featured, false),
     is_active: normalizeBoolean(row.is_active ?? row.active, true),
@@ -127,10 +150,11 @@ function normalizeShop(row, index = 0) {
 }
 
 async function loadShops() {
+  let data = null;
   try {
     const response = await fetch(SHOP_CONFIG.dataUrl, { cache: "no-store" });
     if (!response.ok) throw new Error("shops.json load failed");
-    const data = await response.json();
+    data = await response.json();
     const source = Array.isArray(data) ? data : data.shops || [];
     shops = source
       .map(normalizeShop)
@@ -141,8 +165,20 @@ async function loadShops() {
     console.warn("使用備用店家資料：", error);
   }
 
+  categoryOptions = sortByPreferredOrder([
+    ...CATEGORY_ORDER,
+    ...buildOptions(data?.categories, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER)
+  ], CATEGORY_ORDER);
+  areaOptions = buildOptions(data?.areas, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
+
   if ($("shopGrid")) initShopDirectory();
   if ($("featuredShopGrid")) renderFeaturedShops();
+}
+
+function optionName(option) {
+  if (typeof option === "string") return option;
+  if (option && typeof option === "object") return option.name || option.title || option.id || "";
+  return "";
 }
 
 function sortByPreferredOrder(values, preferred) {
@@ -154,9 +190,12 @@ function sortByPreferredOrder(values, preferred) {
   });
 }
 
-function uniqueValues(key) {
-  const preferred = key === "category" ? CATEGORY_ORDER : AREA_ORDER;
-  return sortByPreferredOrder(shops.map(shop => shop[key]), preferred);
+function buildOptions(sourceOptions, fallbackValues, normalizer, preferred) {
+  const raw = Array.isArray(sourceOptions) && sourceOptions.length
+    ? sourceOptions.map(optionName)
+    : fallbackValues;
+  const normalized = raw.map(normalizer).filter(Boolean);
+  return sortByPreferredOrder(normalized, preferred);
 }
 
 function initShopDirectory() {
@@ -168,10 +207,12 @@ function initShopDirectory() {
   if (!categorySelect || !areaSelect || !categoryChips || !searchInput || !resetBtn) return;
 
   const query = new URLSearchParams(window.location.search);
-  const queryCategory = normalizeCategory(query.get("category") || "");
-  const queryArea = normalizeArea(query.get("area") || "");
-  const categories = uniqueValues("category");
-  const areas = uniqueValues("area");
+  const rawQueryCategory = query.get("category") || "";
+  const rawQueryArea = query.get("area") || "";
+  const queryCategory = resolveCategoryParam(rawQueryCategory);
+  const queryArea = resolveAreaParam(rawQueryArea);
+  const categories = categoryOptions.length ? categoryOptions : buildOptions(null, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
+  const areas = areaOptions.length ? areaOptions : buildOptions(null, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
 
   categorySelect.innerHTML = '<option value="">全部分類</option>' + categories.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
   areaSelect.innerHTML = '<option value="">全部地區</option>' + areas.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
@@ -187,27 +228,52 @@ function initShopDirectory() {
       categorySelect.value = chip.dataset.category || "";
       document.querySelectorAll(".chip").forEach(item => item.classList.remove("active"));
       chip.classList.add("active");
+      updateDirectoryUrl();
       renderShops();
     });
   });
 
-  searchInput.addEventListener("input", renderShops);
+  searchInput.addEventListener("input", () => {
+    updateDirectoryUrl();
+    renderShops();
+  });
   categorySelect.addEventListener("change", () => {
     document.querySelectorAll(".chip").forEach(chip => {
       chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
     });
+    updateDirectoryUrl();
     renderShops();
   });
-  areaSelect.addEventListener("change", renderShops);
+  areaSelect.addEventListener("change", () => {
+    updateDirectoryUrl();
+    renderShops();
+  });
   resetBtn.addEventListener("click", () => {
     searchInput.value = "";
     categorySelect.value = "";
     areaSelect.value = "";
     document.querySelectorAll(".chip").forEach(chip => chip.classList.toggle("active", !chip.dataset.category));
+    updateDirectoryUrl();
     renderShops();
   });
 
+  updateDirectoryUrl();
   renderShops();
+}
+
+function updateDirectoryUrl() {
+  if (!window.history || typeof window.history.replaceState !== "function") return;
+  const params = new URLSearchParams();
+  const keyword = ($("searchInput")?.value || "").trim();
+  const category = $("categorySelect")?.value || "";
+  const area = $("areaSelect")?.value || "";
+
+  if (keyword) params.set("q", keyword);
+  if (category) params.set("category", category);
+  if (area) params.set("area", area);
+
+  const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}${window.location.hash || ""}`;
+  window.history.replaceState({}, "", nextUrl);
 }
 
 function getFilteredShops() {
@@ -241,7 +307,7 @@ function renderFeaturedShops() {
 
 function featuredCard(shop) {
   return `<article class="feature-card">
-    <div class="feature-photo" ${shop.logo && shop.logo !== SHOP_CONFIG.defaultLogo ? `style="background-image:url('${attr(shop.logo)}')"` : ""}></div>
+    <div class="feature-photo logo-frame">${logoImage(shop, "feature-logo")}</div>
     <div class="feature-content">
       <div class="feature-title">${esc(shop.name)}</div>
       <div class="feature-meta">${esc(shop.area)}</div>
@@ -272,21 +338,18 @@ function renderShops() {
 
 function shopCard(shop) {
   return `<article class="shop-card">
-    <div class="shop-photo" ${shop.logo && shop.logo !== SHOP_CONFIG.defaultLogo ? `style="background-image:url('${attr(shop.logo)}')"` : ""}></div>
+    <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
       <div class="shop-head">
         <div><h3>${esc(shop.name)}</h3></div>
-        <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
       </div>
       <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
       <div class="offer">${esc(shop.offer)}</div>
-      <p class="shop-desc">${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
-      <p class="shop-address">${esc(compactAddress(shop.address))}</p>
-      <div class="shop-actions">
-        <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
-        <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
-        <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
-      </div>
+    </div>
+    <div class="shop-actions">
+      <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
+      <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
+      <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
     </div>
   </article>`;
 }
@@ -308,14 +371,20 @@ function openShop(id) {
     `<a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener">加入 LINE 領福利卡</a>`
   ].join("");
 
-  $("modalBody").innerHTML = `<div class="offer">${esc(shop.offer)}</div>
-    <p>${esc(shop.description || "更多店家資訊將陸續補上。")}</p>
-    ${detailRow("地址", shop.address || "待補充")}
-    ${detailRow("電話", shop.phone || "待補充")}
+  $("modalBody").innerHTML = `<div class="modal-shop-summary">
+      <div class="modal-logo-box">${logoImage(shop, "modal-logo")}</div>
+      <div>
+        <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
+        <div class="offer">${esc(shop.offer)}</div>
+      </div>
+    </div>
+    ${shop.description ? `<p>${esc(shop.description)}</p>` : ""}
+    ${detailRow("地址", shop.address)}
+    ${detailRow("電話", shop.phone)}
     ${shop.line_url ? detailRow("LINE", shop.line_url) : ""}
     ${shop.business_hours ? detailRow("營業時間", shop.business_hours) : ""}
     <div class="shop-actions">${links}</div>
-    <div class="notice">優惠內容與使用方式以店家現場公告為準，建議消費前先向店家確認。</div>`;
+    <div class="notice">福利優惠以本平台公告為主要依據；如遇店家臨時公休、營運調整或資料尚未即時更新，建議消費前可先向店家確認。若店家需調整優惠內容，請提交修改資料，經審核後更新公告。</div>`;
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -352,12 +421,17 @@ function mapUrl(shop) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword)}`;
 }
 
-function compactAddress(address) {
-  return address ? `地址：${address}` : "地址：待補充";
+function detailRow(label, value) {
+  if (!value) return "";
+  return `<p><b>${esc(label)}：</b>${esc(value)}</p>`;
 }
 
-function detailRow(label, value) {
-  return `<p><b>${esc(label)}：</b>${esc(value)}</p>`;
+function logoPath(shop) {
+  return shop.logo || SHOP_CONFIG.defaultLogo;
+}
+
+function logoImage(shop, className) {
+  return `<img class="${className}" src="${attr(logoPath(shop))}" alt="${attr(`${shop.name} LOGO`)}" loading="lazy" onerror="this.onerror=null;this.src='${SHOP_CONFIG.defaultLogo}';">`;
 }
 
 function esc(value) {
