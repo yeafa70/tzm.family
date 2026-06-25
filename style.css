@@ -620,7 +620,7 @@ textarea,
   .menu-btn{display:inline-flex}
 }
 @media (max-width:620px){
-  .container{width:min(calc(100% - 24px),var(--container))}
+  .container{width:min(calc(100% - 14px),var(--container))}
   .page-shell{padding-top:14px}
   .hero-wrap{border-radius:8px}
   .hero-copy{padding:24px 18px}
@@ -633,11 +633,15 @@ textarea,
   .featured-grid{grid-template-columns:repeat(2,1fr)}
   .service-grid{grid-template-columns:1fr}
   .shop-grid{grid-template-columns:1fr}
-  .shop-card{grid-template-columns:88px minmax(0,1fr);gap:12px;padding:14px}
-  .shop-logo-box{width:88px;height:88px;padding:8px}
+  .directory{padding:12px}
+  .shop-card{grid-template-columns:78px minmax(0,1fr);gap:9px 10px;padding:10px}
+  .shop-logo-box{width:78px;height:78px;padding:7px}
   .shop-head h3{font-size:18px}
-  .offer{-webkit-line-clamp:3}
-  .shop-actions .mini-btn{min-height:42px;font-size:14px;padding:0 8px}
+  .tags{gap:5px;margin-bottom:6px}
+  .tag{font-size:11px;padding:2px 6px}
+  .offer{padding:8px;font-size:13px;line-height:1.45;margin-bottom:0;-webkit-line-clamp:3}
+  .shop-actions{gap:7px;margin-top:0}
+  .shop-actions .mini-btn{min-height:40px;font-size:14px;padding:0 6px}
   .modal-shop-summary{grid-template-columns:96px minmax(0,1fr);gap:12px}
   .modal-logo-box{width:96px;height:96px;padding:10px}
   .filters,.steps{grid-template-columns:1fr}
