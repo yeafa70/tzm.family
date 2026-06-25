@@ -255,6 +255,17 @@ function trackGaEvent(eventName, params = {}) {
   });
 }
 
+function shopGaParams(shop, params = {}) {
+  if (!shop) return params;
+  return {
+    shop_id: shop.id || "",
+    shop_name: shop.name || "",
+    category: shop.category || "",
+    area: shop.area || "",
+    ...params
+  };
+}
+
 function initShopDirectory() {
   const categorySelect = $("categorySelect");
   const areaSelect = $("areaSelect");
@@ -410,6 +421,7 @@ function renderShops() {
 }
 
 function shopCard(shop) {
+  const navigationUrl = shop.map_url || mapUrl(shop);
   return `<article class="shop-card">
     <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
@@ -420,11 +432,20 @@ function shopCard(shop) {
       <div class="offer">${esc(shop.offer)}</div>
     </div>
     <div class="shop-actions">
-      <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
-      <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
+      <button class="mini-btn primary" type="button" aria-label="查看 ${attr(shop.name)} 詳情" onclick="openShop('${js(shop.id)}')">詳情</button>
+      <a class="mini-btn" href="${attr(navigationUrl)}" target="_blank" rel="noopener" aria-label="開啟 ${attr(shop.name)} Google 地圖導航" onclick="trackShopNavigation('${js(shop.id)}', this.href, 'shop_card')">導航</a>
       <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
     </div>
   </article>`;
+}
+
+function trackShopNavigation(id, linkUrl, section = "shop_card") {
+  const shop = shops.find(item => item.id === id);
+  trackGaEvent(section === "shop_modal" ? "shop_modal_navigation_click" : "shop_navigation_click", shopGaParams(shop, {
+    cta_text: section === "shop_modal" ? "Google 地圖" : "導航",
+    link_url: linkUrl,
+    section
+  }));
 }
 
 function openShop(id) {
@@ -432,16 +453,21 @@ function openShop(id) {
   const modal = $("shopModal");
   if (!shop || !modal) return;
 
+  trackGaEvent("shop_detail_click", shopGaParams(shop, {
+    cta_text: "詳情",
+    section: "shop_card"
+  }));
+
   $("modalTitle").textContent = shop.name;
   $("modalMeta").textContent = `${shop.area}｜${shop.category}`;
 
   const links = [
-    shop.map_url || shop.name || shop.address ? `<a class="btn btn-primary" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">Google 地圖</a>` : "",
+    shop.map_url || shop.name || shop.address ? `<a class="btn btn-primary" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener" aria-label="開啟 ${attr(shop.name)} Google 地圖導航" onclick="trackShopNavigation('${js(shop.id)}', this.href, 'shop_modal')">Google 地圖</a>` : "",
     shop.website_url ? `<a class="btn btn-outline" href="${attr(shop.website_url)}" target="_blank" rel="noopener">官方網站</a>` : "",
     shop.facebook_url ? `<a class="btn btn-outline" href="${attr(shop.facebook_url)}" target="_blank" rel="noopener">Facebook</a>` : "",
     shop.instagram_url ? `<a class="btn btn-outline" href="${attr(shop.instagram_url)}" target="_blank" rel="noopener">Instagram</a>` : "",
     shop.line_url ? `<a class="btn btn-line" href="${attr(shop.line_url)}" target="_blank" rel="noopener">店家 LINE</a>` : "",
-    `<a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener">加入 LINE 領福利卡</a>`
+    `<a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener" aria-label="開啟頭竹苗福利卡" onclick="trackWelfareCardOpen('${js(shop.id)}', this.href)">開啟福利卡</a>`
   ].join("");
 
   $("modalBody").innerHTML = `<div class="modal-shop-summary">
@@ -467,6 +493,11 @@ async function shareShop(id) {
   const shop = shops.find(item => item.id === id);
   if (!shop) return;
 
+  trackGaEvent("shop_share_click", shopGaParams(shop, {
+    cta_text: "分享",
+    section: "shop_card"
+  }));
+
   const text = `我在頭竹苗福利社看到 ${shop.name} 的優惠：${shop.offer}`;
   const url = `${location.origin}${location.pathname}`;
 
@@ -480,6 +511,15 @@ async function shareShop(id) {
     await navigator.clipboard.writeText(`${text}\n${url}`);
     alert("已複製店家資訊");
   }
+}
+
+function trackWelfareCardOpen(id, linkUrl) {
+  const shop = shops.find(item => item.id === id);
+  trackGaEvent("welfare_card_open_click", shopGaParams(shop, {
+    cta_text: "開啟福利卡",
+    link_url: linkUrl,
+    section: "shop_modal"
+  }));
 }
 
 function closeModal() {
