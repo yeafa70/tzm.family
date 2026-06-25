@@ -116,7 +116,7 @@ function normalizeShop(row, index = 0) {
     name: row.name || row.shop_name || "未命名店家",
     category: normalizeCategory(row.category),
     area: normalizeArea(row.area),
-    offer: row.offer || row.discount || "詳細優惠以店家現場公告為準。",
+    offer: row.offer || row.discount || "詳細優惠以本平台公告為主要依據。",
     description: row.description || row.desc || "",
     address: row.address || "",
     phone: row.phone || "",
@@ -342,7 +342,7 @@ function openShop(id) {
     ${shop.line_url ? detailRow("LINE", shop.line_url) : ""}
     ${shop.business_hours ? detailRow("營業時間", shop.business_hours) : ""}
     <div class="shop-actions">${links}</div>
-    <div class="notice">優惠內容與使用方式以店家現場公告為準，建議消費前先向店家確認。</div>`;
+    <div class="notice">福利優惠以本平台公告為主要依據；如遇店家臨時公休、營運調整或資料尚未即時更新，建議消費前可先向店家確認。若店家需調整優惠內容，請提交修改資料，經審核後更新公告。</div>`;
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");

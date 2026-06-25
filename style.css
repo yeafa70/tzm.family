@@ -145,6 +145,24 @@ h1,h2,h3,p{margin-top:0}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .hero-note{margin-top:14px;color:var(--muted);font-size:14px}
 .hero-media{min-height:340px;background:url("pics/hero-local.svg") center/cover no-repeat;border-radius:0}
+.hero-video-card{
+  min-height:340px;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:linear-gradient(135deg,#F7F0E8 0%,#E8DFD3 100%);
+}
+.shorts-frame{
+  aspect-ratio:9/16;
+  width:min(260px,100%);
+  max-height:420px;
+  margin:auto;
+  border-radius:18px;
+  overflow:hidden;
+  background:#1f1722;
+  box-shadow:0 18px 42px rgba(36,26,38,.18);
+}
+.shorts-frame iframe{width:100%;height:100%;border:0;border-radius:18px;display:block}
 
 .section{padding:40px 0}
 .section-tight{padding:28px 0}
@@ -262,6 +280,34 @@ h1,h2,h3,p{margin-top:0}
   font-size:12px;
   border-radius:6px;
 }
+.partner-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:20px;
+}
+.partner-card{
+  background:#fff;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:8px;
+  box-shadow:var(--shadow-sm);
+  padding:20px;
+  text-align:center;
+}
+.partner-logo{
+  width:104px;
+  height:104px;
+  margin:0 auto 14px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(67,49,71,.12);
+  border-radius:16px;
+  background:#FAF7F2;
+  color:var(--purple);
+  font-weight:900;
+}
+.partner-logo img{max-width:82px;max-height:82px;object-fit:contain}
+.partner-card p{margin-bottom:0;color:var(--muted);font-weight:800}
 
 /* Inner pages */
 .page-hero{padding:34px 0 12px}
@@ -288,6 +334,12 @@ h1,h2,h3,p{margin-top:0}
   font-weight:900;
 }
 .page-hero p,.card p,.panel p{color:var(--muted)}
+.dark-panel,.gradient-panel,.panel.dark{color:#f9f4fb}
+.dark-panel h2,.dark-panel h3,.gradient-panel h2,.gradient-panel h3,.panel.dark h2,.panel.dark h3{color:#fff}
+.dark-panel p,.gradient-panel p,.panel.dark p,.dark-panel li,.gradient-panel li,.panel.dark li{color:#f0e6f2}
+.page-hero-side p{color:#f0e6f2}
+.light-card,.process-card,.info-card{color:#2d2430}
+.light-card p,.process-card p,.info-card p{color:#5f5364}
 
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -311,6 +363,51 @@ h1,h2,h3,p{margin-top:0}
   margin-bottom:14px;
 }
 .card-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feature-icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px;
+  background:#F2EADF;
+  color:var(--purple);
+  font-size:13px;
+  font-weight:900;
+}
+.process-flow{margin-top:18px}
+.flow-panel{background:#fff}
+.flow-line{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+.flow-line span{
+  position:relative;
+  min-height:64px;
+  display:grid;
+  place-items:center;
+  padding:10px;
+  text-align:center;
+  border-radius:8px;
+  background:#FAF7F2;
+  border:1px solid rgba(67,49,71,.10);
+  color:var(--purple);
+  font-weight:900;
+}
+.flow-line span:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  right:-9px;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--stone);
+  border-right:2px solid var(--stone);
+  transform:translateY(-50%) rotate(45deg);
+}
 .list{display:grid;gap:10px;margin-top:12px}
 .list-item{display:flex;gap:10px;color:var(--text);font-weight:800}
 .list-item span:first-child{color:var(--clay-dark);font-weight:900}
@@ -615,7 +712,11 @@ textarea,
   .hero{grid-template-columns:1fr}
   .hero-copy{padding:32px 24px}
   .hero-media{min-height:250px}
+  .hero-video-card{min-height:0;padding:22px}
   .page-hero-card,.grid-3,.grid-2,.news-grid,.footer-grid{grid-template-columns:1fr}
+  .partner-grid{grid-template-columns:1fr}
+  .flow-line{grid-template-columns:1fr}
+  .flow-line span:not(:last-child)::after{display:none}
   .steps{grid-template-columns:repeat(2,1fr)}
   .shop-grid,.featured-grid{grid-template-columns:repeat(2,1fr)}
   .category-grid{grid-template-columns:repeat(3,1fr)}
@@ -645,6 +746,7 @@ textarea,
   .hero-copy{padding:24px 18px}
   .hero h1{font-size:36px}
   .hero p{font-size:16px}
+  .shorts-frame{max-width:230px;max-height:390px}
   .hero-actions{display:grid}
   .btn{width:100%}
   .section{padding:32px 0}
