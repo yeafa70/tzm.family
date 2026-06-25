@@ -303,11 +303,11 @@ function shopCard(shop) {
       </div>
       <div class="tags"><span class="tag">${esc(shop.category)}</span><span class="tag area">${esc(shop.area)}</span></div>
       <div class="offer">${esc(shop.offer)}</div>
-      <div class="shop-actions">
-        <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
-        <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
-        <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
-      </div>
+    </div>
+    <div class="shop-actions">
+      <button class="mini-btn primary" type="button" onclick="openShop('${js(shop.id)}')">查看資訊</button>
+      <a class="mini-btn" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener">地圖</a>
+      <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
     </div>
   </article>`;
 }
