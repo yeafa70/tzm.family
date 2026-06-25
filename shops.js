@@ -1,6 +1,6 @@
 const SHOP_CONFIG = {
   dataUrl: "shops.json",
-  lineCardUrl: "https://lin.ee/rQzJS3i",
+  lineCardUrl: "https://lin.ee/OuiR6gV",
   defaultLogo: "pics/logo/default-logo.svg"
 };
 
