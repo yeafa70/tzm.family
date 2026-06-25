@@ -19,7 +19,13 @@ const CATEGORY_ORDER = [
   "企業服務",
   "其他"
 ];
-const AREA_ORDER = ["竹南", "頭份", "苗栗市", "南庄", "後龍", "公館", "其他地區"];
+const AREA_ORDER = ["竹南", "頭份", "苗栗市", "後龍", "公館", "南庄", "造橋", "三灣", "西湖", "頭屋", "銅鑼", "三義", "通霄", "苑裡", "卓蘭", "大湖", "獅潭", "泰安", "外縣市", "其他地區"];
+const FEATURED_SHOP_MATCHERS = [
+  { label: "丘森茶室", tests: ["丘森茶室"] },
+  { label: "買樂購", tests: ["買樂購"] },
+  { label: "親蜜家優床館", tests: ["親蜜家優床館", "親密家優床館"] },
+  { label: "十畝園味", tests: ["十畝園味"] }
+];
 
 const LEGACY_CATEGORY_MAP = new Map([
   ["食", "美食飲品"],
@@ -45,8 +51,34 @@ const AREA_MAP = new Map([
   ["後龍鎮", "後龍"],
   ["後龍", "後龍"],
   ["公館鄉", "公館"],
-  ["公館", "公館"]
+  ["公館", "公館"],
+  ["造橋鄉", "造橋"],
+  ["造橋", "造橋"],
+  ["三灣鄉", "三灣"],
+  ["三灣", "三灣"],
+  ["西湖鄉", "西湖"],
+  ["西湖", "西湖"],
+  ["頭屋鄉", "頭屋"],
+  ["頭屋", "頭屋"],
+  ["銅鑼鄉", "銅鑼"],
+  ["銅鑼", "銅鑼"],
+  ["三義鄉", "三義"],
+  ["三義", "三義"],
+  ["通霄鎮", "通霄"],
+  ["通霄", "通霄"],
+  ["苑裡鎮", "苑裡"],
+  ["苑裡", "苑裡"],
+  ["卓蘭鎮", "卓蘭"],
+  ["卓蘭", "卓蘭"],
+  ["大湖鄉", "大湖"],
+  ["大湖", "大湖"],
+  ["獅潭鄉", "獅潭"],
+  ["獅潭", "獅潭"],
+  ["泰安鄉", "泰安"],
+  ["泰安", "泰安"]
 ]);
+
+const EXTERNAL_AREA_PATTERN = /(新竹|桃園|台中|臺中|台北|臺北|新北|基隆|宜蘭|彰化|南投|雲林|嘉義|台南|臺南|高雄|屏東|花蓮|台東|臺東|澎湖|金門|連江)/;
 
 const FALLBACK_SHOPS = [
   {
@@ -86,10 +118,14 @@ function normalizeCategory(category) {
   return LEGACY_CATEGORY_MAP.get(value) || "其他";
 }
 
-function normalizeArea(area) {
-  const value = String(area || "").trim();
-  if (!value || /^https?:\/\//i.test(value)) return "其他地區";
-  return AREA_MAP.get(value) || "其他地區";
+function normalizeArea(area, address = "") {
+  const text = [area, address].map(value => String(value || "").trim()).filter(Boolean).join(" ");
+  if (!text || /^https?:\/\//i.test(text)) return "其他地區";
+  for (const [needle, label] of AREA_MAP.entries()) {
+    if (text.includes(needle)) return label;
+  }
+  if (EXTERNAL_AREA_PATTERN.test(text)) return "外縣市";
+  return "其他地區";
 }
 
 function resolveCategoryParam(category) {
@@ -129,7 +165,7 @@ function normalizeShop(row, index = 0) {
     id: String(row.id || row.shop_id || row.name || `shop-${index + 1}`),
     name: row.name || row.shop_name || "未命名店家",
     category: normalizeCategory(row.category),
-    area: normalizeArea(row.area),
+    area: normalizeArea(row.area, row.address),
     offer: row.offer || row.discount || "詳細優惠以本平台公告為主要依據。",
     description: row.description || row.desc || "",
     address: row.address || "",
@@ -169,7 +205,7 @@ async function loadShops() {
     ...CATEGORY_ORDER,
     ...buildOptions(data?.categories, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER)
   ], CATEGORY_ORDER);
-  areaOptions = buildOptions(data?.areas, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
+  areaOptions = collectAreasFromShops(shops, data?.areas);
 
   if ($("shopGrid")) initShopDirectory();
   if ($("featuredShopGrid")) renderFeaturedShops();
@@ -196,6 +232,27 @@ function buildOptions(sourceOptions, fallbackValues, normalizer, preferred) {
     : fallbackValues;
   const normalized = raw.map(normalizer).filter(Boolean);
   return sortByPreferredOrder(normalized, preferred);
+}
+
+function collectAreasFromShops(shopList, sourceAreas) {
+  const source = Array.isArray(sourceAreas) ? sourceAreas.map(optionName) : [];
+  const detected = shopList.flatMap(shop => [
+    normalizeArea(shop.area, shop.address),
+    normalizeArea("", shop.address)
+  ]);
+  const values = [...source.map(value => normalizeArea(value)), ...detected].filter(value => value && value !== "其他地區");
+  return sortByPreferredOrder(values, AREA_ORDER);
+}
+
+function trackGaEvent(eventName, params = {}) {
+  if (typeof window.gtag !== "function") return;
+  const cleanParams = Object.fromEntries(
+    Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== "")
+  );
+  window.gtag("event", eventName, {
+    page_path: window.location.pathname,
+    ...cleanParams
+  });
 }
 
 function initShopDirectory() {
@@ -229,6 +286,10 @@ function initShopDirectory() {
       document.querySelectorAll(".chip").forEach(item => item.classList.remove("active"));
       chip.classList.add("active");
       updateDirectoryUrl();
+      trackGaEvent("category_filter_change", {
+        category: categorySelect.value || "全部分類",
+        section: "shops_filter"
+      });
       renderShops();
     });
   });
@@ -242,10 +303,18 @@ function initShopDirectory() {
       chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
     });
     updateDirectoryUrl();
+    trackGaEvent("category_filter_change", {
+      category: categorySelect.value || "全部分類",
+      section: "shops_filter"
+    });
     renderShops();
   });
   areaSelect.addEventListener("change", () => {
     updateDirectoryUrl();
+    trackGaEvent("area_filter_change", {
+      area: areaSelect.value || "全部地區",
+      section: "shops_filter"
+    });
     renderShops();
   });
   resetBtn.addEventListener("click", () => {
@@ -300,13 +369,17 @@ function renderFeaturedShops() {
   const grid = $("featuredShopGrid");
   if (!grid) return;
 
-  const featured = shops.filter(shop => shop.is_featured).slice(0, 4);
-  const list = featured.length ? featured : shops.slice(0, 4);
+  const list = FEATURED_SHOP_MATCHERS.map(matcher => {
+    const found = shops.find(shop => matcher.tests.some(test => shop.name.includes(test)));
+    if (!found) console.warn(`找不到精選合作店家：${matcher.label}`);
+    return found;
+  }).filter(Boolean);
   grid.innerHTML = list.map(featuredCard).join("");
 }
 
 function featuredCard(shop) {
-  return `<article class="feature-card">
+  const linkUrl = `shops.html?q=${encodeURIComponent(shop.name)}`;
+  return `<a class="feature-card" href="${attr(linkUrl)}" data-ga-event="featured_shop_click" data-ga-section="featured_shops" data-ga-shop-name="${attr(shop.name)}" data-ga-shop-id="${attr(shop.id)}">
     <div class="feature-photo logo-frame">${logoImage(shop, "feature-logo")}</div>
     <div class="feature-content">
       <div class="feature-title">${esc(shop.name)}</div>
@@ -317,7 +390,7 @@ function featuredCard(shop) {
       </div>
       <div class="feature-offer">${esc(shop.offer)}</div>
     </div>
-  </article>`;
+  </a>`;
 }
 
 function renderShops() {
@@ -431,7 +504,19 @@ function logoPath(shop) {
 }
 
 function logoImage(shop, className) {
-  return `<img class="${className}" src="${attr(logoPath(shop))}" alt="${attr(`${shop.name} LOGO`)}" loading="lazy" onerror="this.onerror=null;this.src='${SHOP_CONFIG.defaultLogo}';">`;
+  return `<img class="${className}" src="${attr(logoPath(shop))}" alt="${attr(logoAlt(shop))}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${SHOP_CONFIG.defaultLogo}';this.alt='${attr(defaultLogoAlt(shop))}';">`;
+}
+
+function logoAlt(shop) {
+  if (!shop?.name) return "頭竹苗福利社特約商店 LOGO";
+  if (!shop.logo || logoPath(shop) === SHOP_CONFIG.defaultLogo) return defaultLogoAlt(shop);
+  return `${shop.name} LOGO｜頭竹苗福利社特約商店`;
+}
+
+function defaultLogoAlt(shop) {
+  return shop?.name
+    ? `${shop.name} 尚未提供 LOGO｜頭竹苗福利社特約商店`
+    : "店家尚未提供 LOGO｜頭竹苗福利社特約商店";
 }
 
 function esc(value) {

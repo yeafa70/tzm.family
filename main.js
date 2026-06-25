@@ -45,7 +45,9 @@
         category: target.dataset.gaCategory,
         cta_text: target.dataset.gaCta || text,
         link_url: target.href || href,
-        section: target.dataset.gaSection
+        section: target.dataset.gaSection,
+        shop_name: target.dataset.gaShopName,
+        shop_id: target.dataset.gaShopId
       });
     }
     const linkType = classifyLink(href);
