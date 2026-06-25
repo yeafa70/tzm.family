@@ -314,6 +314,62 @@ h1,h2,h3,p{margin-top:0}
 .list-item{display:flex;gap:10px;color:var(--text);font-weight:800}
 .list-item span:first-child{color:var(--clay-dark);font-weight:900}
 
+.card-tutorial-section{padding-top:18px}
+.tutorial-card{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(260px,.75fr);
+  gap:20px;
+  align-items:stretch;
+  background:#fff;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  padding:24px;
+}
+.tutorial-copy h2{
+  margin:12px 0 10px;
+  font-size:clamp(28px,4vw,38px);
+  line-height:1.15;
+  letter-spacing:-.04em;
+}
+.tutorial-copy p{color:var(--text)}
+.tutorial-note{
+  margin:12px 0 0;
+  color:var(--muted) !important;
+  font-size:14px;
+}
+.tutorial-preview{
+  min-height:210px;
+  border-radius:8px;
+  background:
+    radial-gradient(circle at 28% 24%, rgba(198,136,115,.42), transparent 30%),
+    linear-gradient(135deg,var(--purple),var(--purple-dark));
+  color:#fff;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:10px;
+  overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+}
+.tutorial-play{
+  width:62px;
+  height:62px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:26px;
+  line-height:1;
+  padding-left:3px;
+}
+.tutorial-label{
+  font-size:14px;
+  font-weight:900;
+  color:rgba(255,255,255,.86);
+}
+
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .step-no{
   width:34px;
@@ -546,7 +602,7 @@ textarea,
   .hero{grid-template-columns:1fr}
   .hero-copy{padding:32px 24px}
   .hero-media{min-height:250px}
-  .page-hero-card,.grid-3,.grid-2,.news-grid,.footer-grid{grid-template-columns:1fr}
+  .page-hero-card,.grid-3,.grid-2,.news-grid,.footer-grid,.tutorial-card{grid-template-columns:1fr}
   .steps{grid-template-columns:repeat(2,1fr)}
   .shop-grid,.featured-grid{grid-template-columns:repeat(2,1fr)}
   .category-grid{grid-template-columns:repeat(3,1fr)}
@@ -583,5 +639,7 @@ textarea,
   .featured-grid{grid-template-columns:repeat(2,1fr)}
   .service-grid{grid-template-columns:1fr}
   .shop-grid{grid-template-columns:1fr}
+  .tutorial-card{padding:18px}
+  .tutorial-preview{min-height:160px}
   .filters,.steps{grid-template-columns:1fr}
 }
