@@ -413,6 +413,57 @@ h1,h2,h3,p{margin-top:0}
   stroke-linecap:round;
   stroke-linejoin:round;
 }
+.card-steps-grid{align-items:stretch}
+.step-card{
+  display:flex;
+  flex-direction:column;
+  min-height:220px;
+  padding:24px;
+}
+.step-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.step-card .step-number,
+.step-card .step-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 44px;
+}
+.step-card .step-number{
+  background:#F2EADF;
+  color:var(--purple);
+  font-weight:900;
+}
+.step-card .step-icon{
+  background:#EFE6F0;
+  color:var(--purple);
+}
+.step-card .step-icon svg{
+  width:22px;
+  height:22px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.step-card h3{
+  margin:0 0 12px;
+  color:var(--ink);
+}
+.step-card p{
+  margin:0;
+  color:#5F5364;
+  line-height:1.75;
+}
 .process-flow{margin-top:18px}
 .info-card{
   display:flex;
@@ -792,6 +843,7 @@ textarea,
 .shop-logo-box{border-radius:14px !important}
 .modal-logo-box,.feature-photo{border-radius:12px !important}
 .shop-actions .mini-btn{border-radius:12px !important}
+.step-card .step-number,.step-card .step-icon{border-radius:12px !important}
 
 @media (min-width:1100px){
   .shop-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
