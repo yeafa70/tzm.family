@@ -2,9 +2,12 @@
 (function(){
   const track = (eventName, params = {}) => {
     if (typeof window.gtag !== 'function') return;
+    const cleanParams = Object.fromEntries(
+      Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '')
+    );
     window.gtag('event', eventName, {
       page_path: window.location.pathname,
-      ...params
+      ...cleanParams
     });
   };
 
@@ -36,6 +39,15 @@
     if (!target) return;
     const href = target.getAttribute('href') || '';
     const text = (target.textContent || target.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+    const customEvent = target.dataset.gaEvent;
+    if (customEvent) {
+      track(customEvent, {
+        category: target.dataset.gaCategory,
+        cta_text: target.dataset.gaCta || text,
+        link_url: target.href || href,
+        section: target.dataset.gaSection
+      });
+    }
     const linkType = classifyLink(href);
     const eventName = linkType === 'line' ? 'line_click' : linkType === 'map' ? 'map_click' : 'site_click';
     track(eventName, {

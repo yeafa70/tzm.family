@@ -92,6 +92,20 @@ function normalizeArea(area) {
   return AREA_MAP.get(value) || "其他地區";
 }
 
+function resolveCategoryParam(category) {
+  const value = String(category || "").trim();
+  if (!value) return "";
+  if (CATEGORY_ORDER.includes(value) || LEGACY_CATEGORY_MAP.has(value)) return normalizeCategory(value);
+  return "";
+}
+
+function resolveAreaParam(area) {
+  const value = String(area || "").trim();
+  if (!value) return "";
+  if (AREA_ORDER.includes(value) || AREA_MAP.has(value)) return normalizeArea(value);
+  return "";
+}
+
 function normalizeImages(images) {
   if (Array.isArray(images)) return images.map(value => String(value).trim()).filter(Boolean);
   if (typeof images === "string") return images.split(/[,，、\n\r]+/).map(value => value.trim()).filter(Boolean);
@@ -151,7 +165,10 @@ async function loadShops() {
     console.warn("使用備用店家資料：", error);
   }
 
-  categoryOptions = buildOptions(data?.categories, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
+  categoryOptions = sortByPreferredOrder([
+    ...CATEGORY_ORDER,
+    ...buildOptions(data?.categories, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER)
+  ], CATEGORY_ORDER);
   areaOptions = buildOptions(data?.areas, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
 
   if ($("shopGrid")) initShopDirectory();
@@ -192,8 +209,8 @@ function initShopDirectory() {
   const query = new URLSearchParams(window.location.search);
   const rawQueryCategory = query.get("category") || "";
   const rawQueryArea = query.get("area") || "";
-  const queryCategory = rawQueryCategory ? normalizeCategory(rawQueryCategory) : "";
-  const queryArea = rawQueryArea ? normalizeArea(rawQueryArea) : "";
+  const queryCategory = resolveCategoryParam(rawQueryCategory);
+  const queryArea = resolveAreaParam(rawQueryArea);
   const categories = categoryOptions.length ? categoryOptions : buildOptions(null, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
   const areas = areaOptions.length ? areaOptions : buildOptions(null, shops.map(shop => shop.area), normalizeArea, AREA_ORDER);
 
@@ -211,27 +228,52 @@ function initShopDirectory() {
       categorySelect.value = chip.dataset.category || "";
       document.querySelectorAll(".chip").forEach(item => item.classList.remove("active"));
       chip.classList.add("active");
+      updateDirectoryUrl();
       renderShops();
     });
   });
 
-  searchInput.addEventListener("input", renderShops);
+  searchInput.addEventListener("input", () => {
+    updateDirectoryUrl();
+    renderShops();
+  });
   categorySelect.addEventListener("change", () => {
     document.querySelectorAll(".chip").forEach(chip => {
       chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
     });
+    updateDirectoryUrl();
     renderShops();
   });
-  areaSelect.addEventListener("change", renderShops);
+  areaSelect.addEventListener("change", () => {
+    updateDirectoryUrl();
+    renderShops();
+  });
   resetBtn.addEventListener("click", () => {
     searchInput.value = "";
     categorySelect.value = "";
     areaSelect.value = "";
     document.querySelectorAll(".chip").forEach(chip => chip.classList.toggle("active", !chip.dataset.category));
+    updateDirectoryUrl();
     renderShops();
   });
 
+  updateDirectoryUrl();
   renderShops();
+}
+
+function updateDirectoryUrl() {
+  if (!window.history || typeof window.history.replaceState !== "function") return;
+  const params = new URLSearchParams();
+  const keyword = ($("searchInput")?.value || "").trim();
+  const category = $("categorySelect")?.value || "";
+  const area = $("areaSelect")?.value || "";
+
+  if (keyword) params.set("q", keyword);
+  if (category) params.set("category", category);
+  if (area) params.set("area", area);
+
+  const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}${window.location.hash || ""}`;
+  window.history.replaceState({}, "", nextUrl);
 }
 
 function getFilteredShops() {

@@ -184,7 +184,7 @@ h1,h2,h3,p{margin-top:0}
 /* Categories like reference image */
 .category-grid{
   display:grid;
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns:repeat(5,1fr);
   gap:12px;
   margin-top:20px;
 }
@@ -192,7 +192,8 @@ h1,h2,h3,p{margin-top:0}
   background:#FBFAF7;
   border:1px solid rgba(67,49,71,.08);
   border-radius:8px;
-  min-height:88px;
+  min-height:84px;
+  padding:14px 10px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -212,6 +213,33 @@ h1,h2,h3,p{margin-top:0}
   border-radius:0;
 }
 .category-card span{font-size:13px;font-weight:800;color:var(--text)}
+
+.merchant-cta-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+.merchant-cta-card{
+  background:#fff;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:8px;
+  box-shadow:var(--shadow-sm);
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+.merchant-cta-card h2{
+  margin-bottom:0;
+}
+.merchant-cta-card p{
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.merchant-cta-card .btn{
+  margin-top:auto;
+}
 
 /* Featured stores */
 .featured-grid{
@@ -781,6 +809,7 @@ textarea,
   .steps,.process-grid{grid-template-columns:repeat(2,1fr)}
   .shop-grid,.featured-grid{grid-template-columns:repeat(2,1fr)}
   .category-grid{grid-template-columns:repeat(3,1fr)}
+  .merchant-cta-grid{grid-template-columns:1fr}
   .filters{grid-template-columns:1fr 1fr}
   .nav-links{
     display:none;
@@ -811,7 +840,7 @@ textarea,
   .hero-actions{display:grid}
   .btn{width:100%}
   .section{padding:32px 0}
-  .category-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .category-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .featured-grid{grid-template-columns:repeat(2,1fr)}
   .service-grid{grid-template-columns:1fr}
   .shop-grid{grid-template-columns:1fr}
