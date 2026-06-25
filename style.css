@@ -310,6 +310,57 @@ h1,h2,h3,p{margin-top:0}
   margin-bottom:14px;
 }
 .card-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card-steps-grid{align-items:stretch}
+.step-card{
+  display:flex;
+  flex-direction:column;
+  min-height:220px;
+  padding:24px;
+}
+.step-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.step-number,
+.step-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 44px;
+}
+.step-number{
+  background:#F2EADF;
+  color:var(--purple);
+  font-weight:900;
+}
+.step-icon{
+  background:#EFE6F0;
+  color:var(--purple);
+}
+.step-icon svg{
+  width:22px;
+  height:22px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.step-card h3{
+  margin:0 0 12px;
+  color:var(--ink);
+}
+.step-card p{
+  margin:0;
+  color:#5F5364;
+  line-height:1.75;
+}
 .list{display:grid;gap:10px;margin-top:12px}
 .list-item{display:flex;gap:10px;color:var(--text);font-weight:800}
 .list-item span:first-child{color:var(--clay-dark);font-weight:900}
