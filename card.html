@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>福利卡申請｜頭竹苗福利社</title>
-<meta name="description" content="免費申請頭竹苗福利社數位福利卡，查詢頭份、竹南、苗栗在地特約商優惠。">
+<title>福利卡領取｜頭竹苗福利社</title>
+<meta name="description" content="免費領取頭竹苗福利社數位福利卡，查詢頭份、竹南、苗栗在地特約商優惠。">
 <meta name="theme-color" content="#4B2E4F">
 <link rel="stylesheet" href="style.css?v=site-upgrade-20260625">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YNZ2NS7L2"></script>
@@ -14,6 +14,18 @@
   gtag('js', new Date());
   gtag('config', 'G-5YNZ2NS7L2');
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "頭竹苗福利卡是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "頭竹苗福利卡是頭份、竹南、苗栗在地優惠平台提供的數位福利卡，方便民眾查詢合作店家與在地優惠。"}},
+    {"@type": "Question", "name": "如何領取數位福利卡？", "acceptedAnswer": {"@type": "Answer", "text": "可透過官方 LINE 進入頭竹苗福利社，加入好友後查看數位福利卡與優惠店家資訊。"}},
+    {"@type": "Question", "name": "福利卡可以在哪些地區使用？", "acceptedAnswer": {"@type": "Answer", "text": "目前以頭份、竹南、苗栗生活圈合作店家為主，實際優惠內容請以優惠店家查詢頁公告為準。"}},
+    {"@type": "Question", "name": "使用前需要注意什麼？", "acceptedAnswer": {"@type": "Answer", "text": "建議消費前先確認店家營業時間與優惠條件；如遇臨時公休或營運調整，請以店家現場公告為準。"}}
+  ]
+}
+</script>
 </head>
 <body>
 <header class="site-header">
@@ -22,7 +34,7 @@
     <button class="menu-btn" id="menuBtn" type="button">選單</button>
     <nav class="nav-links" id="navLinks">
       <a href="card.html" class="active">福利卡</a><a href="shops.html">優惠店家</a><a href="merchant.html">特約商專區</a><a href="company.html">企業合作</a><a href="about.html">關於我們</a><a href="news.html">最新消息</a>
-      <a class="btn btn-primary" href="card.html">申請福利卡</a>
+      <a class="btn btn-primary" href="card.html">領取數位福利卡</a>
     </nav>
   </div>
 </header>
@@ -30,10 +42,10 @@
   <section class="page-hero">
     <div class="container page-hero-card">
       <div class="page-hero-copy">
-        <span class="eyebrow">免費申請</span>
+        <span class="eyebrow">免費領取</span>
         <h1>一機在手，優惠隨時有</h1>
         <p>加入頭竹苗福利社數位福利卡，方便查詢頭份、竹南、苗栗在地優惠與特約店家資訊。</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="https://lin.ee/OuiR6gV" target="_blank" rel="noopener">加入 LINE 領福利卡</a><a class="btn btn-outline" href="shops.html">先看優惠店家</a></div>
+        <div class="hero-actions"><a class="btn btn-primary" href="https://lin.ee/OuiR6gV" target="_blank" rel="noopener">加入 LINE 領取數位福利卡</a><a class="btn btn-outline" href="shops.html">先看優惠店家</a></div>
       </div>
       <div class="page-hero-side gradient-panel">
         <h2>福利卡可以做什麼</h2>
@@ -46,14 +58,37 @@
     </div>
   </section>
   <section class="section">
-    <div class="container grid-3">
-      <article class="card info-card"><div class="card-icon">1</div><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"/><path d="M8 10h8"/><path d="M8 13h5"/></svg></span><h3>加入 LINE</h3><p>透過官方 LINE 進入福利卡申請流程，留下基本資料即可完成。</p></article>
-      <article class="card info-card"><div class="card-icon">2</div><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h5"/></svg></span><h3>取得數位福利卡</h3><p>完成申請後即可使用數位福利卡，查詢適用店家與優惠內容。</p></article>
-      <article class="card info-card"><div class="card-icon">3</div><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5l-1 5Z"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/></svg></span><h3>到店使用優惠</h3><p>依本平台公告向合作店家出示福利卡；如遇臨時公休或營運調整，建議消費前先向店家確認。</p></article>
+    <div class="container grid-3 card-steps-grid">
+      <article class="card step-card">
+        <div class="step-card-head"><span class="step-number">1</span><span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"/><path d="M8 10h8"/><path d="M8 13h5"/></svg></span></div>
+        <h3>加入 LINE</h3>
+        <p>進入官方 LINE 並加好友，即可查看頭竹苗福利卡與在地優惠資訊。</p>
+      </article>
+      <article class="card step-card">
+        <div class="step-card-head"><span class="step-number">2</span><span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h5"/></svg></span></div>
+        <h3>取得數位福利卡</h3>
+        <p>完成加入後即可使用數位福利卡，查詢適用店家與優惠內容。</p>
+      </article>
+      <article class="card step-card">
+        <div class="step-card-head"><span class="step-number">3</span><span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5l-1 5Z"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/></svg></span></div>
+        <h3>到店使用優惠</h3>
+        <p>依本平台公告向合作店家出示福利卡；如遇臨時公休或營運調整，建議消費前先向店家確認。</p>
+      </article>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head center"><h2>常見問題</h2><p>整理頭竹苗福利卡領取與使用前最常見的問題。</p></div>
+      <div class="faq">
+        <details><summary>頭竹苗福利卡是什麼？</summary><p>頭竹苗福利卡是頭份、竹南、苗栗在地優惠平台提供的數位福利卡，方便民眾查詢合作店家與在地優惠。</p></details>
+        <details><summary>如何領取數位福利卡？</summary><p>可透過官方 LINE 進入頭竹苗福利社，加入好友後查看數位福利卡與優惠店家資訊。</p></details>
+        <details><summary>福利卡可以在哪些地區使用？</summary><p>目前以頭份、竹南、苗栗生活圈合作店家為主，實際優惠內容請以優惠店家查詢頁公告為準。</p></details>
+        <details><summary>使用前需要注意什麼？</summary><p>建議消費前先確認店家營業時間與優惠條件；如遇臨時公休或營運調整，請以店家現場公告為準。</p></details>
+      </div>
     </div>
   </section>
 </main>
-<footer class="footer"><div class="container footer-grid"><div><h3>頭竹苗福利社</h3><p>服務頭份、竹南、苗栗在地鄉親，串連優惠店家、數位福利卡與企業合作資源。</p><p>© <span id="year"></span> 頭竹苗福利社 All Rights Reserved.</p></div><div><h4>快速入口</h4><div class="footer-links"><a href="card.html">福利卡申請</a><a href="shops.html">優惠店家</a><a href="merchant.html">特約商專區</a><a href="company.html">企業合作</a></div></div><div><h4>官方連結</h4><div class="footer-links"><a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">Facebook 粉專</a><a href="https://lin.ee/OuiR6gV" target="_blank" rel="noopener">官方 LINE</a><a href="https://www.facebook.com/groups/tzcare" target="_blank" rel="noopener">FB 社團｜我是竹南人</a></div></div></div></footer>
+<footer class="footer"><div class="container footer-grid"><div><h3>頭竹苗福利社</h3><p>服務頭份、竹南、苗栗在地鄉親，串連優惠店家、數位福利卡與企業合作資源。</p><p>© <span id="year"></span> 頭竹苗福利社 All Rights Reserved.</p></div><div><h4>快速入口</h4><div class="footer-links"><a href="card.html">福利卡領取</a><a href="shops.html">優惠店家</a><a href="merchant.html">特約商專區</a><a href="company.html">企業合作</a></div></div><div><h4>官方連結</h4><div class="footer-links"><a href="https://buyhappy.work/B2CEo" target="_blank" rel="noopener">Facebook 粉專</a><a href="https://lin.ee/OuiR6gV" target="_blank" rel="noopener">官方 LINE</a><a href="https://www.facebook.com/groups/tzcare" target="_blank" rel="noopener">FB 社團｜我是竹南人</a></div></div></div></footer>
 <button class="backtop" type="button" data-backtop>上</button>
 <script src="main.js?v=ga4-line-20260625"></script>
 </body>
