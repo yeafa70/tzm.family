@@ -1,8 +1,10 @@
 const SHOP_CONFIG = {
-  dataUrl: "shops.json",
   lineCardUrl: "https://lin.ee/OuiR6gV",
   defaultLogo: "pics/logo/default-logo.svg"
 };
+
+const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
+const SHOPS_FALLBACK_URL = 'shops.json';
 
 const CATEGORY_ORDER = [
   "美食飲品",
@@ -161,7 +163,6 @@ function normalizeShop(row, index = 0) {
   const sort = Number(row.sort_order);
 
   return {
-    ...row,
     id: String(row.id || row.shop_id || row.name || `shop-${index + 1}`),
     name: row.name || row.shop_name || "未命名店家",
     category: normalizeCategory(row.category),
@@ -185,20 +186,79 @@ function normalizeShop(row, index = 0) {
   };
 }
 
+async function fetchWithTimeout(url, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status);
+    }
+
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function loadShopsData() {
+  let data = null;
+  let source = '';
+
+  try {
+    data = await fetchWithTimeout(SHOPS_API_URL, 8000);
+
+    if (!data || !Array.isArray(data.shops)) {
+      throw new Error('GAS API 回傳格式不正確');
+    }
+
+    source = 'gas_api';
+    console.log('已從 GAS API 載入店家資料', data);
+  } catch (apiError) {
+    console.warn('GAS API 載入失敗，改用 shops.json 備援：', apiError);
+
+    data = await fetchWithTimeout(SHOPS_FALLBACK_URL, 8000);
+
+    if (!data || !Array.isArray(data.shops)) {
+      throw new Error('shops.json 回傳格式不正確');
+    }
+
+    source = 'shops_json_fallback';
+    console.log('已從 shops.json 備援載入店家資料', data);
+  }
+
+  return {
+    shops: data.shops || [],
+    categories: data.categories || [],
+    areas: data.areas || [],
+    updated_at: data.updated_at || '',
+    source
+  };
+}
+
 async function loadShops() {
   let data = null;
   try {
-    const response = await fetch(SHOP_CONFIG.dataUrl, { cache: "no-store" });
-    if (!response.ok) throw new Error("shops.json load failed");
-    data = await response.json();
-    const source = Array.isArray(data) ? data : data.shops || [];
-    shops = source
+    data = await loadShopsData();
+    shops = data.shops
       .map(normalizeShop)
       .filter(shop => shop.is_active)
       .sort((a, b) => a.sort_order - b.sort_order || a.name.localeCompare(b.name, "zh-Hant"));
   } catch (error) {
-    shops = FALLBACK_SHOPS.map(normalizeShop);
-    console.warn("使用備用店家資料：", error);
+    shops = [];
+    categoryOptions = [];
+    areaOptions = [];
+    showShopLoadError(error);
+    return;
+  }
+
+  if (!shops.length) {
+    console.warn("店家資料目前為空。");
   }
 
   categoryOptions = sortByPreferredOrder([
@@ -209,6 +269,17 @@ async function loadShops() {
 
   if ($("shopGrid")) initShopDirectory();
   if ($("featuredShopGrid")) renderFeaturedShops();
+}
+
+function showShopLoadError(error) {
+  console.error("店家資料載入失敗：", error);
+  const grid = $("shopGrid");
+  const empty = $("emptyState");
+  if (grid) grid.innerHTML = "";
+  if (empty) {
+    empty.textContent = "目前無法載入店家資料，請稍後再試。";
+    empty.style.display = "block";
+  }
 }
 
 function optionName(option) {
