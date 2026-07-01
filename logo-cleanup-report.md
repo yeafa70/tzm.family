@@ -1,0 +1,197 @@
+﻿# 頭竹苗福利社 Logo 整理報告
+
+## 一、整理結果摘要
+- 店家資料筆數：69 家
+- 官網正式 TZM WebP 檔：66 個，包含預設圖 tzm0000.webp
+- 人工來源檔：66 個
+- 缺圖店家：4 家
+- 官網正式檔名維持原系統規則：pics/logo/tzm0001.webp、pics/logo/tzm0002.webp ...
+- 人工來源檔名使用可讀格式：logo_source/TZM001-店名.jpg/png/webp
+
+## 二、修改檔案與資料夾
+- 修改 shops.js：將缺圖 fallback 改為 pics/logo/tzm0000.webp，保留先讀 shops.json、背景讀 GAS API 的資料流程。
+- 新增/更新 pics/logo/tzm0000.webp：福利社預設 Logo。
+- 新增/整理 logo_source/：人工可讀來源檔。
+- 新增 missing-logo-report.txt：逐店 Logo 檢查表。
+- 新增 logo-organize-summary.json：機器可讀整理摘要。
+- 新增 _archive/：集中存放舊檔、測試檔與不再使用的檔案。
+
+## 三、缺圖店家
+- tzm0005｜沐寶髮浴｜pics/logo/tzm0005.webp｜缺圖，使用 pics/logo/tzm0000.webp
+- tzm0006｜世鼎國際事業有限公司｜pics/logo/tzm0006.webp｜缺圖，使用 pics/logo/tzm0000.webp
+- tzm0048｜Na’s Studio｜耳燭｜體雕｜頭療｜暖宮｜pics/logo/tzm0048.webp｜缺圖，使用 pics/logo/tzm0000.webp
+- tzm0067｜全植薆經典美容館｜pics/logo/tzm0067.webp｜缺圖，使用 pics/logo/tzm0000.webp
+
+## 四、會使用預設 Logo 的店家
+- tzm0005｜沐寶髮浴｜pics/logo/tzm0000.webp
+- tzm0006｜世鼎國際事業有限公司｜pics/logo/tzm0000.webp
+- tzm0048｜Na’s Studio｜耳燭｜體雕｜頭療｜暖宮｜pics/logo/tzm0000.webp
+- tzm0067｜全植薆經典美容館｜pics/logo/tzm0000.webp
+
+## 五、官網正式 Logo 檔
+- pics/logo/tzm0000.webp
+- pics/logo/tzm0001.webp
+- pics/logo/tzm0002.webp
+- pics/logo/tzm0003.webp
+- pics/logo/tzm0007.webp
+- pics/logo/tzm0008.webp
+- pics/logo/tzm0009.webp
+- pics/logo/tzm0010.webp
+- pics/logo/tzm0011.webp
+- pics/logo/tzm0012.webp
+- pics/logo/tzm0013.webp
+- pics/logo/tzm0014.webp
+- pics/logo/tzm0015.webp
+- pics/logo/tzm0016.webp
+- pics/logo/tzm0017.webp
+- pics/logo/tzm0018.webp
+- pics/logo/tzm0019.webp
+- pics/logo/tzm0020.webp
+- pics/logo/tzm0021.webp
+- pics/logo/tzm0022.webp
+- pics/logo/tzm0023.webp
+- pics/logo/tzm0024.webp
+- pics/logo/tzm0025.webp
+- pics/logo/tzm0026.webp
+- pics/logo/tzm0027.webp
+- pics/logo/tzm0028.webp
+- pics/logo/tzm0029.webp
+- pics/logo/tzm0030.webp
+- pics/logo/tzm0031.webp
+- pics/logo/tzm0032.webp
+- pics/logo/tzm0033.webp
+- pics/logo/tzm0034.webp
+- pics/logo/tzm0035.webp
+- pics/logo/tzm0037.webp
+- pics/logo/tzm0038.webp
+- pics/logo/tzm0039.webp
+- pics/logo/tzm0040.webp
+- pics/logo/tzm0041.webp
+- pics/logo/tzm0042.webp
+- pics/logo/tzm0044.webp
+- pics/logo/tzm0045.webp
+- pics/logo/tzm0046.webp
+- pics/logo/tzm0047.webp
+- pics/logo/tzm0049.webp
+- pics/logo/tzm0050.webp
+- pics/logo/tzm0051.webp
+- pics/logo/tzm0052.webp
+- pics/logo/tzm0053.webp
+- pics/logo/tzm0054.webp
+- pics/logo/tzm0055.webp
+- pics/logo/tzm0056.webp
+- pics/logo/tzm0057.webp
+- pics/logo/tzm0058.webp
+- pics/logo/tzm0059.webp
+- pics/logo/tzm0060.webp
+- pics/logo/tzm0061.webp
+- pics/logo/tzm0062.webp
+- pics/logo/tzm0063.webp
+- pics/logo/tzm0064.webp
+- pics/logo/tzm0065.webp
+- pics/logo/tzm0066.webp
+- pics/logo/tzm0068.webp
+- pics/logo/tzm0069.webp
+- pics/logo/tzm0070.webp
+- pics/logo/tzm0071.webp
+- pics/logo/tzm0072.webp
+
+## 六、人工來源檔
+- logo_source/TZM000-頭竹苗福利社預設Logo.png
+- logo_source/TZM001-享森活居家.jpg
+- logo_source/TZM002-買樂購.png
+- logo_source/TZM003-三峽角胖金牛角苗栗直營車.jpg
+- logo_source/TZM007-植饗烤物.jpg
+- logo_source/TZM008-丘森茶室.webp
+- logo_source/TZM009-老黃窗簾設計.室內裝修.軟裝規劃.jpg
+- logo_source/TZM010-嬰泳樂園頭份店.jpg
+- logo_source/TZM011-小畫家多元美術🎨.jpg
+- logo_source/TZM012-丘森茶室後龍店.jpg
+- logo_source/TZM013-奧斯汀國際美語 照南分校.webp
+- logo_source/TZM014-SYM龍辰機車行排氣定檢站.jpg
+- logo_source/TZM015-薩雅芳香療癒家.jpg
+- logo_source/TZM016-丘森茶室總店.webp
+- logo_source/TZM017-唯加美好霧眉。做臉。身體調整.jpg
+- logo_source/TZM018-親蜜家優床館.jpg
+- logo_source/TZM019-元爵味黃燜雞米飯竹南店.webp
+- logo_source/TZM020-愛學館個別指導-竹南校.jpg
+- logo_source/TZM021-儒瑜文教社.jpg
+- logo_source/TZM022-手機家族.jpg
+- logo_source/TZM023-十畝園味家傳冷凍冷藏美食.jpg
+- logo_source/TZM024-Boorr啵耳星球_掏耳專門店.jpg
+- logo_source/TZM025-湘蠟過癮美容工作室.jpg
+- logo_source/TZM026-環境博士科技有限公司.webp
+- logo_source/TZM027-Café32.jpg
+- logo_source/TZM028-建鋒車業.jpg
+- logo_source/TZM029-元爵味黃燜雞米飯頭份店.webp
+- logo_source/TZM030-AM hair salon.jpg
+- logo_source/TZM031-大瑋叔叔炸雞.jpg
+- logo_source/TZM032-貝拉小巴披薩 bella bus pizza.jpg
+- logo_source/TZM033-百麗兒美睫·刺青·髮際線紋綉.webp
+- logo_source/TZM034-信和吉元有線電視-大大寬頻-蕭鴻仁.jpg
+- logo_source/TZM035-城市漢堡-龍山店.webp
+- logo_source/TZM037-727 Studio.jpg
+- logo_source/TZM038-羊寶藝術教室.jpg
+- logo_source/TZM039-叡視眼鏡行.jpg
+- logo_source/TZM040-瑞宇科技.jpg
+- logo_source/TZM041-JJ手作美睫.jpg
+- logo_source/TZM042-南苑渡假莊園.jpg
+- logo_source/TZM044-吉泰乾洗衣店.jpg
+- logo_source/TZM045-六蒜包冰果室.jpg
+- logo_source/TZM046-采筑窗簾.png
+- logo_source/TZM047-伊集購.jpg
+- logo_source/TZM049-雲朵森林.jpg
+- logo_source/TZM050-極食玩樂桌遊店.webp
+- logo_source/TZM051-止癢2 ๑專業掏耳皮膚管理.webp
+- logo_source/TZM052-Chill time studio 艾比撥經.jpg
+- logo_source/TZM053-Amy美睫公主.jpg
+- logo_source/TZM054-Lady’s 服飾店.webp
+- logo_source/TZM055-REP Fitness 健身工作室.jpg
+- logo_source/TZM056-爪哇殿咖啡.jpg
+- logo_source/TZM057-天祿電動麻將桌.webp
+- logo_source/TZM058-女王姬韓式皮膚管理.webp
+- logo_source/TZM059-桃喜甜幸 正宗四川冰粉特色甜品.webp
+- logo_source/TZM060-蔡宗熹個人小貨車貨運行.webp
+- logo_source/TZM061-345._studio.jpg
+- logo_source/TZM062-玩巢公仔.jpg
+- logo_source/TZM063-和牛涮頭份尚順育樂世界店.jpg
+- logo_source/TZM064-福梅烤雞.jpg
+- logo_source/TZM065-怡廷居家護理所.jpg
+- logo_source/TZM066-磐龍科技實業有限公司.jpg
+- logo_source/TZM068-思緹美學體雕精油按摩身體去角質.webp
+- logo_source/TZM069-森森kids童裝工作室.png
+- logo_source/TZM070-啵耳星球掏耳專門店.jpg
+- logo_source/TZM071-吃餃嬌手工水餃🥟.jpg
+- logo_source/TZM072-畢茱爾醫美診所.jpg
+
+## 七、已移到 _archive/ 的檔案
+- _archive\old-deliverables\tzm-shops-api-fallback-update.zip
+- _archive\old-deliverables\tzm-shops-api-fallback-update\shops.js
+- _archive\old-deliverables\tzm-shops-static-first-api-background-update.zip
+- _archive\old-deliverables\tzm-shops-static-first-api-background-update\shops.js
+- _archive\old-logo-import\logo-manifest.json
+- _archive\old-logo-import\shop002.jpg
+- _archive\old-scripts\push_logo_cards_pr.ps1
+- _archive\old-scripts\push_shops_pr.ps1
+- _archive\old-tools\package.json
+- _archive\old-tools\package-lock.json
+- _archive\old-tools\tools\fetch-shop-logos.js
+- _archive\old-tools\tools\logo-import-report.csv
+- _archive\preview-tools\preview_server.js
+- _archive\preview-tools\preview_site.bat
+- _archive\unused-logo\tzm0004.webp
+- _archive\unused-logo\tzm0036.webp
+- _archive\unused-logo\tzm0043.webp
+
+## 八、專案結構摘要
+- 根目錄：官網 HTML / CSS / JS / JSON 主檔。
+- pics/logo/：官網正式讀取 Logo，使用 tzm0000.webp、tzm0001.webp 這類系統 id 檔名。
+- logo_source/：人工查看用來源圖，使用 TZM001-店名 這類檔名。
+- _archive/：舊壓縮包、舊腳本、舊工具、預覽工具與未使用 Logo 集中歸檔。
+
+## 九、限制確認
+- 未修改 index.html。
+- 未修改 shops.json 店家 id。
+- 未改 GAS logo 路徑邏輯。
+- 未修改網站視覺風格。
+- 未推送 GitHub。
