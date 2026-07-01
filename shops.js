@@ -4,6 +4,7 @@ const SHOP_CONFIG = {
 };
 
 const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
+// GitHub Pages 同一 repo / 同一目錄下的靜態 shops.json，作為快速顯示與備援資料。
 const SHOPS_FALLBACK_URL = 'shops.json';
 
 const CATEGORY_ORDER = [
@@ -110,6 +111,7 @@ const FALLBACK_SHOPS = [
 let shops = [];
 let categoryOptions = [];
 let areaOptions = [];
+let shopDirectoryInitialized = false;
 
 const $ = id => document.getElementById(id);
 
@@ -206,56 +208,39 @@ async function fetchWithTimeout(url, timeoutMs = 8000) {
   }
 }
 
-async function loadShopsData() {
-  let data = null;
-  let source = '';
-
-  try {
-    data = await fetchWithTimeout(SHOPS_API_URL, 8000);
-
-    if (!data || !Array.isArray(data.shops)) {
-      throw new Error('GAS API 回傳格式不正確');
-    }
-
-    source = 'gas_api';
-    console.log('已從 GAS API 載入店家資料', data);
-  } catch (apiError) {
-    console.warn('GAS API 載入失敗，改用 shops.json 備援：', apiError);
-
-    data = await fetchWithTimeout(SHOPS_FALLBACK_URL, 8000);
-
-    if (!data || !Array.isArray(data.shops)) {
-      throw new Error('shops.json 回傳格式不正確');
-    }
-
-    source = 'shops_json_fallback';
-    console.log('已從 shops.json 備援載入店家資料', data);
+async function loadStaticShopsJson() {
+  const data = await fetchWithTimeout(SHOPS_FALLBACK_URL, 5000);
+  if (!data || !Array.isArray(data.shops)) {
+    throw new Error('shops.json 回傳格式不正確');
   }
-
   return {
     shops: data.shops || [],
     categories: data.categories || [],
     areas: data.areas || [],
     updated_at: data.updated_at || '',
-    source
+    source: 'shops_json_static'
   };
 }
 
-async function loadShops() {
-  let data = null;
-  try {
-    data = await loadShopsData();
-    shops = data.shops
-      .map(normalizeShop)
-      .filter(shop => shop.is_active)
-      .sort((a, b) => a.sort_order - b.sort_order || a.name.localeCompare(b.name, "zh-Hant"));
-  } catch (error) {
-    shops = [];
-    categoryOptions = [];
-    areaOptions = [];
-    showShopLoadError(error);
-    return;
+async function loadGasApiData() {
+  const data = await fetchWithTimeout(SHOPS_API_URL, 8000);
+  if (!data || !Array.isArray(data.shops)) {
+    throw new Error('GAS API 回傳格式不正確');
   }
+  return {
+    shops: data.shops || [],
+    categories: data.categories || [],
+    areas: data.areas || [],
+    updated_at: data.updated_at || '',
+    source: 'gas_api_background'
+  };
+}
+
+function applyShopsData(data) {
+  shops = (data?.shops || [])
+    .map(normalizeShop)
+    .filter(shop => shop.is_active)
+    .sort((a, b) => a.sort_order - b.sort_order || a.name.localeCompare(b.name, "zh-Hant"));
 
   if (!shops.length) {
     console.warn("店家資料目前為空。");
@@ -267,8 +252,48 @@ async function loadShops() {
   ], CATEGORY_ORDER);
   areaOptions = collectAreasFromShops(shops, data?.areas);
 
-  if ($("shopGrid")) initShopDirectory();
+  if ($("shopGrid")) {
+    if (shopDirectoryInitialized) {
+      populateDirectoryFilters({ preserveCurrent: true });
+      updateDirectoryUrl();
+      renderShops();
+    } else {
+      initShopDirectory();
+    }
+  }
   if ($("featuredShopGrid")) renderFeaturedShops();
+}
+
+async function initShopsPage() {
+  try {
+    const staticData = await loadStaticShopsJson();
+    applyShopsData(staticData);
+    console.log('已先從 GitHub Pages shops.json 載入資料', staticData);
+
+    loadGasApiData()
+      .then(apiData => {
+        applyShopsData(apiData);
+        console.log('已用 GAS API 背景資料更新畫面', apiData);
+      })
+      .catch(apiError => {
+        console.warn('GAS API 背景更新失敗，不影響畫面：', apiError);
+      });
+  } catch (staticError) {
+    console.warn('shops.json 載入失敗，改嘗試 GAS API：', staticError);
+
+    try {
+      const apiData = await loadGasApiData();
+      applyShopsData(apiData);
+      console.log('shops.json 失敗，已改用 GAS API 載入資料', apiData);
+    } catch (apiError) {
+      console.error('shops.json 與 GAS API 都失敗：', apiError);
+      showShopLoadError();
+    }
+  }
+}
+
+async function loadShops() {
+  await initShopsPage();
 }
 
 function showShopLoadError(error) {
@@ -337,17 +362,16 @@ function shopGaParams(shop, params = {}) {
   };
 }
 
-function initShopDirectory() {
+function populateDirectoryFilters({ preserveCurrent = true } = {}) {
   const categorySelect = $("categorySelect");
   const areaSelect = $("areaSelect");
   const categoryChips = $("categoryChips");
   const searchInput = $("searchInput");
-  const resetBtn = $("resetBtn");
-  if (!categorySelect || !areaSelect || !categoryChips || !searchInput || !resetBtn) return;
+  if (!categorySelect || !areaSelect || !categoryChips || !searchInput) return;
 
   const query = new URLSearchParams(window.location.search);
-  const rawQueryCategory = query.get("category") || "";
-  const rawQueryArea = query.get("area") || "";
+  const rawQueryCategory = preserveCurrent ? categorySelect.value : query.get("category") || "";
+  const rawQueryArea = preserveCurrent ? areaSelect.value : query.get("area") || "";
   const queryCategory = resolveCategoryParam(rawQueryCategory);
   const queryArea = resolveAreaParam(rawQueryArea);
   const categories = categoryOptions.length ? categoryOptions : buildOptions(null, shops.map(shop => shop.category), normalizeCategory, CATEGORY_ORDER);
@@ -359,7 +383,7 @@ function initShopDirectory() {
 
   if (categories.includes(queryCategory)) categorySelect.value = queryCategory;
   if (areas.includes(queryArea)) areaSelect.value = queryArea;
-  searchInput.value = query.get("q") || "";
+  if (!preserveCurrent) searchInput.value = query.get("q") || "";
 
   document.querySelectorAll(".chip").forEach(chip => {
     chip.classList.toggle("active", (chip.dataset.category || "") === categorySelect.value);
@@ -375,6 +399,17 @@ function initShopDirectory() {
       renderShops();
     });
   });
+}
+
+function initShopDirectory() {
+  const categorySelect = $("categorySelect");
+  const areaSelect = $("areaSelect");
+  const categoryChips = $("categoryChips");
+  const searchInput = $("searchInput");
+  const resetBtn = $("resetBtn");
+  if (!categorySelect || !areaSelect || !categoryChips || !searchInput || !resetBtn) return;
+
+  populateDirectoryFilters({ preserveCurrent: false });
 
   searchInput.addEventListener("input", () => {
     updateDirectoryUrl();
@@ -408,6 +443,7 @@ function initShopDirectory() {
     renderShops();
   });
 
+  shopDirectoryInitialized = true;
   updateDirectoryUrl();
   renderShops();
 }
