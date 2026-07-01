@@ -1,6 +1,6 @@
 const SHOP_CONFIG = {
   lineCardUrl: "https://lin.ee/OuiR6gV",
-  defaultLogo: "pics/logo/tzm0000.webp"
+  defaultLogo: "pics/logo/tzm0000.png"
 };
 
 const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
@@ -648,7 +648,7 @@ function detailRow(label, value) {
 
 function logoPath(shop) {
   const logo = String(shop?.logo || "").trim();
-  if (!logo || logo === "pics/logo/default-logo.svg" || logo.endsWith("/default-logo.svg")) {
+  if (!logo || logo === "pics/logo/default-logo.svg" || logo.endsWith("/default-logo.svg") || logo === "pics/logo/tzm0000.webp" || logo.endsWith("/tzm0000.webp")) {
     return SHOP_CONFIG.defaultLogo;
   }
   return logo;
