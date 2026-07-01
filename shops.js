@@ -1,6 +1,6 @@
 const SHOP_CONFIG = {
   lineCardUrl: "https://lin.ee/OuiR6gV",
-  defaultLogo: "pics/logo/default-logo.svg"
+  defaultLogo: "pics/logo/tzm0000.webp"
 };
 
 const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
@@ -647,7 +647,11 @@ function detailRow(label, value) {
 }
 
 function logoPath(shop) {
-  return shop.logo || SHOP_CONFIG.defaultLogo;
+  const logo = String(shop?.logo || "").trim();
+  if (!logo || logo === "pics/logo/default-logo.svg" || logo.endsWith("/default-logo.svg")) {
+    return SHOP_CONFIG.defaultLogo;
+  }
+  return logo;
 }
 
 function logoImage(shop, className) {
