@@ -529,6 +529,7 @@ function renderShops() {
 
 function shopCard(shop) {
   const navigationUrl = shop.map_url || mapUrl(shop);
+  const useOfferUrl = redeemUrl(shop, "shop_card");
   return `<article class="shop-card">
     <div class="shop-logo-box">${logoImage(shop, "shop-logo")}</div>
     <div class="shop-content">
@@ -539,7 +540,8 @@ function shopCard(shop) {
       <div class="offer">${esc(shop.offer)}</div>
     </div>
     <div class="shop-actions">
-      <button class="mini-btn primary" type="button" aria-label="查看 ${attr(shop.name)} 詳情" onclick="openShop('${js(shop.id)}')">詳情</button>
+      <a class="mini-btn primary" href="${attr(useOfferUrl)}" aria-label="使用 ${attr(shop.name)} 優惠" onclick="trackRedeemStart('${js(shop.id)}', this.href, 'shop_card')">使用</a>
+      <button class="mini-btn" type="button" aria-label="查看 ${attr(shop.name)} 詳情" onclick="openShop('${js(shop.id)}')">詳情</button>
       <a class="mini-btn" href="${attr(navigationUrl)}" target="_blank" rel="noopener" aria-label="開啟 ${attr(shop.name)} Google 地圖導航" onclick="trackShopNavigation('${js(shop.id)}', this.href, 'shop_card')">導航</a>
       <button class="mini-btn" type="button" onclick="shareShop('${js(shop.id)}')">分享</button>
     </div>
@@ -567,8 +569,10 @@ function openShop(id) {
 
   $("modalTitle").textContent = shop.name;
   $("modalMeta").textContent = `${shop.area}｜${shop.category}`;
+  const useOfferUrl = redeemUrl(shop, "shop_modal");
 
   const links = [
+    `<a class="btn btn-primary" href="${attr(useOfferUrl)}" aria-label="使用 ${attr(shop.name)} 優惠" onclick="trackRedeemStart('${js(shop.id)}', this.href, 'shop_modal')">使用優惠</a>`,
     shop.map_url || shop.name || shop.address ? `<a class="btn btn-primary" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener" aria-label="開啟 ${attr(shop.name)} Google 地圖導航" onclick="trackShopNavigation('${js(shop.id)}', this.href, 'shop_modal')">Google 地圖</a>` : "",
     shop.website_url ? `<a class="btn btn-outline" href="${attr(shop.website_url)}" target="_blank" rel="noopener">官方網站</a>` : "",
     shop.facebook_url ? `<a class="btn btn-outline" href="${attr(shop.facebook_url)}" target="_blank" rel="noopener">Facebook</a>` : "",
@@ -626,6 +630,28 @@ function trackWelfareCardOpen(id, linkUrl) {
     cta_text: "開啟福利卡",
     link_url: linkUrl,
     section: "shop_modal"
+  }));
+}
+
+function redeemUrl(shop, section = "shop_card") {
+  const params = new URLSearchParams();
+  params.set("shop_id", shop.id);
+  params.set("source", currentPageSource());
+  params.set("from", section);
+  return `redeem.html?${params.toString()}`;
+}
+
+function currentPageSource() {
+  const source = new URLSearchParams(location.search).get("source");
+  return source || "shops";
+}
+
+function trackRedeemStart(id, linkUrl, section = "shop_card") {
+  const shop = shops.find(item => item.id === id);
+  trackGaEvent("redeem_start_click", shopGaParams(shop, {
+    cta_text: "使用優惠",
+    link_url: linkUrl,
+    section
   }));
 }
 

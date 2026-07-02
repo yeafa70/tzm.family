@@ -823,7 +823,7 @@ input:focus,select:focus,textarea:focus{
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
-.shop-actions{grid-area:actions;margin-top:2px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.shop-actions{grid-area:actions;margin-top:2px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .mini-btn{
   width:100%;
   min-width:0;
@@ -964,6 +964,104 @@ input:focus,select:focus,textarea:focus{
   border-radius:6px;
 }
 
+/* Redeem confirmation */
+.redeem-hero .page-hero-card{grid-template-columns:1.25fr .75fr}
+.redeem-panel{max-width:900px;margin:0 auto}
+.redeem-loading{
+  padding:36px 20px;
+  text-align:center;
+  color:var(--muted);
+  background:#fff;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:8px;
+  box-shadow:var(--shadow-sm);
+}
+.redeem-card{
+  background:#fff;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:24px;
+}
+.redeem-shop{
+  display:grid;
+  grid-template-columns:128px minmax(0,1fr);
+  gap:18px;
+  align-items:center;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(67,49,71,.10);
+}
+.redeem-logo{
+  width:128px;
+  height:128px;
+  padding:6px;
+  border-radius:16px;
+  border:1px solid rgba(31,21,33,.06);
+  background:#fff;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.redeem-logo img{width:100%;height:100%;object-fit:contain}
+.redeem-shop h2{margin:8px 0;font-size:clamp(26px,4vw,38px)}
+.redeem-shop p{margin:0;color:var(--muted);line-height:1.7}
+.redeem-offer{
+  margin:18px 0;
+  padding:18px;
+  border-left:5px solid var(--clay);
+  background:#FBF1ED;
+  color:var(--clay-dark);
+  border-radius:8px;
+}
+.redeem-offer span{display:block;margin-bottom:6px;color:#8C6C61;font-size:14px;font-weight:900}
+.redeem-offer strong{display:block;font-size:clamp(22px,4vw,32px);line-height:1.45}
+.redeem-meta{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 18px;
+}
+.redeem-meta div{
+  padding:12px;
+  background:#FAF7F2;
+  border:1px solid rgba(67,49,71,.08);
+  border-radius:8px;
+}
+.redeem-meta dt{color:var(--muted);font-size:13px;font-weight:900}
+.redeem-meta dd{margin:5px 0 0;color:var(--ink);font-weight:800;line-height:1.55}
+.redeem-confirm-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:16px;
+  background:#F4F7F1;
+  border:1px solid rgba(125,143,114,.18);
+  border-radius:8px;
+}
+.redeem-confirm-box p{
+  flex:1 1 260px;
+  margin:0;
+  color:#5C6954;
+  font-weight:800;
+  line-height:1.7;
+}
+.redeem-result{
+  display:grid;
+  gap:10px;
+  padding:18px;
+  background:#F4F7F1;
+  border:1px solid rgba(125,143,114,.22);
+  border-radius:8px;
+  color:#5C6954;
+}
+.redeem-result strong{color:var(--sage-dark);font-size:22px}
+.redeem-result span{font-weight:800}
+.redeem-result .btn{width:max-content}
+.redeem-note{margin:14px 0 0;color:var(--muted);line-height:1.7;font-size:14px}
+.redeem-empty{display:grid;gap:14px}
+
 /* Hard guard: no pill UI */
 .btn,
 .nav-links a,
@@ -1070,10 +1168,17 @@ textarea,
   .tag{font-size:11px;padding:2px 6px}
   .offer{padding:8px;font-size:13px;line-height:1.45;margin-bottom:0;-webkit-line-clamp:3}
   .shop-actions{gap:7px;margin-top:0}
+  .shop-card .shop-actions{grid-template-columns:repeat(2,1fr)}
   .shop-actions .mini-btn{min-height:40px;font-size:14px;padding:0 6px}
   .modal-shop-summary{grid-template-columns:118px minmax(0,1fr);gap:12px}
   .modal-logo-box{width:118px;height:118px;padding:5px}
   .modal-body .shop-actions{display:flex;gap:8px}
   .modal-body .shop-actions .btn{width:auto;min-width:104px;flex:0 1 auto;font-size:14px;padding:8px 12px}
   .filters,.steps,.process-grid{grid-template-columns:1fr}
+  .redeem-hero .page-hero-card{grid-template-columns:1fr}
+  .redeem-card{padding:16px}
+  .redeem-shop{grid-template-columns:92px minmax(0,1fr);gap:12px}
+  .redeem-logo{width:92px;height:92px;padding:5px}
+  .redeem-meta{grid-template-columns:1fr}
+  .redeem-confirm-box .btn{width:100%}
 }
