@@ -13,7 +13,8 @@ const redeemState = {
   clientId: "",
   confirmed: false,
   confirming: false,
-  trackedPageView: false
+  trackedPageView: false,
+  activeAttemptId: ""
 };
 
 document.addEventListener("DOMContentLoaded", initRedeemPage);
@@ -125,6 +126,7 @@ function renderRedeemPage(shop) {
         <p>請將此畫面出示給店家，由店家確認優惠適用後按下方按鈕。請勿由消費者自行點選確認。</p>
         <button class="btn btn-primary" type="button" id="confirmRedeemBtn">店家確認使用</button>
         <a class="btn btn-outline" href="shops.html">返回優惠店家</a>
+        <small class="redeem-submit-status" id="redeemSubmitStatus" hidden></small>
       </div>
       <div class="redeem-result" id="redeemResult" hidden></div>
       <p class="redeem-note">優惠內容與使用方式以店家現場公告為準。此確認紀錄將協助平台了解優惠使用成效與熱門店家。</p>
@@ -143,15 +145,18 @@ async function confirmRedeem() {
   if (!ok) return;
 
   const eventId = `redeem_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-  const button = document.getElementById("confirmRedeemBtn");
-  if (button) {
-    button.disabled = true;
-    button.textContent = "確認送出中...";
-    button.setAttribute("aria-busy", "true");
-  }
-
   redeemState.confirming = true;
-  redeemState.confirmed = true;
+  redeemState.activeAttemptId = eventId;
+  setSubmitState("sending", "確認送出中，請稍候...");
+
+  const recoveryTimer = window.setTimeout(() => {
+    if (redeemState.confirming && redeemState.activeAttemptId === eventId && !redeemState.confirmed) {
+      redeemState.confirming = false;
+      redeemState.activeAttemptId = "";
+      setSubmitState("ready", "送出時間較久，已恢復按鈕。可確認網路後再按一次。");
+    }
+  }, 15000);
+
   const payload = {
     event_id: eventId,
     event_type: "redeem_confirmed",
@@ -171,8 +176,31 @@ async function confirmRedeem() {
   saveLocalRedeem(payload);
   trackEvent("redeem_confirmed", redeemGaParams("confirmed", { event_id: eventId }));
   await sendRedeemLog(payload);
+  window.clearTimeout(recoveryTimer);
+  if (redeemState.activeAttemptId !== eventId) return;
+  redeemState.confirmed = true;
   redeemState.confirming = false;
+  redeemState.activeAttemptId = "";
   showRedeemSuccess(payload);
+}
+
+function setSubmitState(state, message = "") {
+  const button = document.getElementById("confirmRedeemBtn");
+  const status = document.getElementById("redeemSubmitStatus");
+
+  if (button) {
+    const isSending = state === "sending";
+    button.disabled = isSending;
+    button.textContent = isSending ? "送出中，請稍候" : "店家確認使用";
+    button.setAttribute("aria-busy", isSending ? "true" : "false");
+    button.classList.toggle("is-sending", isSending);
+  }
+
+  if (status) {
+    status.hidden = !message;
+    status.textContent = message;
+    status.classList.toggle("is-warning", state === "ready" && Boolean(message));
+  }
 }
 
 async function sendRedeemLog(payload) {

@@ -1047,10 +1047,32 @@ input:focus,select:focus,textarea:focus{
   font-weight:800;
   line-height:1.7;
 }
+.redeem-confirm-box[hidden],
+.redeem-result[hidden]{
+  display:none !important;
+}
 .redeem-confirm-box .btn[disabled]{
   cursor:wait;
-  opacity:.72;
+  opacity:1;
   transform:none;
+  background:#B7B2A7;
+  border-color:#B7B2A7;
+  color:#fff;
+  box-shadow:none;
+}
+.redeem-confirm-box .btn.is-sending{
+  background:#B7B2A7;
+  border-color:#B7B2A7;
+}
+.redeem-submit-status{
+  flex:1 1 100%;
+  margin-top:2px;
+  color:var(--sage-dark);
+  font-weight:800;
+  line-height:1.6;
+}
+.redeem-submit-status.is-warning{
+  color:var(--clay-dark);
 }
 .redeem-result{
   display:grid;
