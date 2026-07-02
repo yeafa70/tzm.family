@@ -12,6 +12,7 @@ const redeemState = {
   from: "",
   clientId: "",
   confirmed: false,
+  confirming: false,
   trackedPageView: false
 };
 
@@ -121,7 +122,7 @@ function renderRedeemPage(shop) {
         <div><dt>確認時間</dt><dd>${esc(nowText)}</dd></div>
       </dl>
       <div class="redeem-confirm-box" id="redeemConfirmBox">
-        <p>請將此畫面出示給店家，由店家確認優惠適用後按下方按鈕。</p>
+        <p>請將此畫面出示給店家，由店家確認優惠適用後按下方按鈕。請勿由消費者自行點選確認。</p>
         <button class="btn btn-primary" type="button" id="confirmRedeemBtn">店家確認使用</button>
         <a class="btn btn-outline" href="shops.html">返回優惠店家</a>
       </div>
@@ -136,10 +137,20 @@ function renderRedeemPage(shop) {
 async function confirmRedeem() {
   const shop = redeemState.shop;
   if (!shop) return;
+  if (redeemState.confirmed || redeemState.confirming) return;
+
   const ok = window.confirm("請確認此按鈕由店家或店員操作。是否完成本次優惠使用確認？");
   if (!ok) return;
 
   const eventId = `redeem_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  const button = document.getElementById("confirmRedeemBtn");
+  if (button) {
+    button.disabled = true;
+    button.textContent = "確認送出中...";
+    button.setAttribute("aria-busy", "true");
+  }
+
+  redeemState.confirming = true;
   redeemState.confirmed = true;
   const payload = {
     event_id: eventId,
@@ -160,6 +171,7 @@ async function confirmRedeem() {
   saveLocalRedeem(payload);
   trackEvent("redeem_confirmed", redeemGaParams("confirmed", { event_id: eventId }));
   await sendRedeemLog(payload);
+  redeemState.confirming = false;
   showRedeemSuccess(payload);
 }
 

@@ -1047,6 +1047,11 @@ input:focus,select:focus,textarea:focus{
   font-weight:800;
   line-height:1.7;
 }
+.redeem-confirm-box .btn[disabled]{
+  cursor:wait;
+  opacity:.72;
+  transform:none;
+}
 .redeem-result{
   display:grid;
   gap:10px;
