@@ -98,6 +98,8 @@ h1,h2,h3,p{margin-top:0}
 .btn-soft:hover{background:#FFF7F3}
 .btn-outline{background:transparent;color:var(--purple);border-color:rgba(75,46,79,.18)}
 .btn-line{background:#06C755;color:#fff}
+.btn-redeem{background:#06C755;color:#fff;box-shadow:0 8px 18px rgba(6,199,85,.20)}
+.btn-redeem:hover{background:#05B84F}
 
 /* Home hero */
 .page-shell{padding:20px 0 0}

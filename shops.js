@@ -572,13 +572,12 @@ function openShop(id) {
   const useOfferUrl = redeemUrl(shop, "shop_modal");
 
   const links = [
-    `<a class="btn btn-primary" href="${attr(useOfferUrl)}" aria-label="使用 ${attr(shop.name)} 優惠" onclick="trackRedeemStart('${js(shop.id)}', this.href, 'shop_modal')">使用優惠</a>`,
+    `<a class="btn btn-redeem" href="${attr(useOfferUrl)}" aria-label="使用 ${attr(shop.name)} 優惠" onclick="trackRedeemStart('${js(shop.id)}', this.href, 'shop_modal')">使用優惠</a>`,
     shop.map_url || shop.name || shop.address ? `<a class="btn btn-primary" href="${attr(shop.map_url || mapUrl(shop))}" target="_blank" rel="noopener" aria-label="開啟 ${attr(shop.name)} Google 地圖導航" onclick="trackShopNavigation('${js(shop.id)}', this.href, 'shop_modal')">Google 地圖</a>` : "",
     shop.website_url ? `<a class="btn btn-outline" href="${attr(shop.website_url)}" target="_blank" rel="noopener">官方網站</a>` : "",
     shop.facebook_url ? `<a class="btn btn-outline" href="${attr(shop.facebook_url)}" target="_blank" rel="noopener">Facebook</a>` : "",
     shop.instagram_url ? `<a class="btn btn-outline" href="${attr(shop.instagram_url)}" target="_blank" rel="noopener">Instagram</a>` : "",
-    shop.line_url ? `<a class="btn btn-line" href="${attr(shop.line_url)}" target="_blank" rel="noopener">店家 LINE</a>` : "",
-    `<a class="btn btn-line" href="${SHOP_CONFIG.lineCardUrl}" target="_blank" rel="noopener" aria-label="開啟頭竹苗福利卡" onclick="trackWelfareCardOpen('${js(shop.id)}', this.href)">開啟福利卡</a>`
+    shop.line_url ? `<a class="btn btn-line" href="${attr(shop.line_url)}" target="_blank" rel="noopener">店家 LINE</a>` : ""
   ].join("");
 
   $("modalBody").innerHTML = `<div class="modal-shop-summary">
@@ -622,15 +621,6 @@ async function shareShop(id) {
     await navigator.clipboard.writeText(`${text}\n${url}`);
     alert("已複製店家資訊");
   }
-}
-
-function trackWelfareCardOpen(id, linkUrl) {
-  const shop = shops.find(item => item.id === id);
-  trackGaEvent("welfare_card_open_click", shopGaParams(shop, {
-    cta_text: "開啟福利卡",
-    link_url: linkUrl,
-    section: "shop_modal"
-  }));
 }
 
 function redeemUrl(shop, section = "shop_card") {
