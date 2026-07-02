@@ -116,12 +116,7 @@ function renderRedeemPage(shop) {
         <span>本次使用優惠</span>
         <strong>${esc(shop.offer)}</strong>
       </div>
-      <dl class="redeem-meta">
-        ${shop.address ? `<div><dt>地址</dt><dd>${esc(shop.address)}</dd></div>` : ""}
-        ${shop.phone ? `<div><dt>電話</dt><dd>${esc(shop.phone)}</dd></div>` : ""}
-        ${shop.business_hours ? `<div><dt>營業時間</dt><dd>${esc(shop.business_hours)}</dd></div>` : ""}
-        <div><dt>確認時間</dt><dd>${esc(nowText)}</dd></div>
-      </dl>
+      <div class="redeem-time">確認時間：${esc(nowText)}</div>
       <div class="redeem-confirm-box" id="redeemConfirmBox">
         <p>請將此畫面出示給店家，由店家確認優惠適用後按下方按鈕。請勿由消費者自行點選確認。</p>
         <button class="btn btn-primary" type="button" id="confirmRedeemBtn">店家確認使用</button>

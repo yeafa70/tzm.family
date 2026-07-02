@@ -1016,20 +1016,12 @@ input:focus,select:focus,textarea:focus{
 }
 .redeem-offer span{display:block;margin-bottom:6px;color:#8C6C61;font-size:14px;font-weight:900}
 .redeem-offer strong{display:block;font-size:clamp(22px,4vw,32px);line-height:1.45}
-.redeem-meta{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin:0 0 18px;
+.redeem-time{
+  margin:-4px 0 14px;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:800;
 }
-.redeem-meta div{
-  padding:12px;
-  background:#FAF7F2;
-  border:1px solid rgba(67,49,71,.08);
-  border-radius:8px;
-}
-.redeem-meta dt{color:var(--muted);font-size:13px;font-weight:900}
-.redeem-meta dd{margin:5px 0 0;color:var(--ink);font-weight:800;line-height:1.55}
 .redeem-confirm-box{
   display:flex;
   align-items:center;
@@ -1206,6 +1198,5 @@ textarea,
   .redeem-card{padding:16px}
   .redeem-shop{grid-template-columns:92px minmax(0,1fr);gap:12px}
   .redeem-logo{width:92px;height:92px;padding:5px}
-  .redeem-meta{grid-template-columns:1fr}
   .redeem-confirm-box .btn{width:100%}
 }
