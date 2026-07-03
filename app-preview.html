@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手機版模擬｜頭竹苗福利社</title>
+<meta name="description" content="頭竹苗福利社手機 App-like 入口頁模擬，用於預覽福利卡、優惠店家與在地分類的手機體驗。">
+<meta name="theme-color" content="#4B2E4F">
+<style>
+:root{
+  --purple:#4B2E4F;
+  --purple-dark:#38213D;
+  --purple-soft:#F2E8F4;
+  --sage:#7D8F72;
+  --sage-soft:#EEF3EA;
+  --clay:#C68873;
+  --pink:#D96A92;
+  --bg:#F8F1F4;
+  --surface:#FFFFFF;
+  --ink:#241F26;
+  --text:#5C5360;
+  --muted:#8A818D;
+  --line:rgba(75,46,79,.12);
+  --shadow:0 18px 42px rgba(75,46,79,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(217,106,146,.18), transparent 32%),
+    radial-gradient(circle at 90% 0%, rgba(125,143,114,.18), transparent 34%),
+    linear-gradient(145deg,#FFF9F7 0%,#F8EDF4 54%,#EFE7F4 100%);
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit}
+.preview-page{
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:minmax(280px,430px) minmax(320px,520px);
+  align-items:center;
+  justify-content:center;
+  gap:44px;
+  padding:36px 24px;
+}
+.preview-copy{
+  max-width:520px;
+}
+.preview-copy .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:10px;
+  color:var(--purple);
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(75,46,79,.12);
+  font-weight:900;
+}
+.preview-copy h1{
+  margin:18px 0 14px;
+  color:var(--purple-dark);
+  font-size:clamp(34px,5vw,64px);
+  line-height:1.05;
+  letter-spacing:-.04em;
+}
+.preview-copy p{
+  margin:0 0 18px;
+  color:var(--text);
+  font-size:18px;
+  line-height:1.8;
+  font-weight:700;
+}
+.preview-points{
+  display:grid;
+  gap:10px;
+  margin-top:24px;
+}
+.preview-points span{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--purple);
+  font-weight:900;
+}
+.preview-points i{
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--pink);
+  color:#fff;
+  font-style:normal;
+  font-size:14px;
+}
+.phone-shell{
+  width:min(100%,390px);
+  margin:auto;
+  padding:10px;
+  border-radius:38px;
+  background:#19131B;
+  box-shadow:0 28px 70px rgba(36,31,38,.28);
+}
+.phone-screen{
+  position:relative;
+  min-height:780px;
+  max-height:780px;
+  overflow:auto;
+  border-radius:30px;
+  background:linear-gradient(180deg,#FFF9F5 0%,#F7EDF4 52%,#F3EEE7 100%);
+  scrollbar-width:none;
+}
+.phone-screen::-webkit-scrollbar{display:none}
+.app-status{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 18px 0;
+  background:linear-gradient(180deg,rgba(255,249,245,.96),rgba(255,249,245,.72));
+  color:#151018;
+  font-size:12px;
+  font-weight:900;
+}
+.status-icons{letter-spacing:1px}
+.app-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px 10px;
+}
+.app-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.app-logo{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--purple),#7A5C86);
+  color:#fff;
+  font-size:19px;
+  font-weight:950;
+  box-shadow:0 10px 20px rgba(75,46,79,.22);
+}
+.app-brand strong{display:block;font-size:17px;line-height:1.1;color:var(--purple-dark)}
+.app-brand span{display:block;font-size:12px;color:var(--muted);font-weight:800}
+.bell{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:12px;
+  background:#fff;
+  color:var(--purple);
+  box-shadow:0 8px 20px rgba(75,46,79,.10);
+}
+.welfare-card{
+  position:relative;
+  margin:8px 18px 18px;
+  min-height:190px;
+  padding:18px;
+  overflow:hidden;
+  border-radius:22px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(255,255,255,.22),transparent 26%),
+    linear-gradient(135deg,#4B2E4F 0%,#765184 50%,#D96A92 100%);
+  box-shadow:var(--shadow);
+}
+.welfare-card::after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  bottom:-38px;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.card-label{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.welfare-card h2{
+  position:relative;
+  z-index:1;
+  margin:22px 0 6px;
+  font-size:28px;
+  line-height:1.15;
+}
+.welfare-card p{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:rgba(255,255,255,.86);
+  font-size:14px;
+  font-weight:800;
+}
+.card-actions{
+  position:relative;
+  z-index:1;
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+.card-actions a{
+  flex:1;
+  display:grid;
+  place-items:center;
+  min-height:42px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:950;
+}
+.card-actions .primary{background:#fff;color:var(--purple)}
+.card-actions .ghost{border:1px solid rgba(255,255,255,.32);color:#fff}
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:0 18px;
+}
+.quick-item{
+  min-height:88px;
+  display:grid;
+  place-items:center;
+  gap:6px;
+  padding:12px 6px;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(75,46,79,.08);
+  box-shadow:0 8px 18px rgba(75,46,79,.07);
+  color:var(--purple);
+  font-size:12px;
+  font-weight:950;
+}
+.quick-item svg{
+  width:28px;
+  height:28px;
+  stroke:currentColor;
+  stroke-width:1.9;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.quick-item:nth-child(2n){color:var(--pink);background:#FFF4F7}
+.quick-item:nth-child(3n){color:var(--sage-dark);background:#F3F7EF}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  padding:22px 18px 10px;
+}
+.section-head h3{margin:0;color:var(--purple-dark);font-size:18px}
+.section-head a{color:var(--muted);font-size:12px;font-weight:900}
+.deal-scroll{
+  display:flex;
+  gap:12px;
+  overflow:auto;
+  padding:0 18px 8px;
+  scrollbar-width:none;
+}
+.deal-scroll::-webkit-scrollbar{display:none}
+.deal-card{
+  flex:0 0 152px;
+  overflow:hidden;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid rgba(75,46,79,.08);
+  box-shadow:0 8px 20px rgba(75,46,79,.08);
+}
+.deal-img{
+  height:98px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#F5EAF3,#FFF9F2);
+}
+.deal-img img{
+  width:68px;
+  height:68px;
+  object-fit:contain;
+  border-radius:14px;
+}
+.deal-card div:last-child{padding:10px}
+.deal-card strong{display:block;font-size:14px;line-height:1.35;color:var(--ink)}
+.deal-card span{display:block;margin-top:5px;color:var(--clay-dark);font-size:12px;font-weight:900}
+.coupon-list{
+  display:grid;
+  gap:10px;
+  padding:0 18px 96px;
+}
+.coupon{
+  display:grid;
+  grid-template-columns:54px 1fr;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.84);
+  border:1px solid rgba(75,46,79,.08);
+  box-shadow:0 8px 20px rgba(75,46,79,.07);
+}
+.coupon-icon{
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:var(--purple-soft);
+  color:var(--purple);
+}
+.coupon-icon svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.coupon strong{display:block;font-size:15px}
+.coupon span{display:block;margin-top:3px;color:var(--muted);font-size:12px;font-weight:800}
+.bottom-nav{
+  position:sticky;
+  bottom:0;
+  z-index:20;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:3px;
+  padding:8px 12px 12px;
+  background:rgba(255,255,255,.92);
+  border-top:1px solid rgba(75,46,79,.08);
+  backdrop-filter:blur(14px);
+}
+.bottom-nav a{
+  display:grid;
+  place-items:center;
+  gap:3px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+}
+.bottom-nav svg{
+  width:23px;
+  height:23px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.bottom-nav a.active{color:var(--purple)}
+@media (max-width:860px){
+  body{background:#FFF9F5}
+  .preview-page{display:block;min-height:100svh;padding:0}
+  .preview-copy{display:none}
+  .phone-shell{width:100%;min-height:100svh;padding:0;border-radius:0;background:transparent;box-shadow:none}
+  .phone-screen{min-height:100svh;max-height:none;border-radius:0}
+}
+</style>
+</head>
+<body>
+<main class="preview-page">
+  <section class="preview-copy">
+    <span class="tag">手機入口模擬</span>
+    <h1>像 App 一樣使用福利卡</h1>
+    <p>這不是正式 App，而是手機版網頁的視覺模擬。未來可放到 LINE 圖文選單，讓民眾用起來更像一個福利卡入口。</p>
+    <div class="preview-points">
+      <span><i>✓</i> 桌機維持官網，手機可呈現 App-like 介面</span>
+      <span><i>✓</i> 可串接現有優惠店家、使用確認與 GA4 追蹤</span>
+      <span><i>✓</i> 不需要上架 App，成本較低、維護較簡單</span>
+    </div>
+  </section>
+
+  <section class="phone-shell" aria-label="手機版模擬畫面">
+    <div class="phone-screen">
+      <div class="app-status"><span>9:41</span><span class="status-icons">5G ▰▰</span></div>
+      <header class="app-top">
+        <div class="app-brand">
+          <div class="app-logo">福</div>
+          <div>
+            <strong>頭竹苗福利社</strong>
+            <span>在地好康・便利生活</span>
+          </div>
+        </div>
+        <button class="bell" type="button" aria-label="通知">⌕</button>
+      </header>
+
+      <article class="welfare-card">
+        <div class="card-label"><span>Tou Zhu Miao Card</span><span>FREE</span></div>
+        <h2>頭竹苗福利卡</h2>
+        <p>一機在手，優惠隨時有。出示頁面即可查看合作店家優惠。</p>
+        <div class="card-actions">
+          <a class="primary" href="shops.html">找優惠</a>
+          <a class="ghost" href="card.html">展示福利卡</a>
+        </div>
+      </article>
+
+      <nav class="quick-grid" aria-label="常用入口">
+        <a class="quick-item" href="shops.html">
+          <svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5z"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/></svg>
+          特約店家
+        </a>
+        <a class="quick-item" href="shops.html?category=美食飲品">
+          <svg viewBox="0 0 24 24"><path d="M7 3v9"/><path d="M10 3v9"/><path d="M7 8h3"/><path d="M17 3v18"/><path d="M14 3c0 4 1 7 3 8"/></svg>
+          美食飲品
+        </a>
+        <a class="quick-item" href="shops.html?category=零售購物">
+          <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+          購物生活
+        </a>
+        <a class="quick-item" href="shops.html?category=生活服務">
+          <svg viewBox="0 0 24 24"><path d="M12 21s7-4 7-11a7 7 0 0 0-14 0c0 7 7 11 7 11z"/><path d="M9 10h6"/><path d="M12 7v6"/></svg>
+          在地服務
+        </a>
+        <a class="quick-item" href="shops.html?area=頭份">
+          <svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 20v-6h6v6"/></svg>
+          頭份優惠
+        </a>
+        <a class="quick-item" href="redeem.html">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 7v10"/><path d="M16 7v10"/><path d="M10 12h4"/></svg>
+          使用確認
+        </a>
+      </nav>
+
+      <div class="section-head">
+        <h3>熱門推薦</h3>
+        <a href="shops.html">查看更多 ></a>
+      </div>
+      <div class="deal-scroll">
+        <article class="deal-card">
+          <div class="deal-img"><img src="pics/logo/tzm0002.webp" alt="買樂購"></div>
+          <div><strong>買樂購</strong><span>滿額享優惠</span></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img"><img src="pics/logo/tzm0003.webp" alt="三峽角胖"></div>
+          <div><strong>三峽角胖</strong><span>手撕包折價</span></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img"><img src="pics/logo/tzm0001.webp" alt="享森活居家"></div>
+          <div><strong>享森活居家</strong><span>特約商品優惠</span></div>
+        </article>
+      </div>
+
+      <div class="section-head">
+        <h3>今日可以這樣用</h3>
+        <a href="shops.html">附近店家</a>
+      </div>
+      <div class="coupon-list">
+        <a class="coupon" href="shops.html">
+          <div class="coupon-icon"><svg viewBox="0 0 24 24"><path d="M5 7h14v10H5z"/><path d="M8 7v10"/><path d="M16 7v10"/></svg></div>
+          <div><strong>查詢附近優惠店家</strong><span>用地區、分類快速找到可用優惠</span></div>
+        </a>
+        <a class="coupon" href="card.html">
+          <div class="coupon-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M7 10h6"/><path d="M7 14h4"/></svg></div>
+          <div><strong>展示福利卡</strong><span>加入 LINE 後即可出示福利卡資訊</span></div>
+        </a>
+      </div>
+
+      <nav class="bottom-nav" aria-label="手機底部導覽">
+        <a class="active" href="app-preview.html"><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7"/><path d="M6 10v10h12V10"/></svg><span>首頁</span></a>
+        <a href="shops.html"><svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5z"/><path d="M6 10v9h12v-9"/></svg><span>店家</span></a>
+        <a href="card.html"><svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M7 11h6"/></svg><span>福利卡</span></a>
+        <a href="shops.html"><svg viewBox="0 0 24 24"><path d="M20 7 9 18l-5-5"/></svg><span>優惠</span></a>
+        <a href="https://lin.ee/OuiR6gV"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3z"/></svg><span>LINE</span></a>
+      </nav>
+    </div>
+  </section>
+</main>
+</body>
+</html>
