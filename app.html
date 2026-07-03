@@ -605,9 +605,9 @@ img{display:block;max-width:100%}
             <svg viewBox="0 0 24 24"><path d="M20 8c0 6-8 11-8 11S4 14 4 8a4 4 0 0 1 8-2 4 4 0 0 1 8 2z"/></svg>
             我的收藏
           </a>
-          <a class="quick-item" href="#screen-history" data-screen="history">
-            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6"/><path d="M4 4v5h5"/><path d="M12 7v5l3 2"/></svg>
-            使用紀錄
+          <a class="quick-item" href="#screen-shops" data-screen="shops" data-category-shortcut="美容美體">
+            <svg viewBox="0 0 24 24"><path d="m12 3 1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4L12 3Z"/><path d="m18 14 .8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14Z"/></svg>
+            美容美體
           </a>
           <a class="quick-item" href="https://lin.ee/OuiR6gV">
             <svg viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3z"/></svg>
@@ -672,6 +672,12 @@ const APP_KEYS = {
   history: "tzm_redeem_logs"
 };
 const DEFAULT_LOGO = "pics/logo/tzm0000.png";
+const FEATURED_SHOP_MATCHERS = [
+  { label: "丘森茶室", tests: ["丘森茶室"] },
+  { label: "Café32", tests: ["Café32", "Cafe32"] },
+  { label: "親蜜家優床館", tests: ["親蜜家優床館", "親密家優床館"] },
+  { label: "十畝園味", tests: ["十畝園味"] }
+];
 const state = {
   shops: [],
   categories: [],
@@ -717,6 +723,9 @@ function bindNavigation() {
       if (!target) return;
       event.preventDefault();
       showScreen(target);
+      if (el.dataset.categoryShortcut) {
+        applyCategoryShortcut(el.dataset.categoryShortcut);
+      }
       trackEvent("app_tab_click", {
         screen_name: target,
         trigger_text: (el.textContent || "").trim().slice(0, 30)
@@ -796,10 +805,17 @@ function renderFilters() {
 }
 
 function renderFeatured() {
-  const list = state.shops.slice(0, 4);
-  document.getElementById("homeCount").textContent = `${state.shops.length} 間店家`;
+  const list = getFeaturedShops();
+  document.getElementById("homeCount").textContent = `${list.length} 間精選`;
   document.getElementById("featuredList").innerHTML = list.map(shopCard).join("") || empty("目前沒有推薦店家。");
   bindCardEvents();
+}
+
+function getFeaturedShops() {
+  const selected = FEATURED_SHOP_MATCHERS.map(matcher => {
+    return state.shops.find(shop => matcher.tests.some(test => String(shop.name || "").includes(test)));
+  }).filter(Boolean);
+  return selected.length ? selected : state.shops.slice(0, 4);
 }
 
 function renderShopList() {
@@ -968,6 +984,20 @@ function filterShops(keyword) {
     if (area && shop.area !== area) return false;
     if (!q) return true;
     return [shop.name, shop.category, shop.area, shop.offer, shop.description].some(value => String(value || "").toLowerCase().includes(q));
+  });
+}
+
+function applyCategoryShortcut(category) {
+  const categorySelect = document.getElementById("categoryFilter");
+  const areaSelect = document.getElementById("areaFilter");
+  const searchInput = document.getElementById("shopSearch");
+  if (categorySelect) categorySelect.value = state.categories.includes(category) ? category : "";
+  if (areaSelect) areaSelect.value = "";
+  if (searchInput) searchInput.value = "";
+  renderShopList();
+  trackEvent("app_quick_category_click", {
+    shop_category: category,
+    result_count: filterShops("").length
   });
 }
 
