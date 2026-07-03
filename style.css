@@ -1025,21 +1025,64 @@ input:focus,select:focus,textarea:focus{
   font-weight:800;
 }
 .redeem-confirm-box{
-  display:flex;
-  align-items:center;
+  position:relative;
+  display:grid;
   gap:12px;
-  flex-wrap:wrap;
-  padding:16px;
-  background:#F4F7F1;
-  border:1px solid rgba(125,143,114,.18);
-  border-radius:8px;
+  padding:18px;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--purple) 0%,#5B3A60 58%,var(--sage-dark) 100%);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;
+  color:#fff;
+  box-shadow:0 18px 36px rgba(75,46,79,.20);
+}
+.redeem-confirm-box::before{
+  content:"頭竹苗福利卡";
+  display:block;
+  width:max-content;
+  max-width:100%;
+  padding:5px 9px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:6px;
+  color:rgba(255,255,255,.88);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.redeem-confirm-box::after{
+  content:"";
+  position:absolute;
+  right:-42px;
+  top:-42px;
+  width:128px;
+  height:128px;
+  border-radius:50%;
+  background:rgba(255,255,255,.10);
+  pointer-events:none;
 }
 .redeem-confirm-box p{
-  flex:1 1 260px;
+  position:relative;
   margin:0;
-  color:#5C6954;
+  color:rgba(255,255,255,.92);
   font-weight:800;
   line-height:1.7;
+}
+.redeem-confirm-box .btn{
+  position:relative;
+  width:100%;
+  justify-content:center;
+}
+.redeem-confirm-box .btn-primary{
+  background:#fff;
+  border-color:#fff;
+  color:var(--purple);
+  box-shadow:0 10px 24px rgba(36,31,38,.20);
+}
+.redeem-confirm-box .btn-outline{
+  background:rgba(255,255,255,.10);
+  border-color:rgba(255,255,255,.34);
+  color:#fff;
 }
 .redeem-confirm-box[hidden],
 .redeem-result[hidden]{
@@ -1059,14 +1102,13 @@ input:focus,select:focus,textarea:focus{
   border-color:#B7B2A7;
 }
 .redeem-submit-status{
-  flex:1 1 100%;
   margin-top:2px;
-  color:var(--sage-dark);
+  color:rgba(255,255,255,.82);
   font-weight:800;
   line-height:1.6;
 }
 .redeem-submit-status.is-warning{
-  color:var(--clay-dark);
+  color:#FFE0D5;
 }
 .redeem-result{
   display:grid;
