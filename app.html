@@ -6,7 +6,7 @@
 <title>手機福利卡｜頭竹苗福利社</title>
 <meta name="description" content="頭竹苗福利社手機版福利卡入口，可查詢優惠店家、收藏店家與查看本機使用紀錄。">
 <meta name="theme-color" content="#4B2E4F">
-<!-- app-detail-modal-version: 20260703-area-filter-1 -->
+<!-- app-detail-modal-version: 20260703-area-filter-2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YNZ2NS7L2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -858,7 +858,7 @@ function shopCard(shop) {
       <div class="shop-logo"><img src="${esc(logoPath(shop.logo))}" alt="${esc(shop.name)}" onerror="this.onerror=null;this.src='${DEFAULT_LOGO}'"></div>
       <div class="shop-info">
         <h3>${esc(shop.name)}</h3>
-        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(shop.area || "頭竹苗")}</span></div>
+        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(normalizeAreaLabel(shop.area) || "頭竹苗")}</span></div>
         <p class="offer">${esc(shop.offer || "查看店家優惠")}</p>
         <div class="shop-actions">
           <a class="use" href="${redeemUrl(shop)}" data-use-shop="${esc(shop.id)}">使用優惠</a>
@@ -916,7 +916,7 @@ function openShopDetail(shop) {
       <div class="modal-shop-logo"><img src="${esc(logoPath(shop.logo))}" alt="${esc(shop.name || "店家 Logo")}" onerror="this.onerror=null;this.src='${DEFAULT_LOGO}'"></div>
       <div>
         <h2 id="modalShopName">${esc(shop.name || "店家資訊")}</h2>
-        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(shop.area || "頭竹苗")}</span></div>
+        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(normalizeAreaLabel(shop.area) || "頭竹苗")}</span></div>
       </div>
     </div>
     <div class="modal-offer">${esc(shop.offer || "請以店家現場公告為準。")}</div>
