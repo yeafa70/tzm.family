@@ -403,6 +403,126 @@ img{display:block;max-width:100%}
   font-weight:950;
 }
 .tabbar button.active{color:var(--purple)}
+.shop-modal{
+  position:fixed;
+  inset:0;
+  z-index:120;
+  display:none;
+  align-items:end;
+  justify-content:center;
+  padding:18px 12px max(18px,env(safe-area-inset-bottom));
+  background:rgba(36,31,38,.44);
+  backdrop-filter:blur(8px);
+}
+.shop-modal.active{display:flex}
+.shop-modal-panel{
+  width:min(390px,100%);
+  max-height:min(78svh,680px);
+  overflow:auto;
+  border-radius:24px 24px 18px 18px;
+  background:#fff;
+  box-shadow:0 24px 70px rgba(36,31,38,.28);
+}
+.shop-modal-head{
+  position:sticky;
+  top:0;
+  z-index:2;
+  display:flex;
+  justify-content:flex-end;
+  padding:10px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+}
+.modal-close{
+  width:42px;
+  height:42px;
+  border:1px solid rgba(75,46,79,.12);
+  border-radius:14px;
+  background:#fff;
+  color:var(--purple);
+  font-size:22px;
+  font-weight:800;
+}
+.shop-modal-body{padding:0 18px 20px}
+.modal-shop-main{
+  display:grid;
+  grid-template-columns:88px 1fr;
+  gap:14px;
+  align-items:center;
+}
+.modal-shop-logo{
+  width:88px;
+  height:88px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid rgba(75,46,79,.08);
+}
+.modal-shop-logo img{width:100%;height:100%;object-fit:contain}
+.modal-shop-main h2{
+  margin:0 0 8px;
+  color:var(--ink);
+  font-size:22px;
+  line-height:1.25;
+}
+.modal-offer{
+  margin:18px 0 12px;
+  padding:16px;
+  border-left:5px solid var(--clay);
+  border-radius:16px;
+  background:#FFF4F0;
+  color:#A65F55;
+  font-size:17px;
+  line-height:1.55;
+  font-weight:950;
+}
+.modal-description{
+  margin:0 0 14px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:800;
+  line-height:1.75;
+}
+.modal-info{
+  display:grid;
+  gap:8px;
+  margin:12px 0 16px;
+}
+.modal-info div{
+  padding:10px 12px;
+  border-radius:13px;
+  background:#FAF7F2;
+  color:var(--text);
+  font-size:13px;
+  font-weight:850;
+  line-height:1.55;
+}
+.modal-info strong{color:var(--purple-dark)}
+.modal-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.modal-links a{
+  display:grid;
+  place-items:center;
+  min-height:42px;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid rgba(75,46,79,.13);
+  background:#fff;
+  color:var(--purple);
+  font-size:13px;
+  font-weight:950;
+}
+.modal-links .modal-use{
+  grid-column:1/-1;
+  background:var(--sage);
+  border-color:var(--sage);
+  color:#fff;
+}
 @media (max-width:860px){
   body{background:#FFF9F5}
   .desktop-stage{display:block;min-height:100svh;padding:0}
@@ -500,6 +620,15 @@ img{display:block;max-width:100%}
   </section>
 </main>
 
+<div class="shop-modal" id="shopModal" aria-hidden="true">
+  <div class="shop-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalShopName">
+    <div class="shop-modal-head">
+      <button class="modal-close" id="shopModalClose" type="button" aria-label="關閉店家資訊">×</button>
+    </div>
+    <div class="shop-modal-body" id="shopModalBody"></div>
+  </div>
+</div>
+
 <script>
 const APP_KEYS = {
   favorites: "tzm_favorite_shops",
@@ -582,6 +711,13 @@ function bindActions() {
     renderHistory();
     trackEvent("app_history_clear", { history_count: count });
   });
+  document.getElementById("shopModalClose").addEventListener("click", closeShopDetail);
+  document.getElementById("shopModal").addEventListener("click", event => {
+    if (event.target.id === "shopModal") closeShopDetail();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeShopDetail();
+  });
 }
 
 function showScreen(name) {
@@ -643,7 +779,7 @@ function shopCard(shop) {
         <p class="offer">${esc(shop.offer || "查看店家優惠")}</p>
         <div class="shop-actions">
           <a class="use" href="${redeemUrl(shop)}" data-use-shop="${esc(shop.id)}">使用優惠</a>
-          <a href="shops.html#${encodeURIComponent(shop.id)}" data-detail-shop="${esc(shop.id)}">詳情</a>
+          <button type="button" data-detail-shop="${esc(shop.id)}">詳情</button>
           <button class="fav ${isFav ? "active" : ""}" type="button" data-fav="${esc(shop.id)}">${isFav ? "已收藏" : "收藏"}</button>
         </div>
       </div>
@@ -653,20 +789,67 @@ function shopCard(shop) {
 
 function bindCardEvents() {
   document.querySelectorAll("[data-fav]").forEach(button => {
+    if (button.dataset.bound === "1") return;
+    button.dataset.bound = "1";
     button.addEventListener("click", () => toggleFavorite(button.dataset.fav));
   });
   document.querySelectorAll("[data-use-shop]").forEach(link => {
+    if (link.dataset.bound === "1") return;
+    link.dataset.bound = "1";
     link.addEventListener("click", () => {
       const shop = findShop(link.dataset.useShop);
       trackEvent("app_redeem_click", shopEventParams(shop, { source_area: currentScreenName() }));
     });
   });
-  document.querySelectorAll("[data-detail-shop]").forEach(link => {
-    link.addEventListener("click", () => {
-      const shop = findShop(link.dataset.detailShop);
+  document.querySelectorAll("[data-detail-shop]").forEach(button => {
+    if (button.dataset.bound === "1") return;
+    button.dataset.bound = "1";
+    button.addEventListener("click", () => {
+      const shop = findShop(button.dataset.detailShop);
+      openShopDetail(shop);
       trackEvent("app_shop_detail_click", shopEventParams(shop, { source_area: currentScreenName() }));
     });
   });
+}
+
+function openShopDetail(shop) {
+  const modal = document.getElementById("shopModal");
+  const body = document.getElementById("shopModalBody");
+  const info = [
+    shop.address ? `<div><strong>地址：</strong>${esc(shop.address)}</div>` : "",
+    shop.phone ? `<div><strong>電話：</strong>${esc(shop.phone)}</div>` : "",
+    shop.business_hours ? `<div><strong>營業時間：</strong>${esc(shop.business_hours)}</div>` : ""
+  ].filter(Boolean).join("");
+  const links = [
+    `<a class="modal-use" href="${redeemUrl(shop)}" data-use-shop="${esc(shop.id)}">使用優惠</a>`,
+    modalLink("Google 地圖", mapUrl(shop)),
+    modalLink("官方網站", shop.website_url),
+    modalLink("Facebook", shop.facebook_url),
+    modalLink("Instagram", shop.instagram_url),
+    modalLink("LINE", shop.line_url)
+  ].filter(Boolean).join("");
+  body.innerHTML = `
+    <div class="modal-shop-main">
+      <div class="modal-shop-logo"><img src="${esc(logoPath(shop.logo))}" alt="${esc(shop.name || "店家 Logo")}" onerror="this.onerror=null;this.src='${DEFAULT_LOGO}'"></div>
+      <div>
+        <h2 id="modalShopName">${esc(shop.name || "店家資訊")}</h2>
+        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(shop.area || "頭竹苗")}</span></div>
+      </div>
+    </div>
+    <div class="modal-offer">${esc(shop.offer || "請以店家現場公告為準。")}</div>
+    ${shop.description ? `<p class="modal-description">${esc(shop.description)}</p>` : ""}
+    ${info ? `<div class="modal-info">${info}</div>` : ""}
+    <div class="modal-links">${links}</div>
+  `;
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  bindCardEvents();
+}
+
+function closeShopDetail() {
+  const modal = document.getElementById("shopModal");
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
 }
 
 function toggleFavorite(id) {
@@ -692,6 +875,19 @@ function redeemUrl(shop) {
     from: "app_shop_card"
   });
   return `redeem.html?${params.toString()}`;
+}
+
+function modalLink(label, url) {
+  const href = String(url || "").trim();
+  if (!href) return "";
+  return `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+}
+
+function mapUrl(shop) {
+  const direct = String(shop?.map_url || "").trim();
+  if (direct) return direct;
+  const query = [shop?.name, shop?.address].filter(Boolean).join(" ");
+  return query ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}` : "";
 }
 
 function logoPath(logo) {
