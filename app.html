@@ -6,6 +6,13 @@
 <title>手機福利卡｜頭竹苗福利社</title>
 <meta name="description" content="頭竹苗福利社手機版福利卡入口，可查詢優惠店家、收藏店家與查看本機使用紀錄。">
 <meta name="theme-color" content="#4B2E4F">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5YNZ2NS7L2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-5YNZ2NS7L2");
+</script>
 <style>
 :root{
   --purple:#4B2E4F;
@@ -504,6 +511,7 @@ const state = {
   favorites: readJson(APP_KEYS.favorites, []),
   history: readJson(APP_KEYS.history, [])
 };
+let searchTrackTimer = null;
 
 document.addEventListener("DOMContentLoaded", initApp);
 
@@ -512,6 +520,12 @@ async function initApp() {
   bindActions();
   await loadShops();
   renderAll();
+  trackEvent("app_page_ready", {
+    screen_name: "home",
+    shop_count: state.shops.length,
+    favorite_count: state.favorites.length,
+    history_count: state.history.length
+  });
 }
 
 async function loadShops() {
@@ -533,21 +547,40 @@ function bindNavigation() {
       if (!target) return;
       event.preventDefault();
       showScreen(target);
+      trackEvent("app_tab_click", {
+        screen_name: target,
+        trigger_text: (el.textContent || "").trim().slice(0, 30)
+      });
     });
   });
 }
 
 function bindActions() {
-  document.getElementById("shopSearch").addEventListener("input", renderShopList);
+  document.getElementById("shopSearch").addEventListener("input", () => {
+    renderShopList();
+    window.clearTimeout(searchTrackTimer);
+    searchTrackTimer = window.setTimeout(() => {
+      const keyword = document.getElementById("shopSearch").value.trim();
+      if (keyword.length < 2) return;
+      trackEvent("app_shop_search", {
+        search_term: keyword,
+        result_count: filterShops(keyword).length
+      });
+    }, 900);
+  });
   document.getElementById("clearFavs").addEventListener("click", () => {
+    const count = state.favorites.length;
     state.favorites = [];
     writeJson(APP_KEYS.favorites, state.favorites);
     renderAll();
+    trackEvent("app_favorites_clear", { favorite_count: count });
   });
   document.getElementById("clearHistory").addEventListener("click", () => {
+    const count = state.history.length;
     state.history = [];
     writeJson(APP_KEYS.history, state.history);
     renderHistory();
+    trackEvent("app_history_clear", { history_count: count });
   });
 }
 
@@ -567,25 +600,22 @@ function renderFeatured() {
   const list = state.shops.slice(0, 4);
   document.getElementById("homeCount").textContent = `${state.shops.length} 間店家`;
   document.getElementById("featuredList").innerHTML = list.map(shopCard).join("") || empty("目前沒有推薦店家。");
-  bindFavoriteButtons();
+  bindCardEvents();
 }
 
 function renderShopList() {
-  const q = document.getElementById("shopSearch").value.trim().toLowerCase();
-  const list = state.shops.filter(shop => {
-    if (!q) return true;
-    return [shop.name, shop.category, shop.area, shop.offer].some(value => String(value || "").toLowerCase().includes(q));
-  });
+  const q = document.getElementById("shopSearch").value.trim();
+  const list = filterShops(q);
   document.getElementById("shopCount").textContent = `${list.length} 間`;
   document.getElementById("shopList").innerHTML = list.slice(0, 30).map(shopCard).join("") || empty("找不到符合條件的店家。");
-  bindFavoriteButtons();
+  bindCardEvents();
 }
 
 function renderFavorites() {
   const favoriteSet = new Set(state.favorites);
   const list = state.shops.filter(shop => favoriteSet.has(shop.id));
   document.getElementById("favoriteList").innerHTML = list.map(shopCard).join("") || empty("尚未收藏店家。點店家卡片上的「收藏」即可加入。");
-  bindFavoriteButtons();
+  bindCardEvents();
 }
 
 function renderHistory() {
@@ -612,8 +642,8 @@ function shopCard(shop) {
         <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(shop.area || "頭竹苗")}</span></div>
         <p class="offer">${esc(shop.offer || "查看店家優惠")}</p>
         <div class="shop-actions">
-          <a class="use" href="${redeemUrl(shop)}">使用優惠</a>
-          <a href="shops.html#${encodeURIComponent(shop.id)}">詳情</a>
+          <a class="use" href="${redeemUrl(shop)}" data-use-shop="${esc(shop.id)}">使用優惠</a>
+          <a href="shops.html#${encodeURIComponent(shop.id)}" data-detail-shop="${esc(shop.id)}">詳情</a>
           <button class="fav ${isFav ? "active" : ""}" type="button" data-fav="${esc(shop.id)}">${isFav ? "已收藏" : "收藏"}</button>
         </div>
       </div>
@@ -621,20 +651,38 @@ function shopCard(shop) {
   `;
 }
 
-function bindFavoriteButtons() {
+function bindCardEvents() {
   document.querySelectorAll("[data-fav]").forEach(button => {
     button.addEventListener("click", () => toggleFavorite(button.dataset.fav));
+  });
+  document.querySelectorAll("[data-use-shop]").forEach(link => {
+    link.addEventListener("click", () => {
+      const shop = findShop(link.dataset.useShop);
+      trackEvent("app_redeem_click", shopEventParams(shop, { source_area: currentScreenName() }));
+    });
+  });
+  document.querySelectorAll("[data-detail-shop]").forEach(link => {
+    link.addEventListener("click", () => {
+      const shop = findShop(link.dataset.detailShop);
+      trackEvent("app_shop_detail_click", shopEventParams(shop, { source_area: currentScreenName() }));
+    });
   });
 }
 
 function toggleFavorite(id) {
   if (!id) return;
   const set = new Set(state.favorites);
-  if (set.has(id)) set.delete(id);
+  const shop = findShop(id);
+  const wasFavorite = set.has(id);
+  if (wasFavorite) set.delete(id);
   else set.add(id);
   state.favorites = Array.from(set).slice(0, 80);
   writeJson(APP_KEYS.favorites, state.favorites);
   renderAll();
+  trackEvent(wasFavorite ? "app_favorite_remove" : "app_favorite_add", shopEventParams(shop, {
+    source_area: currentScreenName(),
+    favorite_count: state.favorites.length
+  }));
 }
 
 function redeemUrl(shop) {
@@ -650,6 +698,45 @@ function logoPath(logo) {
   const path = String(logo || "").trim();
   if (!path || path.includes("default-logo.svg") || path.includes("tzm0000.webp")) return DEFAULT_LOGO;
   return path;
+}
+
+function filterShops(keyword) {
+  const q = String(keyword || "").trim().toLowerCase();
+  return state.shops.filter(shop => {
+    if (!q) return true;
+    return [shop.name, shop.category, shop.area, shop.offer, shop.description].some(value => String(value || "").toLowerCase().includes(q));
+  });
+}
+
+function findShop(id) {
+  return state.shops.find(shop => shop.id === id) || { id };
+}
+
+function currentScreenName() {
+  const active = document.querySelector(".screen.active");
+  return active ? active.id.replace("screen-", "") : "unknown";
+}
+
+function shopEventParams(shop, extra = {}) {
+  return {
+    shop_id: shop?.id || "",
+    shop_name: shop?.name || "",
+    shop_category: shop?.category || "",
+    shop_area: shop?.area || "",
+    ...extra
+  };
+}
+
+function trackEvent(eventName, params = {}) {
+  const payload = {
+    app_name: "tzm_mobile_app",
+    page_type: "app_like_mobile",
+    ...params
+  };
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, payload);
+  }
+  console.log("[TZM GA4]", eventName, payload);
 }
 
 function readJson(key, fallback) {
