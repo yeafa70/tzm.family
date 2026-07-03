@@ -669,6 +669,19 @@ const FEATURED_SHOP_MATCHERS = [
   { label: "親蜜家優床館", tests: ["親蜜家優床館", "親密家優床館"] },
   { label: "十畝園味", tests: ["十畝園味"] }
 ];
+const AREA_LABEL_MAP = new Map([
+  ["竹南鎮", "竹南"],
+  ["竹南", "竹南"],
+  ["頭份市", "頭份"],
+  ["頭份", "頭份"],
+  ["苗栗市", "苗栗市"],
+  ["南庄鄉", "南庄"],
+  ["南庄", "南庄"],
+  ["後龍鎮", "後龍"],
+  ["後龍", "後龍"],
+  ["公館鄉", "公館"],
+  ["公館", "公館"]
+]);
 const state = {
   shops: [],
   categories: [],
@@ -700,7 +713,7 @@ async function loadShops() {
     const data = await res.json();
     state.shops = (data.shops || []).filter(shop => shop && shop.id && shop.name);
     state.categories = optionValues(data.categories, state.shops.map(shop => shop.category));
-    state.areas = optionValues(data.areas, state.shops.map(shop => shop.area));
+    state.areas = optionValues(data.areas, state.shops.map(shop => shop.area), normalizeAreaLabel);
   } catch (error) {
     document.getElementById("featuredList").innerHTML = empty("目前無法載入店家資料。");
     document.getElementById("shopList").innerHTML = empty("目前無法載入店家資料。");
@@ -972,7 +985,7 @@ function filterShops(keyword) {
   const area = document.getElementById("areaFilter")?.value || "";
   return state.shops.filter(shop => {
     if (category && shop.category !== category) return false;
-    if (area && shop.area !== area) return false;
+    if (area && normalizeAreaLabel(shop.area) !== area) return false;
     if (!q) return true;
     return [shop.name, shop.category, shop.area, shop.offer, shop.description].some(value => String(value || "").toLowerCase().includes(q));
   });
@@ -1003,16 +1016,16 @@ function uniqueValues(values) {
   return Array.from(new Set((values || []).map(value => String(value || "").trim()).filter(Boolean))).sort((a, b) => a.localeCompare(b, "zh-Hant"));
 }
 
-function optionValues(configValues, fallbackValues) {
+function optionValues(configValues, fallbackValues, normalizer = value => value) {
   const source = Array.isArray(configValues) && configValues.length ? configValues : fallbackValues;
   const normalized = (source || []).map((item, index) => {
     if (item && typeof item === "object") {
       return {
-        value: String(item.name || item.id || "").trim(),
+        value: normalizer(item.name || item.id || ""),
         order: Number.isFinite(Number(item.sort_order)) ? Number(item.sort_order) : index
       };
     }
-    return { value: String(item || "").trim(), order: index };
+    return { value: normalizer(item), order: index };
   }).filter(item => item.value);
   const seen = new Set();
   return normalized
@@ -1023,6 +1036,16 @@ function optionValues(configValues, fallbackValues) {
       return true;
     })
     .map(item => item.value);
+}
+
+function normalizeAreaLabel(value) {
+  const raw = String(value || "").trim();
+  if (!raw || /^https?:\/\//i.test(raw)) return "其他地區";
+  if (AREA_LABEL_MAP.has(raw)) return AREA_LABEL_MAP.get(raw);
+  for (const [needle, label] of AREA_LABEL_MAP.entries()) {
+    if (raw.includes(needle)) return label;
+  }
+  return raw;
 }
 
 function findShop(id) {
