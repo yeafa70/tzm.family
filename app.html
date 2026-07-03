@@ -6,7 +6,7 @@
 <title>手機福利卡｜頭竹苗福利社</title>
 <meta name="description" content="頭竹苗福利社手機版福利卡入口，可查詢優惠店家、收藏店家與查看本機使用紀錄。">
 <meta name="theme-color" content="#4B2E4F">
-<!-- app-detail-modal-version: 20260703-area-filter-3 -->
+<!-- app-detail-modal-version: 20260703-quick-icons-2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YNZ2NS7L2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -214,24 +214,56 @@ img{display:block;max-width:100%}
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:11px;
   padding:0 18px;
 }
 .quick-item{
-  min-height:88px;
+  position:relative;
+  min-height:94px;
   display:grid;
   place-items:center;
-  gap:6px;
-  padding:12px 6px;
+  align-content:center;
+  gap:7px;
+  padding:11px 8px 10px;
   border-radius:18px;
-  background:rgba(255,255,255,.82);
-  border:1px solid rgba(75,46,79,.08);
-  box-shadow:0 8px 18px rgba(75,46,79,.07);
+  background:
+    radial-gradient(circle at 78% 14%,rgba(255,255,255,.84),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.96),rgba(250,247,242,.78));
+  border:1px solid rgba(75,46,79,.10);
+  box-shadow:0 14px 28px rgba(75,46,79,.10);
   color:var(--purple);
-  font-size:12px;
+  font-size:13px;
   font-weight:950;
+  line-height:1.2;
+  text-align:center;
 }
-.quick-item svg,
+.quick-item::before{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:50%;
+  width:50px;
+  height:50px;
+  border-radius:16px;
+  transform:translateX(-50%);
+  background:rgba(75,46,79,.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78),0 8px 16px rgba(75,46,79,.08);
+}
+.quick-item svg{
+  position:relative;
+  z-index:1;
+  width:44px;
+  height:44px;
+  stroke:currentColor;
+  stroke-width:2.25;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 3px 4px rgba(75,46,79,.12));
+}
+.quick-item{
+  padding-top:12px;
+}
 .tabbar svg,
 .iconbox svg{
   width:26px;
@@ -242,8 +274,27 @@ img{display:block;max-width:100%}
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-.quick-item:nth-child(2n){color:var(--clay);background:#F8F0EA}
-.quick-item:nth-child(3n){color:var(--sage-dark);background:#EEF2EA}
+.quick-item:nth-child(1),
+.quick-item:nth-child(5){
+  color:var(--purple);
+  background:linear-gradient(145deg,#fff,#F5EFF5);
+}
+.quick-item:nth-child(1)::before,
+.quick-item:nth-child(5)::before{background:rgba(75,46,79,.10)}
+.quick-item:nth-child(2),
+.quick-item:nth-child(4){
+  color:var(--clay);
+  background:linear-gradient(145deg,#fff,#F8EEE9);
+}
+.quick-item:nth-child(2)::before,
+.quick-item:nth-child(4)::before{background:rgba(198,136,115,.14)}
+.quick-item:nth-child(3),
+.quick-item:nth-child(6){
+  color:var(--sage-dark);
+  background:linear-gradient(145deg,#fff,#EEF3EA);
+}
+.quick-item:nth-child(3)::before,
+.quick-item:nth-child(6)::before{background:rgba(125,143,114,.14)}
 .section-head{
   display:flex;
   align-items:end;
