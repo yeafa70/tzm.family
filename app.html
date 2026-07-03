@@ -93,24 +93,11 @@ img{display:block;max-width:100%}
   scrollbar-width:none;
 }
 .app::-webkit-scrollbar{display:none}
-.status{
-  position:sticky;
-  top:0;
-  z-index:30;
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:8px 18px 0;
-  background:linear-gradient(180deg,rgba(255,249,245,.96),rgba(255,249,245,.72));
-  font-size:12px;
-  font-weight:900;
-}
 .app-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:14px 18px 10px;
+  padding:18px 18px 12px;
 }
 .brand{
   display:flex;
@@ -123,10 +110,15 @@ img{display:block;max-width:100%}
   display:grid;
   place-items:center;
   border-radius:13px;
-  background:linear-gradient(135deg,var(--purple),#7A5C86);
-  color:#fff;
-  font-weight:950;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(75,46,79,.10);
   box-shadow:0 10px 20px rgba(75,46,79,.22);
+}
+.brand-mark img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
 .brand strong{display:block;color:var(--purple-dark);font-size:17px;line-height:1.1}
 .brand span{display:block;color:var(--muted);font-size:12px;font-weight:850}
@@ -568,10 +560,9 @@ img{display:block;max-width:100%}
 
   <section class="phone-shell" aria-label="手機福利卡畫面">
     <div class="app">
-      <div class="status"><span>9:41</span><span>5G ▰▰</span></div>
       <header class="app-header">
         <div class="brand">
-          <div class="brand-mark">福</div>
+          <div class="brand-mark"><img src="pics/logo/tzm0000.png" alt="頭竹苗福利社 Logo"></div>
           <div><strong>頭竹苗福利社</strong><span>在地好康・便利生活</span></div>
         </div>
         <button class="small-btn" type="button" data-screen="history" aria-label="查看使用紀錄">↺</button>
@@ -708,8 +699,8 @@ async function loadShops() {
     if (!res.ok) throw new Error("shops.json 載入失敗");
     const data = await res.json();
     state.shops = (data.shops || []).filter(shop => shop && shop.id && shop.name);
-    state.categories = uniqueValues(data.categories || state.shops.map(shop => shop.category));
-    state.areas = uniqueValues(data.areas || state.shops.map(shop => shop.area));
+    state.categories = optionValues(data.categories, state.shops.map(shop => shop.category));
+    state.areas = optionValues(data.areas, state.shops.map(shop => shop.area));
   } catch (error) {
     document.getElementById("featuredList").innerHTML = empty("目前無法載入店家資料。");
     document.getElementById("shopList").innerHTML = empty("目前無法載入店家資料。");
@@ -1010,6 +1001,28 @@ function fillSelect(id, values) {
 
 function uniqueValues(values) {
   return Array.from(new Set((values || []).map(value => String(value || "").trim()).filter(Boolean))).sort((a, b) => a.localeCompare(b, "zh-Hant"));
+}
+
+function optionValues(configValues, fallbackValues) {
+  const source = Array.isArray(configValues) && configValues.length ? configValues : fallbackValues;
+  const normalized = (source || []).map((item, index) => {
+    if (item && typeof item === "object") {
+      return {
+        value: String(item.name || item.id || "").trim(),
+        order: Number.isFinite(Number(item.sort_order)) ? Number(item.sort_order) : index
+      };
+    }
+    return { value: String(item || "").trim(), order: index };
+  }).filter(item => item.value);
+  const seen = new Set();
+  return normalized
+    .sort((a, b) => a.order - b.order || a.value.localeCompare(b.value, "zh-Hant"))
+    .filter(item => {
+      if (seen.has(item.value)) return false;
+      seen.add(item.value);
+      return true;
+    })
+    .map(item => item.value);
 }
 
 function findShop(id) {
