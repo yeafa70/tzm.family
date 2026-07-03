@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手機福利卡｜頭竹苗福利社</title>
+<meta name="description" content="頭竹苗福利社手機版福利卡入口，可查詢優惠店家、收藏店家與查看本機使用紀錄。">
+<meta name="theme-color" content="#4B2E4F">
+<style>
+:root{
+  --purple:#4B2E4F;
+  --purple-dark:#38213D;
+  --sage:#7D8F72;
+  --sage-dark:#667A5C;
+  --clay:#C68873;
+  --surface:#FFFFFF;
+  --surface-soft:#FAF7F2;
+  --bg:#F3EEE7;
+  --ink:#241F26;
+  --text:#5C5360;
+  --muted:#817784;
+  --line:rgba(75,46,79,.12);
+  --shadow:0 16px 38px rgba(75,46,79,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(198,136,115,.16),transparent 30%),
+    radial-gradient(circle at 88% 0%,rgba(125,143,114,.18),transparent 34%),
+    linear-gradient(145deg,#FFF9F5 0%,#F5EDEF 48%,#ECE6F0 100%);
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+img{display:block;max-width:100%}
+.desktop-stage{
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:minmax(300px,480px) minmax(320px,420px);
+  align-items:center;
+  justify-content:center;
+  gap:44px;
+  padding:36px 24px;
+}
+.desktop-copy h1{
+  margin:14px 0;
+  color:var(--purple-dark);
+  font-size:clamp(34px,5vw,60px);
+  line-height:1.08;
+}
+.desktop-copy p{
+  margin:0;
+  color:var(--text);
+  font-size:18px;
+  line-height:1.8;
+  font-weight:750;
+}
+.desktop-copy .tag{
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:10px;
+  color:var(--purple);
+  background:rgba(255,255,255,.74);
+  border:1px solid rgba(75,46,79,.12);
+  font-weight:900;
+}
+.phone-shell{
+  width:min(100%,390px);
+  margin:auto;
+  padding:10px;
+  border-radius:38px;
+  background:#171219;
+  box-shadow:0 28px 70px rgba(36,31,38,.30);
+}
+.app{
+  position:relative;
+  min-height:780px;
+  max-height:780px;
+  overflow:auto;
+  border-radius:30px;
+  background:linear-gradient(180deg,#FFF9F5 0%,#F6EEF3 56%,#F3EEE7 100%);
+  scrollbar-width:none;
+}
+.app::-webkit-scrollbar{display:none}
+.status{
+  position:sticky;
+  top:0;
+  z-index:30;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 18px 0;
+  background:linear-gradient(180deg,rgba(255,249,245,.96),rgba(255,249,245,.72));
+  font-size:12px;
+  font-weight:900;
+}
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px 10px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand-mark{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--purple),#7A5C86);
+  color:#fff;
+  font-weight:950;
+  box-shadow:0 10px 20px rgba(75,46,79,.22);
+}
+.brand strong{display:block;color:var(--purple-dark);font-size:17px;line-height:1.1}
+.brand span{display:block;color:var(--muted);font-size:12px;font-weight:850}
+.small-btn{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:12px;
+  background:#fff;
+  color:var(--purple);
+  font-weight:950;
+  box-shadow:0 8px 20px rgba(75,46,79,.10);
+}
+.screen{display:none;padding-bottom:92px}
+.screen.active{display:block}
+.welfare-card{
+  position:relative;
+  min-height:190px;
+  margin:8px 18px 18px;
+  padding:18px;
+  overflow:hidden;
+  border-radius:22px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(255,255,255,.20),transparent 26%),
+    linear-gradient(135deg,#4B2E4F 0%,#765184 56%,#7D8F72 100%);
+  box-shadow:var(--shadow);
+}
+.welfare-card::after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  bottom:-38px;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.card-label{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.welfare-card h1{
+  position:relative;
+  z-index:1;
+  margin:22px 0 6px;
+  font-size:28px;
+  line-height:1.15;
+}
+.welfare-card p{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:rgba(255,255,255,.86);
+  font-size:14px;
+  font-weight:800;
+}
+.card-actions{
+  position:relative;
+  z-index:1;
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+.card-actions a{
+  flex:1;
+  display:grid;
+  place-items:center;
+  min-height:42px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:950;
+}
+.card-actions .primary{background:#fff;color:var(--purple)}
+.card-actions .ghost{border:1px solid rgba(255,255,255,.34);color:#fff}
+.notice{
+  margin:0 18px 14px;
+  padding:12px;
+  border-radius:16px;
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(75,46,79,.08);
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  line-height:1.65;
+}
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:0 18px;
+}
+.quick-item{
+  min-height:88px;
+  display:grid;
+  place-items:center;
+  gap:6px;
+  padding:12px 6px;
+  border-radius:18px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(75,46,79,.08);
+  box-shadow:0 8px 18px rgba(75,46,79,.07);
+  color:var(--purple);
+  font-size:12px;
+  font-weight:950;
+}
+.quick-item svg,
+.tabbar svg,
+.iconbox svg{
+  width:26px;
+  height:26px;
+  stroke:currentColor;
+  stroke-width:1.95;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.quick-item:nth-child(2n){color:var(--clay);background:#FFF6F2}
+.quick-item:nth-child(3n){color:var(--sage-dark);background:#F3F7EF}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  padding:22px 18px 10px;
+}
+.section-head h2{margin:0;color:var(--purple-dark);font-size:18px}
+.section-head span,
+.section-head button{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+}
+.shop-list{
+  display:grid;
+  gap:10px;
+  padding:0 18px;
+}
+.shop-card{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:12px;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(75,46,79,.08);
+  box-shadow:0 8px 20px rgba(75,46,79,.07);
+}
+.shop-logo{
+  width:64px;
+  height:64px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+}
+.shop-logo img{width:100%;height:100%;object-fit:contain}
+.shop-info h3{
+  margin:0 0 5px;
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.3;
+}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+.tags span{
+  padding:3px 7px;
+  border-radius:8px;
+  background:#F1ECEF;
+  color:var(--purple);
+  font-size:11px;
+  font-weight:900;
+}
+.offer{
+  margin:0;
+  color:var(--clay);
+  font-size:13px;
+  line-height:1.5;
+  font-weight:900;
+}
+.shop-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+.shop-actions a,
+.shop-actions button{
+  min-height:34px;
+  padding:7px 10px;
+  border-radius:10px;
+  border:1px solid rgba(75,46,79,.14);
+  background:#fff;
+  color:var(--purple);
+  font-size:12px;
+  font-weight:950;
+}
+.shop-actions .use{background:var(--sage);border-color:var(--sage);color:#fff}
+.shop-actions .fav.active{background:var(--purple);border-color:var(--purple);color:#fff}
+.filters{
+  display:grid;
+  gap:10px;
+  padding:0 18px 12px;
+}
+.filters input{
+  width:100%;
+  height:44px;
+  padding:0 14px;
+  border-radius:14px;
+  border:1px solid rgba(75,46,79,.12);
+  background:#fff;
+  color:var(--ink);
+  font-weight:800;
+}
+.empty{
+  margin:0 18px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.74);
+  color:var(--muted);
+  text-align:center;
+  font-weight:850;
+}
+.history-list{display:grid;gap:10px;padding:0 18px}
+.history-card{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  gap:12px;
+  padding:13px;
+  border-radius:18px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(75,46,79,.08);
+}
+.iconbox{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:#F1ECEF;
+  color:var(--purple);
+}
+.history-card strong{display:block;font-size:15px}
+.history-card span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.5}
+.tabbar{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  z-index:80;
+  width:min(390px,100%);
+  transform:translateX(-50%);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:3px;
+  padding:8px 12px max(10px,env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);
+  border-top:1px solid rgba(75,46,79,.08);
+  backdrop-filter:blur(14px);
+}
+.tabbar button{
+  display:grid;
+  place-items:center;
+  gap:3px;
+  min-height:50px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:950;
+}
+.tabbar button.active{color:var(--purple)}
+@media (max-width:860px){
+  body{background:#FFF9F5}
+  .desktop-stage{display:block;min-height:100svh;padding:0}
+  .desktop-copy{display:none}
+  .phone-shell{width:100%;min-height:100svh;padding:0;border-radius:0;background:transparent;box-shadow:none}
+  .app{min-height:100svh;max-height:none;border-radius:0}
+  .tabbar{left:0;right:0;width:100%;transform:none}
+}
+</style>
+</head>
+<body>
+<main class="desktop-stage">
+  <section class="desktop-copy">
+    <span class="tag">手機版入口</span>
+    <h1>像 App 一樣使用福利卡</h1>
+    <p>這頁是頭竹苗福利社的手機版入口。桌機版官網維持原本樣子，手機使用者可以用更像 App 的方式查優惠、收藏店家與查看本機使用紀錄。</p>
+  </section>
+
+  <section class="phone-shell" aria-label="手機福利卡畫面">
+    <div class="app">
+      <div class="status"><span>9:41</span><span>5G ▰▰</span></div>
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-mark">福</div>
+          <div><strong>頭竹苗福利社</strong><span>在地好康・便利生活</span></div>
+        </div>
+        <button class="small-btn" type="button" data-screen="history" aria-label="查看使用紀錄">↺</button>
+      </header>
+
+      <section class="screen active" id="screen-home">
+        <article class="welfare-card">
+          <div class="card-label"><span>Tou Zhu Miao Card</span><span>FREE</span></div>
+          <h1>頭竹苗福利卡</h1>
+          <p>一機在手，優惠隨時有。查詢店家、收藏優惠、出示頁面即可使用。</p>
+          <div class="card-actions">
+            <a class="primary" href="#screen-shops" data-screen="shops">找優惠</a>
+            <a class="ghost" href="card.html">展示福利卡</a>
+          </div>
+        </article>
+        <p class="notice">收藏與使用紀錄先存在這支手機的瀏覽器中，不會記錄姓名、電話等個資。清除瀏覽器資料或換手機時，這些本機資料可能會消失。</p>
+        <nav class="quick-grid" aria-label="常用入口">
+          <a class="quick-item" href="#screen-shops" data-screen="shops">
+            <svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5z"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/></svg>
+            特約店家
+          </a>
+          <a class="quick-item" href="shops.html?category=美食飲品">
+            <svg viewBox="0 0 24 24"><path d="M7 3v9"/><path d="M10 3v9"/><path d="M7 8h3"/><path d="M17 3v18"/></svg>
+            美食飲品
+          </a>
+          <a class="quick-item" href="shops.html?category=零售購物">
+            <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+            購物生活
+          </a>
+          <a class="quick-item" href="#screen-favorites" data-screen="favorites">
+            <svg viewBox="0 0 24 24"><path d="M20 8c0 6-8 11-8 11S4 14 4 8a4 4 0 0 1 8-2 4 4 0 0 1 8 2z"/></svg>
+            我的收藏
+          </a>
+          <a class="quick-item" href="#screen-history" data-screen="history">
+            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6"/><path d="M4 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+            使用紀錄
+          </a>
+          <a class="quick-item" href="https://lin.ee/OuiR6gV">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3z"/></svg>
+            官方 LINE
+          </a>
+        </nav>
+        <div class="section-head"><h2>推薦店家</h2><span id="homeCount">載入中</span></div>
+        <div class="shop-list" id="featuredList"></div>
+      </section>
+
+      <section class="screen" id="screen-shops">
+        <div class="section-head"><h2>優惠店家</h2><span id="shopCount">載入中</span></div>
+        <div class="filters"><input id="shopSearch" type="search" placeholder="搜尋店名、分類、地區、優惠"></div>
+        <div class="shop-list" id="shopList"></div>
+      </section>
+
+      <section class="screen" id="screen-favorites">
+        <div class="section-head"><h2>我的收藏</h2><button type="button" id="clearFavs">清空收藏</button></div>
+        <div class="shop-list" id="favoriteList"></div>
+      </section>
+
+      <section class="screen" id="screen-history">
+        <div class="section-head"><h2>我的使用紀錄</h2><button type="button" id="clearHistory">清空紀錄</button></div>
+        <p class="notice">這裡只顯示本機瀏覽器曾完成的優惠使用確認，資料存在你的手機瀏覽器中。</p>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <nav class="tabbar" aria-label="手機底部導覽">
+        <button class="active" type="button" data-screen="home"><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7"/><path d="M6 10v10h12V10"/></svg><span>首頁</span></button>
+        <button type="button" data-screen="shops"><svg viewBox="0 0 24 24"><path d="M4 10h16l-1-5H5z"/><path d="M6 10v9h12v-9"/></svg><span>店家</span></button>
+        <button type="button" data-screen="favorites"><svg viewBox="0 0 24 24"><path d="M20 8c0 6-8 11-8 11S4 14 4 8a4 4 0 0 1 8-2 4 4 0 0 1 8 2z"/></svg><span>收藏</span></button>
+        <button type="button" data-screen="history"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6"/><path d="M4 4v5h5"/><path d="M12 7v5l3 2"/></svg><span>紀錄</span></button>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<script>
+const APP_KEYS = {
+  favorites: "tzm_favorite_shops",
+  history: "tzm_redeem_logs"
+};
+const DEFAULT_LOGO = "pics/logo/tzm0000.png";
+const state = {
+  shops: [],
+  favorites: readJson(APP_KEYS.favorites, []),
+  history: readJson(APP_KEYS.history, [])
+};
+
+document.addEventListener("DOMContentLoaded", initApp);
+
+async function initApp() {
+  bindNavigation();
+  bindActions();
+  await loadShops();
+  renderAll();
+}
+
+async function loadShops() {
+  try {
+    const res = await fetch("shops.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("shops.json 載入失敗");
+    const data = await res.json();
+    state.shops = (data.shops || []).filter(shop => shop && shop.id && shop.name);
+  } catch (error) {
+    document.getElementById("featuredList").innerHTML = empty("目前無法載入店家資料。");
+    document.getElementById("shopList").innerHTML = empty("目前無法載入店家資料。");
+  }
+}
+
+function bindNavigation() {
+  document.querySelectorAll("[data-screen]").forEach(el => {
+    el.addEventListener("click", event => {
+      const target = el.dataset.screen;
+      if (!target) return;
+      event.preventDefault();
+      showScreen(target);
+    });
+  });
+}
+
+function bindActions() {
+  document.getElementById("shopSearch").addEventListener("input", renderShopList);
+  document.getElementById("clearFavs").addEventListener("click", () => {
+    state.favorites = [];
+    writeJson(APP_KEYS.favorites, state.favorites);
+    renderAll();
+  });
+  document.getElementById("clearHistory").addEventListener("click", () => {
+    state.history = [];
+    writeJson(APP_KEYS.history, state.history);
+    renderHistory();
+  });
+}
+
+function showScreen(name) {
+  document.querySelectorAll(".screen").forEach(section => section.classList.toggle("active", section.id === `screen-${name}`));
+  document.querySelectorAll(".tabbar button").forEach(btn => btn.classList.toggle("active", btn.dataset.screen === name));
+}
+
+function renderAll() {
+  renderFeatured();
+  renderShopList();
+  renderFavorites();
+  renderHistory();
+}
+
+function renderFeatured() {
+  const list = state.shops.slice(0, 4);
+  document.getElementById("homeCount").textContent = `${state.shops.length} 間店家`;
+  document.getElementById("featuredList").innerHTML = list.map(shopCard).join("") || empty("目前沒有推薦店家。");
+  bindFavoriteButtons();
+}
+
+function renderShopList() {
+  const q = document.getElementById("shopSearch").value.trim().toLowerCase();
+  const list = state.shops.filter(shop => {
+    if (!q) return true;
+    return [shop.name, shop.category, shop.area, shop.offer].some(value => String(value || "").toLowerCase().includes(q));
+  });
+  document.getElementById("shopCount").textContent = `${list.length} 間`;
+  document.getElementById("shopList").innerHTML = list.slice(0, 30).map(shopCard).join("") || empty("找不到符合條件的店家。");
+  bindFavoriteButtons();
+}
+
+function renderFavorites() {
+  const favoriteSet = new Set(state.favorites);
+  const list = state.shops.filter(shop => favoriteSet.has(shop.id));
+  document.getElementById("favoriteList").innerHTML = list.map(shopCard).join("") || empty("尚未收藏店家。點店家卡片上的「收藏」即可加入。");
+  bindFavoriteButtons();
+}
+
+function renderHistory() {
+  state.history = readJson(APP_KEYS.history, []);
+  const list = state.history.slice(0, 30);
+  document.getElementById("historyList").innerHTML = list.map(item => `
+    <article class="history-card">
+      <div class="iconbox"><svg viewBox="0 0 24 24"><path d="M20 7 9 18l-5-5"/></svg></div>
+      <div>
+        <strong>${esc(item.shop_name || "優惠使用紀錄")}</strong>
+        <span>${formatDate(item.confirmed_at)}<br>${esc(item.offer || "")}</span>
+      </div>
+    </article>
+  `).join("") || empty("目前沒有本機使用紀錄。完成一次店家確認後，這裡會顯示最近紀錄。");
+}
+
+function shopCard(shop) {
+  const isFav = state.favorites.includes(shop.id);
+  return `
+    <article class="shop-card">
+      <div class="shop-logo"><img src="${esc(logoPath(shop.logo))}" alt="${esc(shop.name)}" onerror="this.onerror=null;this.src='${DEFAULT_LOGO}'"></div>
+      <div class="shop-info">
+        <h3>${esc(shop.name)}</h3>
+        <div class="tags"><span>${esc(shop.category || "其他")}</span><span>${esc(shop.area || "頭竹苗")}</span></div>
+        <p class="offer">${esc(shop.offer || "查看店家優惠")}</p>
+        <div class="shop-actions">
+          <a class="use" href="${redeemUrl(shop)}">使用優惠</a>
+          <a href="shops.html#${encodeURIComponent(shop.id)}">詳情</a>
+          <button class="fav ${isFav ? "active" : ""}" type="button" data-fav="${esc(shop.id)}">${isFav ? "已收藏" : "收藏"}</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function bindFavoriteButtons() {
+  document.querySelectorAll("[data-fav]").forEach(button => {
+    button.addEventListener("click", () => toggleFavorite(button.dataset.fav));
+  });
+}
+
+function toggleFavorite(id) {
+  if (!id) return;
+  const set = new Set(state.favorites);
+  if (set.has(id)) set.delete(id);
+  else set.add(id);
+  state.favorites = Array.from(set).slice(0, 80);
+  writeJson(APP_KEYS.favorites, state.favorites);
+  renderAll();
+}
+
+function redeemUrl(shop) {
+  const params = new URLSearchParams({
+    shop_id: shop.id,
+    source: "app_home",
+    from: "app_shop_card"
+  });
+  return `redeem.html?${params.toString()}`;
+}
+
+function logoPath(logo) {
+  const path = String(logo || "").trim();
+  if (!path || path.includes("default-logo.svg") || path.includes("tzm0000.webp")) return DEFAULT_LOGO;
+  return path;
+}
+
+function readJson(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "null");
+    return Array.isArray(value) ? value : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeJson(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function formatDate(value) {
+  const date = value ? new Date(value) : null;
+  if (!date || Number.isNaN(date.getTime())) return "時間未記錄";
+  return date.toLocaleString("zh-TW", { hour12: false });
+}
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[char]));
+}
+
+function empty(message) {
+  return `<div class="empty">${esc(message)}</div>`;
+}
+</script>
+</body>
+</html>
