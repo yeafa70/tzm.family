@@ -3,7 +3,7 @@ const SHOP_CONFIG = {
   defaultLogo: "pics/logo/tzm0000.png"
 };
 
-const SHOPS_JS_VERSION = '20260709-mobile-sync-fix';
+const SHOPS_JS_VERSION = '20260709-mobile-live-data-fix';
 const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
 // GitHub Pages 同一 repo / 同一目錄下的靜態 shops.json，作為快速顯示與備援資料。
 const SHOPS_FALLBACK_URL = 'shops.json';
@@ -201,7 +201,8 @@ async function fetchWithTimeout(url, timeoutMs = 8000) {
   try {
     const response = await fetch(url, {
       signal: controller.signal,
-      cache: 'no-store'
+      cache: 'no-store',
+      redirect: 'follow'
     });
 
     if (!response.ok) {
