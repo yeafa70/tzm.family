@@ -762,6 +762,38 @@ input:focus,select:focus,textarea:focus{
   cursor:pointer;
 }
 .chip.active{background:#EEF2EB;color:var(--sage-dark);border-color:rgba(125,143,114,.25)}
+.shop-data-tools{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 18px;
+  padding:10px 12px;
+  border:1px solid rgba(67,49,71,.10);
+  border-radius:8px;
+  background:rgba(250,247,242,.78);
+}
+.shop-data-status{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+  line-height:1.45;
+}
+.shop-data-sync{
+  flex:0 0 auto;
+  min-height:36px;
+  padding:8px 12px;
+  border:1px solid rgba(67,49,71,.14);
+  border-radius:6px;
+  background:#fff;
+  color:var(--purple);
+  font-weight:900;
+  cursor:pointer;
+}
+.shop-data-sync:disabled{
+  cursor:not-allowed;
+  opacity:.62;
+}
 
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:18px}
 .shop-card{
@@ -1205,6 +1237,8 @@ textarea,
   .category-grid{grid-template-columns:repeat(3,1fr)}
   .merchant-cta-grid{grid-template-columns:1fr}
   .filters{grid-template-columns:1fr 1fr}
+  .shop-data-tools{align-items:flex-start;flex-direction:column}
+  .shop-data-sync{width:100%}
   .nav-links{
     display:none;
     position:absolute;
