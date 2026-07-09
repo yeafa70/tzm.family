@@ -3,6 +3,7 @@ const SHOP_CONFIG = {
   defaultLogo: "pics/logo/tzm0000.png"
 };
 
+const SHOPS_JS_VERSION = '20260709-mobile-sync-fix';
 const SHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops';
 // GitHub Pages 同一 repo / 同一目錄下的靜態 shops.json，作為快速顯示與備援資料。
 const SHOPS_FALLBACK_URL = 'shops.json';
@@ -188,6 +189,11 @@ function normalizeShop(row, index = 0) {
   };
 }
 
+function withCacheBuster(url) {
+  const separator = url.includes('?') ? '&' : '?';
+  return url + separator + '_t=' + Date.now();
+}
+
 async function fetchWithTimeout(url, timeoutMs = 8000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -209,7 +215,7 @@ async function fetchWithTimeout(url, timeoutMs = 8000) {
 }
 
 async function loadStaticShopsJson() {
-  const data = await fetchWithTimeout(SHOPS_FALLBACK_URL, 5000);
+  const data = await fetchWithTimeout(withCacheBuster(SHOPS_FALLBACK_URL), 5000);
   if (!data || !Array.isArray(data.shops)) {
     throw new Error('shops.json 回傳格式不正確');
   }
@@ -223,7 +229,7 @@ async function loadStaticShopsJson() {
 }
 
 async function loadGasApiData() {
-  const data = await fetchWithTimeout(SHOPS_API_URL, 8000);
+  const data = await fetchWithTimeout(withCacheBuster(SHOPS_API_URL), 15000);
   if (!data || !Array.isArray(data.shops)) {
     throw new Error('GAS API 回傳格式不正確');
   }
@@ -236,7 +242,49 @@ async function loadGasApiData() {
   };
 }
 
-function applyShopsData(data) {
+function updateShopDataStatus(data, message) {
+  const el = $("shopDataStatus");
+  if (!el) return;
+  if (message) {
+    el.textContent = message;
+    return;
+  }
+  const sourceLabel = data?.source === 'gas_api_background'
+    ? '即時資料'
+    : data?.source === 'shops_json_static'
+      ? '快速快取資料'
+      : '資料';
+  const updatedAt = data?.updated_at ? '｜更新時間：' + data.updated_at : '';
+  el.textContent = '資料來源：' + sourceLabel + updatedAt;
+}
+
+function setSyncButtonLoading(isLoading) {
+  const btn = $("resyncShopsBtn");
+  if (!btn) return;
+  btn.disabled = isLoading;
+  btn.textContent = isLoading ? '同步中...' : '重新同步';
+}
+
+async function refreshGasData(staticData = null) {
+  setSyncButtonLoading(true);
+  try {
+    const apiData = await loadGasApiData();
+    applyShopsData(apiData, { forceRender: true });
+    updateShopDataStatus(apiData);
+    console.log('✅ GAS API loaded and applied', { count: apiData.shops.length, updated_at: apiData.updated_at });
+  } catch (apiError) {
+    console.warn('⚠️ GAS API failed, keep static shops.json', apiError);
+    if (staticData) {
+      updateShopDataStatus(staticData, '資料來源：快速快取資料｜即時同步失敗，稍後會再更新');
+    } else {
+      updateShopDataStatus(null, '即時同步失敗，請稍後再試');
+    }
+  } finally {
+    setSyncButtonLoading(false);
+  }
+}
+
+function applyShopsData(data, options = {}) {
   shops = (data?.shops || [])
     .map(normalizeShop)
     .filter(shop => shop.is_active)
@@ -265,26 +313,22 @@ function applyShopsData(data) {
 }
 
 async function initShopsPage() {
+  console.log('shops.js version:', SHOPS_JS_VERSION);
   try {
     const staticData = await loadStaticShopsJson();
     applyShopsData(staticData);
-    console.log('已先從 GitHub Pages shops.json 載入資料', staticData);
+    updateShopDataStatus(staticData, '資料來源：快速快取資料｜正在同步即時資料...');
+    console.log('✅ shops.json loaded', { count: staticData.shops.length, updated_at: staticData.updated_at });
 
-    loadGasApiData()
-      .then(apiData => {
-        applyShopsData(apiData);
-        console.log('已用 GAS API 背景資料更新畫面', apiData);
-      })
-      .catch(apiError => {
-        console.warn('GAS API 背景更新失敗，不影響畫面：', apiError);
-      });
+    refreshGasData(staticData);
   } catch (staticError) {
     console.warn('shops.json 載入失敗，改嘗試 GAS API：', staticError);
 
     try {
       const apiData = await loadGasApiData();
-      applyShopsData(apiData);
-      console.log('shops.json 失敗，已改用 GAS API 載入資料', apiData);
+      applyShopsData(apiData, { forceRender: true });
+      updateShopDataStatus(apiData);
+      console.log('✅ GAS API loaded and applied', { count: apiData.shops.length, updated_at: apiData.updated_at });
     } catch (apiError) {
       console.error('shops.json 與 GAS API 都失敗：', apiError);
       showShopLoadError();
@@ -298,6 +342,7 @@ async function loadShops() {
 
 function showShopLoadError(error) {
   console.error("店家資料載入失敗：", error);
+  updateShopDataStatus(null, "目前無法載入店家資料，請稍後再試。");
   const grid = $("shopGrid");
   const empty = $("emptyState");
   if (grid) grid.innerHTML = "";
@@ -407,6 +452,7 @@ function initShopDirectory() {
   const categoryChips = $("categoryChips");
   const searchInput = $("searchInput");
   const resetBtn = $("resetBtn");
+  const resyncBtn = $("resyncShopsBtn");
   if (!categorySelect || !areaSelect || !categoryChips || !searchInput || !resetBtn) return;
 
   populateDirectoryFilters({ preserveCurrent: false });
@@ -442,6 +488,12 @@ function initShopDirectory() {
     updateDirectoryUrl();
     renderShops();
   });
+  if (resyncBtn) {
+    resyncBtn.addEventListener("click", () => {
+      updateShopDataStatus(null, "正在重新同步即時資料...");
+      refreshGasData();
+    });
+  }
 
   shopDirectoryInitialized = true;
   updateDirectoryUrl();
@@ -517,8 +569,8 @@ function renderShops() {
   if (!grid || !empty) return;
 
   const list = getFilteredShops();
+  grid.innerHTML = "";
   if (!list.length) {
-    grid.innerHTML = "";
     empty.style.display = "block";
     return;
   }
