@@ -211,6 +211,36 @@ img{display:block;max-width:100%}
   font-weight:800;
   line-height:1.65;
 }
+.app-data-tools{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 18px 12px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.74);
+  border:1px solid rgba(75,46,79,.10);
+}
+.app-data-status{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:850;
+  line-height:1.5;
+}
+.app-resync-btn{
+  flex:0 0 auto;
+  border:1px solid rgba(75,46,79,.14);
+  border-radius:10px;
+  background:#fff;
+  color:var(--purple);
+  padding:8px 10px;
+  font-size:12px;
+  font-weight:950;
+}
+.app-resync-btn:disabled{
+  opacity:.62;
+}
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -637,6 +667,10 @@ img{display:block;max-width:100%}
           </div>
         </article>
         <p class="notice">收藏與使用紀錄先存在這支手機的瀏覽器中，不會記錄姓名、電話等個資。清除瀏覽器資料或換手機時，這些本機資料可能會消失。</p>
+        <div class="app-data-tools">
+          <div id="appDataStatus" class="app-data-status" aria-live="polite"></div>
+          <button id="appResyncBtn" class="app-resync-btn" type="button">重新同步</button>
+        </div>
         <nav class="quick-grid" aria-label="常用入口">
           <a class="quick-item" href="#screen-shops" data-screen="shops">
             <svg viewBox="0 0 48 48" aria-hidden="true"><rect class="icon-bg" x="8" y="13" width="32" height="25" rx="5"/><path d="M10 18h28l-2-8H12z"/><path d="M11 18c0 3 2.1 5 4.7 5s4.3-2 4.3-5c0 3 2.1 5 4.7 5s4.3-2 4.3-5c0 3 2.1 5 4.7 5S38 21 38 18"/><path d="M14 24v14h20V24"/><path d="M20 38V28h8v10"/></svg>
@@ -721,6 +755,9 @@ const APP_KEYS = {
   history: "tzm_redeem_logs"
 };
 const DEFAULT_LOGO = "pics/logo/tzm0000.png";
+const SHOPS_API_URL = "https://script.google.com/macros/s/AKfycbzTQNG4GSWTSSLOI5hw37B-CnsYUjJObX2CxXEz_nrT541VjPgUune4_ywxnCb91jyn/exec?action=shops";
+const SHOPS_FALLBACK_URL = "shops.json";
+const APP_DATA_VERSION = "20260709-app-live-data-fix";
 const FEATURED_SHOP_MATCHERS = [
   { label: "丘森茶室", tests: ["丘森茶室"] },
   { label: "Café32", tests: ["Café32", "Cafe32"] },
@@ -777,10 +814,10 @@ let searchTrackTimer = null;
 document.addEventListener("DOMContentLoaded", initApp);
 
 async function initApp() {
+  console.log("app.html data version:", APP_DATA_VERSION);
   bindNavigation();
   bindActions();
   await loadShops();
-  renderAll();
   trackEvent("app_page_ready", {
     screen_name: "home",
     shop_count: state.shops.length,
@@ -790,16 +827,121 @@ async function initApp() {
 }
 
 async function loadShops() {
+  let staticData = null;
+
   try {
-    const res = await fetch("shops.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("shops.json 載入失敗");
-    const data = await res.json();
-    state.shops = (data.shops || []).filter(shop => shop && shop.id && shop.name);
-    state.categories = optionValues(data.categories, state.shops.map(shop => shop.category));
-    state.areas = optionValues(data.areas, state.shops.map(shop => shop.area), normalizeAreaLabel);
+    staticData = await fetchJson(SHOPS_FALLBACK_URL, 5000);
+    if (!staticData || !Array.isArray(staticData.shops)) throw new Error("shops.json 回傳格式不正確");
+    applyShopDataToApp(staticData, "shops_json_static");
+    updateAppDataStatus("資料來源：快速資料｜正在同步即時資料...");
+    console.log("✅ app.html shops.json loaded", {
+      count: state.shops.length,
+      updated_at: staticData.updated_at
+    });
   } catch (error) {
-    document.getElementById("featuredList").innerHTML = empty("目前無法載入店家資料。");
-    document.getElementById("shopList").innerHTML = empty("目前無法載入店家資料。");
+    console.warn("app shops.json 載入失敗：", error);
+  }
+
+  try {
+    const apiData = await fetchJson(SHOPS_API_URL, 15000);
+    if (!apiData || !Array.isArray(apiData.shops)) throw new Error("GAS API 回傳格式不正確");
+    applyShopDataToApp(apiData, "gas_api_live");
+    updateAppDataStatus(apiData.updated_at
+      ? "資料來源：即時資料｜更新時間：" + apiData.updated_at
+      : "資料來源：即時資料"
+    );
+    console.log("✅ app.html GAS API loaded and applied", {
+      count: state.shops.length,
+      updated_at: apiData.updated_at
+    });
+  } catch (error) {
+    console.warn("⚠️ app.html GAS API failed, keep static shops.json", error);
+    updateAppDataStatus(staticData
+      ? "資料來源：快速資料｜即時同步失敗，稍後會再更新"
+      : "目前無法載入店家資料，請稍後再試。"
+    );
+
+    if (!staticData) {
+      document.getElementById("featuredList").innerHTML = empty("目前無法載入店家資料。");
+      document.getElementById("shopList").innerHTML = empty("目前無法載入店家資料。");
+    }
+  }
+}
+
+function withCacheBuster(url) {
+  const separator = url.includes("?") ? "&" : "?";
+  return url + separator + "_t=" + Date.now();
+}
+
+async function fetchJson(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(withCacheBuster(url), {
+      signal: controller.signal,
+      cache: "no-store",
+      redirect: "follow"
+    });
+
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function applyShopDataToApp(data, source) {
+  const rows = Array.isArray(data?.shops) ? data.shops : [];
+
+  state.shops = rows
+    .filter(shop => shop && shop.id && shop.name)
+    .filter(shop => !hasInactiveFlag(shop));
+  state.categories = optionValues(data?.categories, state.shops.map(shop => shop.category));
+  state.areas = optionValues(data?.areas, state.shops.map(shop => shop.area), normalizeAreaLabel);
+  state.dataSource = source;
+  state.updatedAt = data?.updated_at || "";
+
+  renderAll();
+}
+
+function hasInactiveFlag(shop) {
+  return [shop?.is_active, shop?.active].some(value => {
+    if (value === false) return true;
+    const text = String(value ?? "").trim().toUpperCase();
+    return text === "FALSE" || text === "NO" || text === "0" || text === "否";
+  });
+}
+
+function updateAppDataStatus(message) {
+  const el = document.getElementById("appDataStatus");
+  if (!el) return;
+  el.textContent = message || "";
+}
+
+async function resyncAppData() {
+  const btn = document.getElementById("appResyncBtn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "同步中...";
+  }
+  updateAppDataStatus("正在重新同步即時資料...");
+  try {
+    const apiData = await fetchJson(SHOPS_API_URL, 15000);
+    if (!apiData || !Array.isArray(apiData.shops)) throw new Error("GAS API 回傳格式不正確");
+    applyShopDataToApp(apiData, "gas_api_live");
+    updateAppDataStatus(apiData.updated_at
+      ? "資料來源：即時資料｜更新時間：" + apiData.updated_at
+      : "資料來源：即時資料"
+    );
+  } catch (error) {
+    console.warn("app 重新同步失敗：", error);
+    updateAppDataStatus("即時同步失敗，請稍後再試");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "重新同步";
+    }
   }
 }
 
@@ -871,6 +1013,8 @@ function bindActions() {
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") closeShopDetail();
   });
+  const appResyncBtn = document.getElementById("appResyncBtn");
+  if (appResyncBtn) appResyncBtn.addEventListener("click", resyncAppData);
 }
 
 function showScreen(name) {
