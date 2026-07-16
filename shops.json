@@ -64,27 +64,6 @@
       "updated_at": "2026-06-25 2:29:21"
     },
     {
-      "id": "tzm0005",
-      "name": "沐寶髮浴",
-      "category": "美容美體",
-      "area": "竹南",
-      "offer": "福利卡",
-      "description": "",
-      "address": "竹南鎮大埔五街192號",
-      "phone": "912848408",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0005.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 50,
-      "updated_at": "2026-06-25 2:30:03"
-    },
-    {
       "id": "tzm0006",
       "name": "世鼎國際事業有限公司",
       "category": "零售購物",
@@ -904,27 +883,6 @@
       "updated_at": "2026-06-25 2:29:21"
     },
     {
-      "id": "tzm0048",
-      "name": "Na’s Studio｜耳燭｜體雕｜頭療｜暖宮",
-      "category": "美容美體",
-      "area": "竹南鎮",
-      "offer": "憑福利卡消費滿500打95折，滿1000打9折",
-      "description": "",
-      "address": "苗栗縣竹南鎮環市路三段228-1號3樓",
-      "phone": "@775lgffz / 0907845399",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "https://www.facebook.com/profile.php?id=61565004292387&mibextid=JRoKGi",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0048.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 480,
-      "updated_at": "2026-06-25 2:29:21"
-    },
-    {
       "id": "tzm0049",
       "name": "雲朵森林",
       "category": "美食飲品",
@@ -1162,7 +1120,7 @@
       "area": "竹南鎮",
       "offer": "憑福利卡消費全項目85折優惠",
       "description": "",
-      "address": "苗栗縣竹南鎮新南街216號3樓",
+      "address": "苗栗縣竹南鎮大埔里仁愛路938號",
       "phone": "0963177358/royu0621",
       "business_hours": "",
       "map_url": "",
@@ -1174,7 +1132,7 @@
       "images": [],
       "is_featured": false,
       "sort_order": 610,
-      "updated_at": "2026-06-25 2:32:50"
+      "updated_at": "2026-07-01 14:23:45"
     },
     {
       "id": "tzm0062",
@@ -1345,27 +1303,6 @@
       "updated_at": "2026-06-25 2:33:35"
     },
     {
-      "id": "tzm0070",
-      "name": "啵耳星球掏耳專門店",
-      "category": "美容美體",
-      "area": "竹南",
-      "offer": "滿1000折50",
-      "description": "",
-      "address": "350苗栗縣竹南鎮立達街41號",
-      "phone": "971760595",
-      "business_hours": "",
-      "map_url": "",
-      "website_url": "",
-      "facebook_url": "",
-      "instagram_url": "",
-      "line_url": "",
-      "logo": "pics/logo/tzm0070.webp",
-      "images": [],
-      "is_featured": false,
-      "sort_order": 700,
-      "updated_at": "2026-06-25 2:29:21"
-    },
-    {
       "id": "tzm0071",
       "name": "吃餃嬌｜手工水餃🥟",
       "category": "美食飲品",
@@ -1389,7 +1326,7 @@
     {
       "id": "tzm0072",
       "name": "畢茱爾醫美診所",
-      "category": "生活服務",
+      "category": "醫療保健",
       "area": "竹南鎮",
       "offer": "憑福利卡享專屬禮遇",
       "description": "",
@@ -1405,7 +1342,7 @@
       "images": [],
       "is_featured": false,
       "sort_order": 720,
-      "updated_at": "2026-06-25 2:33:43"
+      "updated_at": "2026-07-03 14:56:34"
     },
     {
       "id": "tzm0073",
@@ -1538,5 +1475,5 @@
       "sort_order": 5
     }
   ],
-  "updated_at": "2026-06-29 23:01:57"
+  "updated_at": "2026-07-17 00:20:10"
 }
