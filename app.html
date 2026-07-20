@@ -1132,11 +1132,11 @@ function openShopDetail(shop) {
   ].filter(Boolean).join("");
   const links = [
     `<a class="modal-use" href="${redeemUrl(shop)}" data-use-shop="${esc(shop.id)}">使用優惠</a>`,
-    modalLink("Google 地圖", mapUrl(shop)),
-    modalLink("官方網站", shop.website_url),
-    modalLink("Facebook", shop.facebook_url),
-    modalLink("Instagram", shop.instagram_url),
-    modalLink("LINE", shop.line_url)
+    modalLink("Google 地圖", mapUrl(shop), shop),
+    modalLink("官方網站", shop.website_url, shop),
+    modalLink("Facebook", shop.facebook_url, shop),
+    modalLink("Instagram", shop.instagram_url, shop),
+    modalLink("LINE", shop.line_url, shop)
   ].filter(Boolean).join("");
   body.innerHTML = `
     <div class="modal-shop-main">
@@ -1187,10 +1187,11 @@ function redeemUrl(shop) {
   return `redeem.html?${params.toString()}`;
 }
 
-function modalLink(label, url) {
+function modalLink(label, url, shop) {
   const href = String(url || "").trim();
   if (!href) return "";
-  return `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const trackingCode = `trackEvent('app_external_link_click', {link_label: '${label}', shop_name: '${shop?.name || ''}', shop_id: '${shop?.id || ''}', section: 'shop_modal'})`;
+  return `<a href="${esc(href)}" target="_blank" rel="noopener" onclick="${trackingCode}">${esc(label)}</a>`;
 }
 
 function mapUrl(shop) {

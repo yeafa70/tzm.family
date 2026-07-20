@@ -113,6 +113,7 @@ let shops = [];
 let categoryOptions = [];
 let areaOptions = [];
 let shopDirectoryInitialized = false;
+let shopsSearchTrackTimer = null;
 
 const $ = id => document.getElementById(id);
 
@@ -461,6 +462,20 @@ function initShopDirectory() {
   searchInput.addEventListener("input", () => {
     updateDirectoryUrl();
     renderShops();
+    
+    // Track search term with debounce
+    window.clearTimeout(shopsSearchTrackTimer);
+    shopsSearchTrackTimer = window.setTimeout(() => {
+      const keyword = searchInput.value.trim();
+      if (keyword.length >= 2) {
+        const resultCount = getFilteredShops().length;
+        trackGaEvent("site_search", {
+          search_term: keyword,
+          result_count: resultCount,
+          section: "shops_directory"
+        });
+      }
+    }, 1000);
   });
   categorySelect.addEventListener("change", () => {
     document.querySelectorAll(".chip").forEach(chip => {
