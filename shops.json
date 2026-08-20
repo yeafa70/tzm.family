@@ -1364,6 +1364,48 @@
       "is_featured": false,
       "sort_order": 730,
       "updated_at": "2026-06-29 22:34:03"
+    },
+    {
+      "id": "tzm0074",
+      "name": "茶棧 竹南中正店",
+      "category": "美食飲品",
+      "area": "竹南鎮",
+      "offer": "9折優惠",
+      "description": "",
+      "address": "苗栗縣竹南鎮中正路157號",
+      "phone": "0916151253/bb1011202",
+      "business_hours": "",
+      "map_url": "",
+      "website_url": "",
+      "facebook_url": "https://www.facebook.com/share/1DMhtdcTNk/?mibextid=LQQJ4d",
+      "instagram_url": "",
+      "line_url": "",
+      "logo": "pics/logo/tzm0074.webp",
+      "images": [],
+      "is_featured": false,
+      "sort_order": 740,
+      "updated_at": "2026-08-20 17:22:58"
+    },
+    {
+      "id": "tzm0075",
+      "name": "綿花食鮮團購",
+      "category": "零售購物",
+      "area": "竹南鎮",
+      "offer": "消費三樣以上，每一樣折5元",
+      "description": "",
+      "address": "苗栗縣竹南鎮科專五路226號",
+      "phone": "909808918",
+      "business_hours": "",
+      "map_url": "",
+      "website_url": "",
+      "facebook_url": "",
+      "instagram_url": "",
+      "line_url": "https://line.me/ti/g2/h0rWq6YG--f_n_vKg_ROimmFZpx1lZWFI_wUgg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default",
+      "logo": "pics/logo/tzm0075.webp",
+      "images": [],
+      "is_featured": false,
+      "sort_order": 750,
+      "updated_at": "2026-08-20 17:27:37"
     }
   ],
   "categories": [
@@ -1475,5 +1517,5 @@
       "sort_order": 5
     }
   ],
-  "updated_at": "2026-07-17 00:20:10"
+  "updated_at": "2026-08-20 17:28:27"
 }
