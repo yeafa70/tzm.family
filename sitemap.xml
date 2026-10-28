@@ -2,50 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yeafa70.github.io/tzm.family/</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-10-29</lastmod>
     <priority>1.00</priority>
   </url>
-  
   <url>
     <loc>https://yeafa70.github.io/tzm.family/shops.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-10-29</lastmod>
     <priority>0.90</priority>
   </url>
-  
+  <url>
+    <loc>https://yeafa70.github.io/tzm.family/card.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.85</priority>
+  </url>
   <url>
     <loc>https://yeafa70.github.io/tzm.family/merchant.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  
-  <url>
-    <loc>https://yeafa70.github.io/tzm.family/news.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.80</priority>
-  </url>
-  
-  <url>
-    <loc>https://yeafa70.github.io/tzm.family/redeem.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-29</lastmod>
     <priority>0.70</priority>
   </url>
-  
   <url>
-    <loc>https://yeafa70.github.io/tzm.family/app-preview.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.60</priority>
+    <loc>https://yeafa70.github.io/tzm.family/company.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.70</priority>
   </url>
-  
   <url>
     <loc>https://yeafa70.github.io/tzm.family/about.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.50</priority>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://yeafa70.github.io/tzm.family/news.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.70</priority>
   </url>
 </urlset>

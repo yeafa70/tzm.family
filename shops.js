@@ -174,13 +174,14 @@ function normalizeShop(row, index = 0) {
     offer: row.offer || row.discount || "詳細優惠以本平台公告為主要依據。",
     description: row.description || row.desc || "",
     address: row.address || "",
-    phone: row.phone || "",
+    // 有些店家在「電話」欄填了 LINE 或網址：改放到對應欄位，電話欄只留號碼
+    phone: isLinkValue(row.phone) ? "" : (row.phone || ""),
     business_hours: row.business_hours || row.hours || "",
     map_url: row.map_url || row.mapUrl || "",
-    website_url: row.website_url || row.websiteUrl || "",
+    website_url: row.website_url || row.websiteUrl || (isLinkValue(row.phone) && !/lin\.ee|line\.me/i.test(row.phone) ? String(row.phone).trim() : ""),
     facebook_url: row.facebook_url || row.facebookUrl || "",
     instagram_url: row.instagram_url || row.instagramUrl || "",
-    line_url: row.line_url || row.lineUrl || "",
+    line_url: row.line_url || row.lineUrl || (isLinkValue(row.phone) && /lin\.ee|line\.me/i.test(row.phone) ? String(row.phone).trim() : ""),
     logo: row.logo || row.logo_url || row.logoUrl || SHOP_CONFIG.defaultLogo,
     images: normalizeImages(row.images),
     is_featured: normalizeBoolean(row.is_featured ?? row.featured, false),
@@ -188,6 +189,10 @@ function normalizeShop(row, index = 0) {
     sort_order: Number.isFinite(sort) ? sort : index + 1,
     updated_at: row.updated_at || ""
   };
+}
+
+function isLinkValue(value) {
+  return /^https?:\/\//i.test(String(value || "").trim());
 }
 
 function withCacheBuster(url) {
