@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yeafa70.github.io/tzm.family/sitemap.xml
+Sitemap: https://tzm.buyhappygo.com/sitemap.xml
